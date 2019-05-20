@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ViewFlex = styled.View`
   flex: 1;
+  padding-bottom: 20;
 `;
 
 export const Margin = styled.View`

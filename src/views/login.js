@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { View, SafeAreaView } from "react-native";
 
 import { AuthHeader } from "../components/Auth/Header";
 import { Title, ActionLink } from "../components/Text";
@@ -10,89 +10,104 @@ import { Button } from "../components/Button";
 import { BottomAuth } from "../components/BottomAuth";
 import Google_logo from "../assets/img/google.png";
 import Github_logo from "../assets/img/github.png";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 function Login(props) {
   return (
-    <ViewFlex>
-      <Margin top={-1}>
-        <AuthHeader withThemeSwitch={true} />
-      </Margin>
-
+    <KeyboardAwareScrollView>
       <ViewFlex>
-        <View paddingLeft="5%">
-          <Title>Sign in</Title>
-        </View>
+        <Margin top={-1}>
+          <AuthHeader withThemeSwitch={true} />
+        </Margin>
 
-        <View padding="5%">
-          <Formik
-            initialValues={{ user: "", password: "" }}
-            onSubmit={values => console.log(values)}
-          >
-            {props => (
-              <View>
-                <TextInput
-                  onChangeText={props.handleChange("user")}
-                  placeholder="Username, Email"
-                  autoCapitalize="none"
-                />
+        <ViewFlex>
+          <View paddingLeft="5%">
+            <Title>Sign in</Title>
+          </View>
 
-                <TextInput
-                  onChangeText={props.handleChange("password")}
-                  placeholder="Password"
-                  secureTextEntry={true}
-                  top={10}
-                />
+          <View padding="5%">
+            <Formik
+              initialValues={{ user: "", password: "" }}
+              onSubmit={values => console.log(values)}
+            >
+              {props => (
+                <View>
+                  <TextInput
+                    onChangeText={props.handleChange("user")}
+                    placeholder="Username, Email"
+                    autoCapitalize="none"
+                    onSubmitEditing={() => {
+                      this.password.focus();
+                    }}
+                    returnKeyType="next"
+                  />
 
-                <Button
-                  action={props.handleSubmit}
-                  text="SIGN IN"
-                  top={45}
-                  disabled={
-                    props.values.user == "" || props.values.password == ""
-                  }
-                  TextColor="white"
-                  color={["#8075f7", "#59a9fb"]}
-                />
-              </View>
-            )}
-          </Formik>
+                  <TextInput
+                    onChangeText={props.handleChange("password")}
+                    placeholder="Password"
+                    secureTextEntry={true}
+                    top={10}
+                    ref={input => {
+                      this.password = input;
+                    }}
+                    returnKeyType="done"
+                  />
 
-          <Margin top={10}>
-            <ActionLink onPress={() => alert()} size={14} color="#0091ff">
-              FORGOT PASSWORD?
-            </ActionLink>
-          </Margin>
+                  <Button
+                    action={props.handleSubmit}
+                    text="SIGN IN"
+                    top={45}
+                    disabled={
+                      props.values.user == "" || props.values.password == ""
+                    }
+                    TextColor="white"
+                    color={["#8075f7", "#59a9fb"]}
+                  />
+                </View>
+              )}
+            </Formik>
 
-          <BottomAuth
-            action={() => props.navigation.navigate("Register")}
-            text="CREATE ACCOUNT"
-            top={15}
-          />
+            <Margin top={10}>
+              <ActionLink
+                onPress={() => props.navigation.navigate("InputEmail")}
+                size={14}
+                color="#0091ff"
+              >
+                FORGOT PASSWORD?
+              </ActionLink>
+            </Margin>
 
-          <Button
-            haveIcon={true}
-            image={Google_logo}
-            disabled={false}
-            text="SIGN IN WITH GOOGLE"
-            top={50}
-            color={["white", "white"]}
-            borderColor="#f4f4f4"
-            TextColor="black"
-          />
+            <BottomAuth
+              action={() => props.navigation.navigate("Register")}
+              text="CREATE ACCOUNT"
+              top={15}
+            />
 
-          <Button
-            haveIcon={true}
-            image={Github_logo}
-            disabled={false}
-            text="SIGN IN WITH GITHUB"
-            top={20}
-            color={["#333333", "#333333"]}
-            borderColor="#333333"
-            TextColor="white"
-          />
-        </View>
+            <Button
+              haveIcon={true}
+              image={Google_logo}
+              disabled={false}
+              text="SIGN IN WITH GOOGLE"
+              top={50}
+              color={["white", "white"]}
+              borderColor="#f4f4f4"
+              TextColor="black"
+            />
+
+            <Button
+              haveIcon={true}
+              image={Github_logo}
+              disabled={false}
+              text="SIGN IN WITH GITHUB"
+              top={20}
+              color={["#333333", "#333333"]}
+              borderColor="#333333"
+              TextColor="white"
+            />
+          </View>
+        </ViewFlex>
       </ViewFlex>
-    </ViewFlex>
+    </KeyboardAwareScrollView>
   );
 }
 

@@ -7,9 +7,10 @@ import { Images } from "../../assets/styles/Image";
 import { SwitchTheme } from "../SwitchTheme";
 import ImageBackground from "../../assets/img/auth-header.png";
 import WHITE_LOGO from "../../assets/img/white-logo.png";
+import { isIphoneX } from "react-native-iphone-x-helper";
 
 const Background = styled.ImageBackground`
-  height: 220px;
+  height: ${isIphoneX() ? 220 : 190};
   width: 100%;
   justify-content: center;
   padding-left: 8%;

@@ -22,3 +22,11 @@ export const InputValidation = styled.Text`
   color: ${props => props.color || "red"};
   margin-top: ${props => props.top || 0};
 `;
+
+export const Information = styled.Text`
+  font-family: "System";
+  font-size: ${props => props.size || 14};
+  color: ${props => props.color || "black"};
+  margin-top: ${props => props.top || 0};
+  font-weight: ${props => props.weight || "normal"};
+`;
