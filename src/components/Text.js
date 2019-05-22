@@ -28,5 +28,8 @@ export const Information = styled.Text`
   font-size: ${props => props.size || 14};
   color: ${props => props.color || "black"};
   margin-top: ${props => props.top || 0};
+  margin-left: ${props => props.left || 0};
+  margin-right: ${props => props.right || 0};
   font-weight: ${props => props.weight || "normal"};
+  max-width: 100%;
 `;

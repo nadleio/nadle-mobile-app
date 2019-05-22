@@ -18,6 +18,9 @@ const SignupSchema = Yup.object().shape({
 });
 
 function Register(props) {
+  function save(values) {
+    console.log(values);
+  }
   return (
     <KeyboardAwareScrollView>
       <ViewFlex>
@@ -39,7 +42,7 @@ function Register(props) {
                 password: "",
                 confirm_password: ""
               }}
-              onSubmit={values => console.log(values)}
+              onSubmit={values => save(values)}
               validationSchema={SignupSchema}
             >
               {props => (

@@ -11,7 +11,6 @@ import { BottomAuth } from "../../components/BottomAuth";
 import TimerCount from "../../lib/utils/TimerCount";
 import styled from "styled-components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import ResetPassword from "./resetPassword";
 
 export const DidntReceive = styled.View`
   margin-top: 11.5;

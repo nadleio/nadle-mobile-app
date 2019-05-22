@@ -1,5 +1,5 @@
-import React from "react";
-import { View, SafeAreaView } from "react-native";
+import React, { useState } from "react";
+import { View } from "react-native";
 
 import { AuthHeader } from "../components/Auth/Header";
 import { Title, ActionLink } from "../components/Text";
@@ -7,14 +7,32 @@ import { TextInput } from "../components/form/Input";
 import { ViewFlex, Margin } from "../assets/styles/styles";
 import { Formik } from "formik";
 import { Button } from "../components/Button";
+import { DropdownAlert } from "../components/alerts/DropdownAlert";
 import { BottomAuth } from "../components/BottomAuth";
 import Google_logo from "../assets/img/google.png";
 import Github_logo from "../assets/img/github.png";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import CLOSE from "../assets/img/close.png";
 
 function Login(props) {
+  const [isShowingAlert, setIsShowingAlert] = useState(false);
+  const [user, setUSer] = useState("");
+
+  function enterProfile(values) {
+    setUSer(values.user);
+    setIsShowingAlert(true);
+  }
+
   return (
     <KeyboardAwareScrollView>
+      <DropdownAlert
+        image={CLOSE}
+        isShowingAlert={isShowingAlert}
+        setShowingAlert={() => setIsShowingAlert(false)}
+        background="#ff5554"
+        text={"Incorrect password for " + user + " please try again."}
+      />
+
       <ViewFlex>
         <Margin top={-1}>
           <AuthHeader withThemeSwitch={true} />
@@ -28,7 +46,7 @@ function Login(props) {
           <View padding="5%">
             <Formik
               initialValues={{ user: "", password: "" }}
-              onSubmit={values => console.log(values)}
+              onSubmit={values => enterProfile(values)}
             >
               {props => (
                 <View>
