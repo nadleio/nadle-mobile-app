@@ -19,8 +19,9 @@ function Login(props) {
   const [user, setUSer] = useState("");
 
   function enterProfile(values) {
-    setUSer(values.user);
-    setIsShowingAlert(true);
+    // setUSer(values.user);
+    // setIsShowingAlert(true);
+    props.navigation.navigate("Root");
   }
 
   return (

@@ -30,6 +30,8 @@ export const Information = styled.Text`
   margin-top: ${props => props.top || 0};
   margin-left: ${props => props.left || 0};
   margin-right: ${props => props.right || 0};
+  margin-bottom: ${props => props.bottom || 0};
   font-weight: ${props => props.weight || "normal"};
+  text-align: ${props => props.align || "left"};
   max-width: 100%;
 `;

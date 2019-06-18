@@ -6,11 +6,19 @@ export const Images = styled.Image`
   border-radius: ${props => props.radius || 0};
 `;
 
+export const ImageBackground = styled.ImageBackground`
+  height: ${props => props.height || 0};
+  width: ${props => props.width || 0};
+  border-radius: ${props => props.radius || 0};
+  overflow: hidden;
+  /* justify-content: flex-end; */
+`;
+
 export const ImageContent = styled.View`
   height: ${props => props.height || 0};
   width: ${props => props.width || 0};
   border-radius: ${props => props.radius || 0};
-  background-color: #d9d9d9;
+  background-color: #e6e6e6;
   justify-content: center;
   align-items: center;
 `;
