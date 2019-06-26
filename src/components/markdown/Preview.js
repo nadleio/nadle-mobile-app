@@ -1,7 +1,12 @@
 import React from "react";
-import { StyleSheet, ScrollView } from "react-native";
+import { StyleSheet, ScrollView, View } from "react-native";
 import Markdown from "react-native-markdown-renderer";
 import { ViewFlex } from "../../assets/styles/styles";
+
+import SyntaxHighlighter from "react-native-syntax-highlighter";
+
+/*by default component uses hljs so access hljs styles, import from /prism for prism styles */
+// import { atomDark } from "react-syntax-highlighter/styles/prism";
 
 const styles = StyleSheet.create({
   heading: {
@@ -31,7 +36,7 @@ const styles = StyleSheet.create({
   heading6: {
     fontSize: 11
   },
-  text: { fontSize: 16 },
+  text: { fontSize: 16, color: "black" },
   table: {
     borderWidth: 1,
     borderColor: "#000000",
@@ -52,11 +57,10 @@ const styles = StyleSheet.create({
   },
   codeBlock: {
     borderWidth: 1,
-    borderColor: "#CCCCCC",
-    backgroundColor: "#f5f5f5",
-    paddingTop: 15,
-    paddingHorizontal: 15,
-    borderRadius: 8
+    borderColor: "#e0d7d1",
+    backgroundColor: "#f5f2f0",
+    borderRadius: 8,
+    paddingHorizontal: "3%"
   },
   codeInline: {
     borderWidth: 1,
@@ -67,11 +71,39 @@ const styles = StyleSheet.create({
   }
 });
 
+const rules = {
+  table: (node, children, parent, styles) => (
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      <View key={node.key} style={[styles.table]}>
+        {children}
+      </View>
+    </ScrollView>
+  ),
+
+  fence: (node, children, parent, styles) => (
+    <View style={styles.codeBlock}>
+      <SyntaxHighlighter
+        language={node.sourceInfo}
+        // style={atomDark}
+        highlighter={"prism" || "hljs"}
+        fontSize={14}
+        showsHorizontalScrollIndicator={false}
+        paddingBottom="-5%"
+        paddingHorizontal={0}
+      >
+        {node.content}
+      </SyntaxHighlighter>
+    </View>
+  )
+};
+
 export function Preview(props) {
   return (
     <ViewFlex>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <Markdown style={styles}>{props.content}</Markdown>
+        <Markdown rules={rules} style={styles}>
+          {props.content}
+        </Markdown>
       </ScrollView>
     </ViewFlex>
   );

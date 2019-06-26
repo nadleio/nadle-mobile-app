@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const PaddingBox = styled.View`
   padding: 5%;
-  padding-top: 3%;
   padding-bottom: 3%;
   background-color: ${props => props.background || "white"};
   border-radius: ${props => props.radius || "0"};
@@ -11,6 +10,7 @@ export const PaddingBox = styled.View`
 export const ActivityBox = styled(PaddingBox)`
   border-top-width: 1px;
   border-color: #f4f4f4;
+  padding-bottom: 1%;
 `;
 
 export const Row = styled.View`
@@ -22,17 +22,17 @@ export const FlexRow = styled.View`
   align-items: center;
 `;
 
-export const JustifyCenter = styled.View`
-  align-items: center;
-`;
-
-export const FlexEnd = styled(FlexRow)`
-  width: 45%;
-  justify-content: space-between;
+export const PaddingHorizontal = styled.View`
+  padding-left: 5%;
+  padding-right: 5%;
 `;
 
 export const SpaceBetween = styled(FlexRow)`
   justify-content: space-between;
+`;
+
+export const JustifyCenter = styled.View`
+  align-items: center;
 `;
 
 export const RecentActivityCount = styled.View`
@@ -55,7 +55,6 @@ export const SmallCircle = styled.View`
 export const ContentBox = styled.View`
   padding-left: 3%;
   width: 88%;
-  margin-top: 7px;
 `;
 
 export const CommentLine = styled.View`

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, View, KeyboardAvoidingView } from "react-native";
+import { Modal, View, KeyboardAvoidingView, Platform } from "react-native";
 
 import styled from "styled-components";
 
@@ -59,7 +59,10 @@ export function Alert(props) {
   const disabled = messagge == "" || link == "";
   return (
     <Modal transparent={true} visible={props.isShowingAlert}>
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" && "padding"}
+      >
         <ModalContent>
           <AlertBox>
             <View>

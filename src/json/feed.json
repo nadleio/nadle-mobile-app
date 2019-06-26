@@ -10,13 +10,14 @@
   "type":"Post",
   "claps":16,
   "comments":56,
-  "saved":false,
+  "saved":true,
 
   "commentUserPhoto":"../assets/img/default.jpg",
   "commentUser":"carlos",
   "commetHour":"7H ago",
-  "commentContent": "I want know if i can implement it on a react project the same way"
-  
+  "commentContent": "I want know if i can implement it on a react project the same way",
+  "url":"https://nadle.io",
+  "clapped":true
 },
 
 {
@@ -35,7 +36,9 @@
   "commentUserPhoto":"../assets/img/default.jpg",
   "commentUser":"manuelmartinez",
   "commetHour":"10H ago",
-  "commentContent": "Doesn't seem possible that there's a problem with axios, but just to rule it out, try to use the built-in fetch module and see if the data is still null."
+  "commentContent": "Doesn't seem possible that there's a problem with axios, but just to rule it out, try to use the built-in fetch module and see if the data is still null.",
+  "url":"https://nadle.io",
+  "clapped":false
   
 },
 
@@ -50,13 +53,14 @@
   "type":"Post",
   "claps":82,
   "comments":123,
-  "saved":false,
+  "saved":true,
 
   "commentUserPhoto":"../assets/img/default.jpg",
   "commentUser":"visqueldls",
   "commetHour":"5H ago",
-  "commentContent": "I’m almost 100% split between the two. I would say that React Navigation has (at this second) a more stable API because of a recent rewrite & has a lot of good maintainers & contributors, you can do whatever you want with it pretty much. React Native Navigation V2 is still very new as far as it being a rewrite of a previous."
-  
+  "commentContent": "I’m almost 100% split between the two. I would say that React Navigation has (at this second) a more stable API because of a recent rewrite & has a lot of good maintainers & contributors, you can do whatever you want with it pretty much. React Native Navigation V2 is still very new as far as it being a rewrite of a previous.",
+  "url":"https://nadle.com",
+  "clapped":true
 },
 
 {
@@ -75,7 +79,9 @@
   "commentUserPhoto":"../assets/img/default.jpg",
   "commentUser":"manuelmartinez",
   "commetHour":"10H ago",
-  "commentContent": "Doesn't seem possible that there's a problem with axios, but just to rule it out, try to use the built-in fetch module and see if the data is still null."
+  "commentContent": "Doesn't seem possible that there's a problem with axios, but just to rule it out, try to use the built-in fetch module and see if the data is still null.",
+  "url":"https://nadle.io",
+  "clapped":false
   
 }],
 

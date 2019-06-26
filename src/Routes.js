@@ -21,14 +21,19 @@ import ResetPassword from "./views/ResetPassword/resetPassword";
 import Feed from "./views/feed";
 import Feed2 from "./views/feed2";
 import MarkdownView from "./views/markdown";
-import MarkdownEditor from "./views/MarkdownEditor";
 
 export const TabNavigator = createBottomTabNavigator(
   {
     Feed: {
       screen: Feed,
       navigationOptions: () => ({
-        tabBarIcon: () => <Images height={21} width={21} source={FEED} />
+        tabBarIcon: () => <Images height={21} width={21} source={FEED} />,
+        tabBarOnPress: tab => {
+          if (tab.navigation.isFocused()) {
+            tab.navigation.state.params.scrollToTop();
+          }
+          tab.navigation.navigate("Feed");
+        }
       })
     },
 
@@ -47,7 +52,7 @@ export const TabNavigator = createBottomTabNavigator(
     },
 
     Notifications: {
-      screen: MarkdownEditor,
+      screen: MarkdownView,
       navigationOptions: () => ({
         tabBarIcon: () => (
           <Images height={21} width={21} source={NOTIFICATION} />
@@ -64,10 +69,12 @@ export const TabNavigator = createBottomTabNavigator(
       })
     }
   },
+
   {
     tabBarOptions: {
       showLabel: false,
-      showIcon: true
+      showIcon: true,
+      animate: false
       // activeTintColor: "#4E4E4E",
       // inactiveTintColor: "grey"
     },

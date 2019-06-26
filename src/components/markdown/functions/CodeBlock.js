@@ -3,19 +3,17 @@ import { RemoveMore } from "./RemoveMore";
 
 export const CodeBlock = (start, end, text, sign) => {
   return new Promise(resolve => {
-    var toSelected = text.substring(start - 5, end + 5);
+    var toSelected = text.substring(start - 4, end + 4);
 
     if (
       toSelected[0] == sign[0] &&
       toSelected[1] == sign[0] &&
       toSelected[2] == sign[0] &&
-      toSelected[3] == sign[0] &&
       toSelected[toSelected.length - 1] == sign[0] &&
       toSelected[toSelected.length - 2] == sign[0] &&
-      toSelected[toSelected.length - 3] == sign[0] &&
-      toSelected[toSelected.length - 4] == sign[0]
+      toSelected[toSelected.length - 3] == sign[0]
     ) {
-      RemoveMore(start, end, text, 5).then(request => {
+      RemoveMore(start, end, text, 4).then(request => {
         resolve({ content: request, erase: true });
       });
     } else {
@@ -27,22 +25,18 @@ export const CodeBlock = (start, end, text, sign) => {
           ? sign[0] +
             sign[0] +
             sign[0] +
-            sign[0] +
             "\n" +
             "" +
             "\n" +
-            sign[0] +
             sign[0] +
             sign[0] +
             sign[0]
           : sign[0] +
             sign[0] +
             sign[0] +
-            sign[0] +
             "\n" +
             selected +
             "\n" +
-            sign[0] +
             sign[0] +
             sign[0] +
             sign[0];

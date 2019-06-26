@@ -88,6 +88,7 @@ export function Gif(props) {
                               source={{
                                 uri: data.media[0].nanogif.url
                               }}
+                              style={{ overlayColor: "white" }}
                             />
                           </ImageContent>
                         </Margin>

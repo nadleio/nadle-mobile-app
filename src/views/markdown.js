@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import {
   View,
   TextInput,
   StatusBar,
   KeyboardAvoidingView,
   Keyboard,
-  Button
+  Platform
 } from "react-native";
 
 import { SafeAreaView } from "react-navigation";
@@ -17,6 +17,7 @@ import { Alert } from "../components/alerts/Alert";
 import { Preview } from "../components/markdown/Preview";
 import { Header, Row } from "../components/markdown/styles";
 import { Gif } from "../components/Gif";
+import { Gist } from "../components/Gist";
 import { Buttons } from "../components/markdown/Buttons";
 import { Photo } from "../components/Photo";
 import { ModalView } from "../components/ModalView";
@@ -29,6 +30,7 @@ import { CodeBlock } from "../components/markdown/functions/CodeBlock";
 import { MarkDownTitles } from "../components/markdown/MarkDownTitles";
 import { SetTable } from "../components/markdown/SetTable";
 import { Table } from "../components/markdown//functions/Table";
+import { Information } from "../components/Text";
 
 function MarkdownView() {
   const [modal, setModal] = useState(false);
@@ -36,10 +38,15 @@ function MarkdownView() {
   const [selection, setSelection] = useState({ start: 0, end: 0 });
   const [showAlert, setShowAlert] = useState(false);
   const [modalGif, setModalGif] = useState(false);
+  const [modalGist, setModalGist] = useState(false);
   const [first, setFirst] = useState(false);
   const [photoAlert, setPhotoAlert] = useState(false);
   const [titleAlert, setTitleAlert] = useState(false);
   const [tableAlert, setTableAlert] = useState(false);
+  const inputRef = useRef("refComponent");
+
+  var selectionNumber = Platform.OS === "android" ? 1 : 2;
+  var block = Platform.OS === "android" ? 3 : 4;
 
   function header(value) {
     var sign;
@@ -55,40 +62,21 @@ function MarkdownView() {
         sign = "###";
         break;
     }
-    BeginSign(selection.start, selection.end, text, sign).then(request => {
-      setText(request);
-    });
+    startSign(sign);
   }
 
-  function blocks() {
-    BeginSign(selection.start, selection.end, text, ">").then(request => {
+  function startSign(simbol) {
+    BeginSign(selection.start, selection.end, text, simbol).then(request => {
       setText(request);
-    });
-  }
-
-  function pointList() {
-    BeginSign(selection.start, selection.end, text, "-").then(request => {
-      setText(request);
-    });
-  }
-
-  function codeLine() {
-    text.length == 0 ? setFirst(true) : setFirst(false);
-
-    OneSign(selection.start, selection.end, text, "``").then(request => {
-      setText(request.content);
-      setSelection({
-        start: request.erase ? selection.end + 1 : selection.end - 1,
-        end: request.erase ? selection.end + 1 : selection.end - 1
-      });
     });
   }
 
   function italics() {
     text.length == 0 ? setFirst(true) : setFirst(false);
 
-    OneSign(selection.start, selection.end, text, "__").then(request => {
+    OneSign(selection.start, selection.end, text, "**").then(request => {
       setText(request.content);
+
       setSelection({
         start: request.erase ? selection.end + 1 : selection.end - 1,
         end: request.erase ? selection.end + 1 : selection.end - 1
@@ -96,14 +84,16 @@ function MarkdownView() {
     });
   }
 
-  function bold() {
+  function twoSimbols(simbol) {
     text.length == 0 ? setFirst(true) : setFirst(false);
 
-    TwoSigns(selection.start, selection.end, text, "****").then(request => {
+    TwoSigns(selection.start, selection.end, text, simbol).then(request => {
       setText(request.content);
       setSelection({
-        start: request.erase ? selection.end + 2 : selection.end - 2,
-        end: request.erase ? selection.end + 2 : selection.end - 2
+        start: request.erase
+          ? selection.end + 2
+          : selection.end - selectionNumber,
+        end: request.erase ? selection.end + 2 : selection.end - selectionNumber
       });
     });
   }
@@ -111,18 +101,6 @@ function MarkdownView() {
   function table(row, column) {
     Table(text, selection.start, row, column).then(request => {
       setText(request);
-    });
-  }
-
-  function textLine() {
-    text.length == 0 ? setFirst(true) : setFirst(false);
-
-    TwoSigns(selection.start, selection.end, text, "~~~~").then(request => {
-      setText(request.content);
-      setSelection({
-        start: request.erase ? selection.end + 2 : selection.end - 2,
-        end: request.erase ? selection.end + 2 : selection.end - 2
-      });
     });
   }
 
@@ -161,38 +139,60 @@ function MarkdownView() {
   }
 
   function codeBlock() {
-    CodeBlock(selection.start, selection.end, text, "~~~~~~~~").then(
-      request => {
-        setText(request.content);
-        setSelection({
-          start: request.erase ? selection.end + 5 : selection.end - 5,
-          end: request.erase ? selection.end + 5 : selection.end - 5
-        });
-      }
-    );
+    CodeBlock(selection.start, selection.end, text, "``````").then(request => {
+      setText(request.content);
+      setSelection({
+        start: request.erase ? selection.end + 4 : selection.end - block,
+        end: request.erase ? selection.end + 4 : selection.end - block
+      });
+    });
+  }
+
+  function gist(content, type) {
+    JustAddSign(
+      selection.start,
+      "\n" + "```" + type + "\n" + content + "\n" + "```",
+      text
+    ).then(request => {
+      setText(request + "\n");
+    });
   }
 
   return (
-    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior="padding"
+      keyboardVerticalOffset={Platform.OS === "android" ? 25 : 0}
+    >
       <SafeAreaView backgroundColor="white" />
       <StatusBar barStyle="dark-content" />
 
       <Row>
-        <Button
-          // onPress={() => setModal(true)}
-          disabled={true}
-          title="Tutorial"
-          color="#833fff"
-        />
+        <Information
+          color={text.length == 0 ? "#cccccc" : "#833fff"}
+          size={18}
+          // onPress={() => text.length != 0 && setModal(true)}
+        >
+          Tutorial
+        </Information>
 
         <Header>
-          <Button
-            onPress={() => setModal(true)}
-            disabled={text.length == 0}
-            title="Preview"
-            color="#833fff"
-          />
-          <Button disabled={text.length == 0} title="Next" color="#833fff" />
+          <Information
+            onPress={() => text.length != 0 && setModal(true)}
+            color={text.length == 0 ? "#cccccc" : "#833fff"}
+            size={18}
+            right={15}
+          >
+            Preview
+          </Information>
+
+          <Information
+            // onPress={() => text.length != 0 && setModal(true)}
+            color={text.length == 0 ? "#cccccc" : "#833fff"}
+            size={18}
+          >
+            Next
+          </Information>
         </Header>
       </Row>
 
@@ -200,27 +200,35 @@ function MarkdownView() {
         <View paddingHorizontal="5%">
           <View marginTop={20}>
             <TextInput
-              style={{ fontSize: 16 }}
+              ref={inputRef}
+              style={{ fontSize: 16, textAlignVertical: "top" }}
+              underlineColorAndroid="rgba(0,0,0,0)"
+              autoCorrect={false}
               onChangeText={text => {
                 setText(text);
                 setFirst(false);
               }}
               placeholder="Start writing a history here"
-              autoCapitalize="none"
-              selection={{
-                start: first ? 2 : selection.start,
-                end: first ? 2 : selection.end
-              }}
+              selection={
+                Platform.OS === "ios"
+                  ? {
+                      start: first ? 2 : selection.start,
+                      end: first ? 2 : selection.end
+                    }
+                  : {
+                      start: first ? 0 : selection.start,
+                      end: first ? 0 : selection.end
+                    }
+              }
               value={text}
               multiline
               returnKeyType="next"
               onKeyPress={this.onKeyPress}
               onSelectionChange={({ nativeEvent: { selection } }) => {
-                setSelection({
-                  start: selection.start,
-                  end: selection.end
-                });
+                setSelection(selection);
               }}
+              autoCapitalize="none"
+              editable={true}
             />
           </View>
         </View>
@@ -228,18 +236,19 @@ function MarkdownView() {
 
       <Buttons
         header={() => setTitleAlert(true)}
-        line={() => textLine()}
-        bold={() => bold()}
+        line={() => twoSimbols("~~~~")}
+        bold={() => twoSimbols("****")}
         italic={() => italics()}
         code={() => codeBlock()}
-        codeLine={() => codeLine()}
+        codeLine={() => twoSimbols("````")}
         link={() => setShowAlert(true)}
         gif={() => setModalGif(true)}
         centerLine={() => centerLine()}
-        blocks={() => blocks()}
-        pointList={() => pointList()}
+        blocks={() => startSign(">")}
+        pointList={() => startSign("-")}
         image={() => setPhotoAlert(true)}
         table={() => setTableAlert(true)}
+        gist={() => setModalGist(true)}
         dimiss={() => Keyboard.dismiss()}
       />
 
@@ -264,6 +273,17 @@ function MarkdownView() {
           show={modalGif}
           set={value => setModalGif(value)}
           gif={value => showGif(value)}
+        />
+      )}
+
+      {modalGist && (
+        <Gist
+          show={modalGist}
+          set={value => setModalGist(value)}
+          gist={(content, type) => {
+            setModalGist(false);
+            gist(content, type);
+          }}
         />
       )}
 

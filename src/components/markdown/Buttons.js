@@ -15,6 +15,7 @@ import LIST from "../../assets/img/list.png";
 import DOWN from "../../assets/img/angle-down.png";
 import IMAGE from "../../assets/img/image.png";
 import TABLE from "../../assets/img/table.png";
+import GIST from "../../assets/img/gist.png";
 
 import styled from "styled-components";
 
@@ -88,6 +89,10 @@ export function Buttons(props) {
 
         <TouchableOpacity onPress={() => props.pointList()}>
           <Images height={20} width={20} source={LIST} />
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => props.gist()}>
+          <Images height={20} width={20} source={GIST} />
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.codeLine()}>

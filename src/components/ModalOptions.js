@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, KeyboardAvoidingView } from "react-native";
+import { Modal, KeyboardAvoidingView, Platform } from "react-native";
 
 import styled from "styled-components";
 import { Images } from "../assets/styles/Image";
@@ -40,7 +40,10 @@ export const IconContent = styled.TouchableOpacity`
 export function ModalOptions(props) {
   return (
     <Modal transparent={true} visible={props.alert}>
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" && "padding"}
+      >
         <ModalContent align={props.align}>
           <AlertBox>
             <CenterContent>
@@ -59,9 +62,9 @@ export function ModalOptions(props) {
                   {props.messagge}
                 </Information>
               )}
-
-              {props.content}
             </CenterContent>
+
+            {props.content}
           </AlertBox>
         </ModalContent>
       </KeyboardAvoidingView>

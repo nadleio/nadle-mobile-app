@@ -12,7 +12,6 @@ export const ButtonContent = styled.TouchableOpacity`
   border-top-color: #f4f4f4;
   padding-top: 10;
   padding-bottom: 10;
-  width: 100%;
 `;
 
 export function MarkDownTitles(props) {

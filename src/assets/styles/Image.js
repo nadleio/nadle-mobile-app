@@ -11,7 +11,6 @@ export const ImageBackground = styled.ImageBackground`
   width: ${props => props.width || 0};
   border-radius: ${props => props.radius || 0};
   overflow: hidden;
-  /* justify-content: flex-end; */
 `;
 
 export const ImageContent = styled.View`
