@@ -17,3 +17,12 @@ export const PaddingHorizontal = styled.View`
   padding-left: 5%;
   padding-right: 5%;
 `;
+
+export const RadiusBox = styled.View`
+  padding: 5%;
+  background-color: white;
+  border-radius: 8;
+  margin-top: ${props => props.top || 0};
+  border-width: 2;
+  border-color: #f4f4f4;
+`;

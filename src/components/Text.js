@@ -10,7 +10,7 @@ export const Title = styled.Text`
 
 export const ActionLink = styled.Text`
   font-family: "System";
-  font-size: ${props => props.size || 17};
+  font-size: ${props => props.size || 16};
   color: ${props => props.color || "black"};
   font-weight: 600;
   text-align: center;

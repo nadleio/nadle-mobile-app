@@ -18,9 +18,11 @@ import Register from "./views/register";
 import InputEmail from "./views/ResetPassword/inputEmail";
 import SendCode from "./views/ResetPassword/sendCode";
 import ResetPassword from "./views/ResetPassword/resetPassword";
-import Feed from "./views/feed";
+import Feed from "./views/Feed/feed";
 import Feed2 from "./views/feed2";
 import MarkdownView from "./views/markdown";
+import Profile from "./views/Profile/profile";
+import SearchProfile from "./views/Profile/searchProfile";
 
 export const TabNavigator = createBottomTabNavigator(
   {
@@ -61,7 +63,7 @@ export const TabNavigator = createBottomTabNavigator(
     },
 
     Profile: {
-      screen: Feed,
+      screen: Profile,
       navigationOptions: () => ({
         tabBarIcon: () => (
           <Images height={22} width={22} radius={11} source={PROFILE} />
@@ -83,18 +85,18 @@ export const TabNavigator = createBottomTabNavigator(
 );
 
 export const Root = createStackNavigator(
-  { TabNavigator },
   {
-    header: null,
-    headerMode: "none"
-  },
-  {
+    TabNavigator,
     Login: { screen: Login },
     Register: { screen: Register },
     InputEmail: { screen: InputEmail },
     SendCode: { screen: SendCode },
-    ResetPassword: { screen: ResetPassword }
-    // Feed: { screen: Feed }
+    ResetPassword: { screen: ResetPassword },
+    SearchProfile: { screen: SearchProfile }
+  },
+  {
+    header: null,
+    headerMode: "none"
   }
 );
 
@@ -103,7 +105,9 @@ export const NotLoginRoot = createStackNavigator({
   Register: { screen: Register },
   InputEmail: { screen: InputEmail },
   SendCode: { screen: SendCode },
-  ResetPassword: { screen: ResetPassword }
+  ResetPassword: { screen: ResetPassword },
+  SearchProfile: { screen: SearchProfile }
+
   // Feed: { screen: Feed }
 });
 
@@ -111,11 +115,11 @@ export const AppContainer = (signedIn = false) =>
   createAppContainer(
     createSwitchNavigator(
       {
-        NotLoginRoot: { screen: NotLoginRoot },
+        // NotLoginRoot: { screen: NotLoginRoot },
         Root: { screen: Root }
       },
 
-      { initialRouteName: signedIn ? "Root" : "NotLoginRoot" }
+      { initialRouteName: signedIn ? "Root" : "Root" }
       // { initialRouteName: false ? "NotLoginRoot" : "NotLoginRoot" }
     )
   );

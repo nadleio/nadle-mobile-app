@@ -2,12 +2,16 @@ import React, { useState, useEffect, useRef } from "react";
 import { StatusBar, ScrollView, View, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
-import { ViewFlex, Margin } from "../assets/styles/styles";
-import { Images, ImageContent, ImageBackground } from "../assets/styles/Image";
-import { Information } from "../components/Text";
-import { ShareIt } from "../lib/utils/Share";
+import { ViewFlex, Margin } from "../../assets/styles/styles";
+import {
+  Images,
+  ImageContent,
+  ImageBackground
+} from "../../assets/styles/Image";
+import { Information } from "../../components/Text";
+import { ShareIt } from "../../lib/utils/Share";
 
-import json from "../json/feed";
+import json from "../../json/feed";
 
 import {
   PaddingBox,
@@ -23,30 +27,30 @@ import {
   CommentLine,
   ActivityBoxSeccion,
   ClapBox
-} from "../assets/styles/feed";
+} from "./style";
 
 import * as Animatable from "react-native-animatable";
 import Swiper from "react-native-swiper";
 import ActionSheet from "react-native-actionsheet";
 
-import FULL_LOGO from "../assets/img/full-logo-color.png";
-import DEFAULT from "../assets/img/default.jpg";
-import PAISAJE from "../assets/img/paisaje.png";
-import SHARE from "../assets/img/share.png";
-import CLAPPING from "../assets/img/clapping.png";
-import BOOKMARK from "../assets/img/bookmark.png";
-import BOOKMARKFILLED from "../assets/img/bookmarkFilled.png";
-import CHAT from "../assets/img/chat.png";
-import OPTIONS from "../assets/img/options.png";
-import PREMIUM from "../assets/img/premium.png";
-import CARLOS from "../assets/img/pp.jpg";
-import CODE from "../assets/img/code.jpg";
-import VUE from "../assets/img/vue2.jpg";
-import FLUTTER from "../assets/img/flutter.jpg";
-import JHOVANNA from "../assets/img/jhovanna.jpg";
-import VISQUEL from "../assets/img/pp-1.jpg";
-import DANIEL from "../assets/img/pp-2.jpg";
-import CLAPFILLIED from "../assets/img/clapFilled.png";
+import FULL_LOGO from "../../assets/img/full-logo-color.png";
+import DEFAULT from "../../assets/img/default.jpg";
+import PAISAJE from "../../assets/img/paisaje.png";
+import SHARE from "../../assets/img/share.png";
+import CLAPPING from "../../assets/img/clapping.png";
+import BOOKMARK from "../../assets/img/bookmark.png";
+import BOOKMARKFILLED from "../../assets/img/bookmarkFilled.png";
+import CHAT from "../../assets/img/chat.png";
+import OPTIONS from "../../assets/img/options.png";
+import PREMIUM from "../../assets/img/premium.png";
+import CARLOS from "../../assets/img/pp.jpg";
+import CODE from "../../assets/img/code.jpg";
+import VUE from "../../assets/img/vue2.jpg";
+import FLUTTER from "../../assets/img/flutter.jpg";
+import JHOVANNA from "../../assets/img/jhovanna.jpg";
+import VISQUEL from "../../assets/img/pp-1.jpg";
+import DANIEL from "../../assets/img/pp-2.jpg";
+import CLAPFILLIED from "../../assets/img/clapFilled.png";
 
 function Feed(props) {
   const [colors, SetColor] = useState(["#7b44ff", "#d6d6d6", "#d6d6d6"]);
@@ -216,7 +220,13 @@ function Feed(props) {
                     <ContentBox>
                       <SpaceBetween>
                         <FlexRow>
-                          <TouchableOpacity onPress={() => alert(data.id)}>
+                          <TouchableOpacity
+                            onPress={() =>
+                              props.navigation.navigate("SearchProfile", {
+                                id: data.id
+                              })
+                            }
+                          >
                             <Information weight="600" color="black" size={16}>
                               {data.name}
                             </Information>
