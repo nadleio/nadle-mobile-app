@@ -23,6 +23,7 @@ import Feed2 from "./views/feed2";
 import MarkdownView from "./views/markdown";
 import Profile from "./views/Profile/profile";
 import SearchProfile from "./views/Profile/searchProfile";
+import Notifications from "./views/Notifications/notifications";
 
 export const TabNavigator = createBottomTabNavigator(
   {
@@ -54,7 +55,7 @@ export const TabNavigator = createBottomTabNavigator(
     },
 
     Notifications: {
-      screen: MarkdownView,
+      screen: Notifications,
       navigationOptions: () => ({
         tabBarIcon: () => (
           <Images height={21} width={21} source={NOTIFICATION} />
@@ -107,15 +108,13 @@ export const NotLoginRoot = createStackNavigator({
   SendCode: { screen: SendCode },
   ResetPassword: { screen: ResetPassword },
   SearchProfile: { screen: SearchProfile }
-
-  // Feed: { screen: Feed }
 });
 
 export const AppContainer = (signedIn = false) =>
   createAppContainer(
     createSwitchNavigator(
       {
-        // NotLoginRoot: { screen: NotLoginRoot },
+        NotLoginRoot: { screen: NotLoginRoot },
         Root: { screen: Root }
       },
 

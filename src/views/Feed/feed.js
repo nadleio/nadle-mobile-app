@@ -356,7 +356,13 @@ function Feed(props) {
                     <ContentBox>
                       <SpaceBetween>
                         <FlexRow>
-                          <TouchableOpacity onPress={() => alert(data.id)}>
+                          <TouchableOpacity
+                            onPress={() =>
+                              props.navigation.navigate("SearchProfile", {
+                                id: data.id
+                              })
+                            }
+                          >
                             <Information weight="600" color="black" size={16}>
                               {data.commentUser}
                             </Information>
