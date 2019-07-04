@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StatusBar, ScrollView, View, TouchableOpacity } from "react-native";
+import { StatusBar, ScrollView, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-navigation";
+
+import * as Animatable from "react-native-animatable";
+import Swiper from "react-native-swiper";
+import ActionSheet from "react-native-actionsheet";
 
 import { ViewFlex, Margin } from "../../assets/styles/styles";
 import {
@@ -26,12 +30,10 @@ import {
   ContentBox,
   CommentLine,
   ActivityBoxSeccion,
-  ClapBox
+  ClapBox,
+  PaddingBoxRecent,
+  Bottom
 } from "./style";
-
-import * as Animatable from "react-native-animatable";
-import Swiper from "react-native-swiper";
-import ActionSheet from "react-native-actionsheet";
 
 import FULL_LOGO from "../../assets/img/full-logo-color.png";
 import DEFAULT from "../../assets/img/default.jpg";
@@ -88,6 +90,12 @@ function Feed(props) {
     const newSave = [...save];
     newSave[i] = save[i] == BOOKMARK ? BOOKMARKFILLED : BOOKMARK;
     setSave(newSave);
+  }
+
+  function goToProfile(id) {
+    props.navigation.navigate("SearchProfile", {
+      id: id
+    });
   }
 
   function changeColor(index) {
@@ -159,250 +167,238 @@ function Feed(props) {
           </FlexRow>
         </ActivityBoxSeccion>
 
-        <Swiper
-          height={112}
-          onIndexChanged={index => changeColor(index)}
-          loop={false}
-          showsPagination={false}
-          index={0}
-        >
-          {json[1].map(data => (
-            <View paddingHorizontal="5%">
-              <PaddingBox background="#f4f4f4" radius={8} height={112}>
-                <SpaceBetween>
-                  <Information weight="600" color="black" size={16}>
-                    {data.fromReply}
+        <Bottom>
+          <Swiper
+            height={112}
+            onIndexChanged={index => changeColor(index)}
+            loop={false}
+            showsPagination={false}
+            index={0}
+          >
+            {json[1].map(data => (
+              <PaddingBoxRecent>
+                <PaddingBox background="#f4f4f4" radius={8} height={112}>
+                  <SpaceBetween>
+                    <Information
+                      onPress={() => goToProfile(data.id)}
+                      weight="600"
+                      color="black"
+                      size={16}
+                    >
+                      {data.fromReply}
+                    </Information>
+
+                    <Information weight="600" color="#bdbdbd" size={11}>
+                      4H ago
+                    </Information>
+                  </SpaceBetween>
+
+                  <Information color="#43485e" size={14} top={7}>
+                    Replied to{" "}
+                    <Information
+                      onPress={() => goToProfile(data.id)}
+                      weight="bold"
+                    >
+                      {data.toReply}
+                    </Information>{" "}
+                    in a post
                   </Information>
 
-                  <Information weight="600" color="#bdbdbd" size={11}>
-                    4H ago
+                  <Information
+                    numberOfLines={2}
+                    color="#43485e"
+                    size={14}
+                    top={4}
+                  >
+                    {data.body}
                   </Information>
-                </SpaceBetween>
-
-                <Information color="#43485e" size={14} top={7}>
-                  Replied to{" "}
-                  <Information weight="bold">{data.toReply}</Information> in a
-                  post
-                </Information>
-
-                <Information
-                  numberOfLines={2}
-                  color="#43485e"
-                  size={14}
-                  top={4}
-                >
-                  {data.body}
-                </Information>
-              </PaddingBox>
-            </View>
-          ))}
-        </Swiper>
+                </PaddingBox>
+              </PaddingBoxRecent>
+            ))}
+          </Swiper>
+        </Bottom>
 
         {json[0].map((data, i) => {
           return (
-            <View>
-              <Margin top={10} key={i}>
-                <ActivityBox>
-                  <Row>
-                    <JustifyCenter>
-                      <ImageContent height={45} width={45} radius={22.5}>
-                        <Images
-                          radius={20}
-                          height={40}
-                          width={40}
-                          source={photosProfile[i]}
-                        />
-                      </ImageContent>
+            <ActivityBox>
+              <Row>
+                <JustifyCenter>
+                  <ImageContent height={45} width={45} radius={22.5}>
+                    <Images
+                      radius={20}
+                      height={40}
+                      width={40}
+                      source={photosProfile[i]}
+                    />
+                  </ImageContent>
 
-                      <CommentLine />
-                    </JustifyCenter>
+                  <CommentLine />
+                </JustifyCenter>
 
-                    <ContentBox>
-                      <SpaceBetween>
-                        <FlexRow>
-                          <TouchableOpacity
-                            onPress={() =>
-                              props.navigation.navigate("SearchProfile", {
-                                id: data.id
-                              })
-                            }
-                          >
-                            <Information weight="600" color="black" size={16}>
-                              {data.name}
-                            </Information>
-                          </TouchableOpacity>
-
-                          <Information
-                            left={5}
-                            weight="600"
-                            color="#bdbdbd"
-                            size={12}
-                          >
-                            • {data.postHour}
-                          </Information>
-                        </FlexRow>
-
-                        <FlexRow>
-                          <Margin right={5}>
-                            <Images height={20} width={20} source={PREMIUM} />
-                          </Margin>
-
-                          <TouchableOpacity
-                            onPress={() => showActionSheet(data.id)}
-                          >
-                            <Images height={18} width={18} source={OPTIONS} />
-                          </TouchableOpacity>
-                        </FlexRow>
-                      </SpaceBetween>
-
-                      <Information
-                        numberOfLines={2}
-                        color="black"
-                        size={16}
-                        top={3}
-                      >
-                        {data.title}
-                      </Information>
-
-                      <Information
-                        numberOfLines={2}
-                        color="#5c5c5c"
-                        size={14}
-                        top={4}
-                      >
-                        {data.description}
-                      </Information>
-
-                      <TouchableOpacity>
-                        <Margin top={4}>
-                          <ImageBackground
-                            radius={8}
-                            height={200}
-                            width="100%"
-                            source={photos[i]}
-                          />
-                        </Margin>
+                <ContentBox>
+                  <SpaceBetween>
+                    <FlexRow>
+                      <TouchableOpacity onPress={() => goToProfile(data.id)}>
+                        <Information weight="600" color="black" size={16}>
+                          {data.name}
+                        </Information>
                       </TouchableOpacity>
 
-                      <Margin top={7}>
-                        <PaddingHorizontal>
-                          <SpaceBetween>
-                            <FlexRow>
-                              {animation[i] && (
-                                <Animatable.View
-                                  animation="fadeOutUp"
-                                  iterationCount={1}
-                                  direction="alternate"
-                                  key={i}
-                                >
-                                  <ClapBox>
-                                    <Images
-                                      height={20}
-                                      width={20}
-                                      source={CLAPPING}
-                                    />
-                                  </ClapBox>
-                                </Animatable.View>
-                              )}
+                      <Information
+                        left={5}
+                        weight="600"
+                        color="#bdbdbd"
+                        size={12}
+                      >
+                        • {data.postHour}
+                      </Information>
+                    </FlexRow>
 
-                              <TouchableOpacity
-                                onPress={() => setAnimatableTrue(i)}
-                              >
+                    <FlexRow>
+                      <Margin right={5}>
+                        <Images height={20} width={20} source={PREMIUM} />
+                      </Margin>
+
+                      <TouchableOpacity
+                        onPress={() => showActionSheet(data.id)}
+                      >
+                        <Images height={18} width={18} source={OPTIONS} />
+                      </TouchableOpacity>
+                    </FlexRow>
+                  </SpaceBetween>
+
+                  <Information
+                    numberOfLines={2}
+                    color="black"
+                    size={16}
+                    top={3}
+                  >
+                    {data.title}
+                  </Information>
+
+                  <Information
+                    numberOfLines={2}
+                    color="#5c5c5c"
+                    size={14}
+                    top={4}
+                  >
+                    {data.description}
+                  </Information>
+
+                  <TouchableOpacity
+                    onPress={() =>
+                      props.navigation.navigate("Post", {
+                        id: 1
+                      })
+                    }
+                  >
+                    <Margin top={4}>
+                      <ImageBackground
+                        radius={8}
+                        height={200}
+                        width="100%"
+                        source={photos[i]}
+                      />
+                    </Margin>
+                  </TouchableOpacity>
+
+                  <Margin top={7}>
+                    <PaddingHorizontal>
+                      <SpaceBetween>
+                        <FlexRow>
+                          {animation[i] && (
+                            <Animatable.View
+                              animation="fadeOutUp"
+                              iterationCount={1}
+                              direction="alternate"
+                              key={i}
+                            >
+                              <ClapBox>
                                 <Images
                                   height={20}
                                   width={20}
-                                  source={images[i]}
+                                  source={CLAPPING}
                                 />
-                              </TouchableOpacity>
+                              </ClapBox>
+                            </Animatable.View>
+                          )}
 
-                              <Information color="#5c5c5c" size={12} left={5}>
-                                {data.claps}
-                              </Information>
-                            </FlexRow>
-
-                            <FlexRow>
-                              <TouchableOpacity onPress={() => alert(data.id)}>
-                                <Images height={18} width={18} source={CHAT} />
-                              </TouchableOpacity>
-
-                              <Information color="#5c5c5c" size={12} left={5}>
-                                {data.comments}
-                              </Information>
-                            </FlexRow>
-
-                            <TouchableOpacity onPress={() => savePost(i)}>
-                              <Images height={18} width={18} source={save[i]} />
-                            </TouchableOpacity>
-
-                            <TouchableOpacity onPress={() => ShareIt(data.url)}>
-                              <Images height={19} width={19} source={SHARE} />
-                            </TouchableOpacity>
-                          </SpaceBetween>
-                        </PaddingHorizontal>
-                      </Margin>
-                    </ContentBox>
-                  </Row>
-
-                  <Row>
-                    <ImageContent height={45} width={45} radius={22.5}>
-                      <Images
-                        radius={20}
-                        height={40}
-                        width={40}
-                        source={CARLOS}
-                      />
-                    </ImageContent>
-
-                    <ContentBox>
-                      <SpaceBetween>
-                        <FlexRow>
                           <TouchableOpacity
-                            onPress={() =>
-                              props.navigation.navigate("SearchProfile", {
-                                id: data.id
-                              })
-                            }
+                            onPress={() => setAnimatableTrue(i)}
                           >
-                            <Information weight="600" color="black" size={16}>
-                              {data.commentUser}
-                            </Information>
+                            <Images height={20} width={20} source={images[i]} />
                           </TouchableOpacity>
 
-                          <Information
-                            left={5}
-                            weight="600"
-                            color="#bdbdbd"
-                            size={12}
-                          >
-                            • {data.commetHour}
+                          <Information color="#5c5c5c" size={12} left={5}>
+                            {data.claps}
                           </Information>
                         </FlexRow>
+
+                        <FlexRow>
+                          <TouchableOpacity onPress={() => alert(data.id)}>
+                            <Images height={18} width={18} source={CHAT} />
+                          </TouchableOpacity>
+
+                          <Information color="#5c5c5c" size={12} left={5}>
+                            {data.comments}
+                          </Information>
+                        </FlexRow>
+
+                        <TouchableOpacity onPress={() => savePost(i)}>
+                          <Images height={18} width={18} source={save[i]} />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => ShareIt(data.url)}>
+                          <Images height={19} width={19} source={SHARE} />
+                        </TouchableOpacity>
                       </SpaceBetween>
+                    </PaddingHorizontal>
+                  </Margin>
+                </ContentBox>
+              </Row>
 
-                      <Information
-                        numberOfLines={2}
-                        color="#5c5c5c"
-                        size={14}
-                        top={3}
-                      >
-                        {data.commentContent}
-                      </Information>
+              <Row>
+                <ImageContent height={45} width={45} radius={22.5}>
+                  <Images radius={20} height={40} width={40} source={CARLOS} />
+                </ImageContent>
 
-                      <TouchableOpacity onPress={() => alert(data.id)}>
-                        <Information
-                          weight="500"
-                          color="#0091ff"
-                          size={15}
-                          top={8}
-                        >
-                          View comments
+                <ContentBox>
+                  <SpaceBetween>
+                    <FlexRow>
+                      <TouchableOpacity onPress={() => goToProfile(data.id)}>
+                        <Information weight="600" color="black" size={16}>
+                          {data.commentUser}
                         </Information>
                       </TouchableOpacity>
-                    </ContentBox>
-                  </Row>
-                </ActivityBox>
-              </Margin>
-            </View>
+
+                      <Information
+                        left={5}
+                        weight="600"
+                        color="#bdbdbd"
+                        size={12}
+                      >
+                        • {data.commetHour}
+                      </Information>
+                    </FlexRow>
+                  </SpaceBetween>
+
+                  <Information
+                    numberOfLines={2}
+                    color="#5c5c5c"
+                    size={14}
+                    top={3}
+                  >
+                    {data.commentContent}
+                  </Information>
+
+                  <TouchableOpacity onPress={() => alert(data.id)}>
+                    <Information weight="500" color="#0091ff" size={15} top={8}>
+                      View comments
+                    </Information>
+                  </TouchableOpacity>
+                </ContentBox>
+              </Row>
+            </ActivityBox>
           );
         })}
       </ScrollView>

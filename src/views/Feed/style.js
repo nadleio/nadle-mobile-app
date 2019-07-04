@@ -7,10 +7,21 @@ export const PaddingBox = styled.View`
   border-radius: ${props => props.radius || "0"};
 `;
 
+export const PaddingBoxRecent = styled.View`
+  padding-left: 5%;
+  padding-right: 5%;
+`;
+
+export const Bottom = styled.View`
+  margin-bottom: 15px;
+`;
+
 export const ActivityBox = styled(PaddingBox)`
   border-top-width: 1px;
   border-color: #f4f4f4;
-  padding-bottom: 1%;
+  padding: 5%;
+  padding-bottom: 3%;
+  background-color: white;
 `;
 
 export const Row = styled.View`

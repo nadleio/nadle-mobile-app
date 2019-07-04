@@ -15,10 +15,12 @@ export const Row = styled.View`
 
 export const IconCenter = styled(Row)`
   align-items: center;
+  margin-top: 4px;
 `;
 
 export const TextContent = styled.View`
   width: 85%;
+  padding-right: 1;
 `;
 
 export const IconBackground = styled.View`
@@ -27,4 +29,11 @@ export const IconBackground = styled.View`
   border-radius: 4;
   margin-top: 4px;
   margin-left: 5px;
+`;
+
+export const Header = styled.View`
+  padding: 20px;
+  padding-left: 5%;
+  border-bottom-color: #f4f4f4;
+  border-bottom-width: 2;
 `;

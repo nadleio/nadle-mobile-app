@@ -5,6 +5,12 @@ export const Padding = styled.View`
   padding-right: 8%;
 `;
 
+export const PostContentPadding = styled.View`
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 10px;
+`;
+
 export const Align = styled.View`
   align-items: center;
 `;
@@ -21,8 +27,8 @@ export const IconsBox = styled.View`
 
 export const PostTitleContent = styled.View`
   height: 45px;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding-left: 5%;
+  padding-right: 5%;
   border-width: 2;
   border-color: #f4f4f4;
   margin-top: ${props => props.margintop || -40};
@@ -33,6 +39,8 @@ export const PostTitleContent = styled.View`
 
 export const Authorized = styled.View`
   padding: 15px;
+  padding-left: 5%;
+  padding-right: 5%;
   margin-top: -50px;
   border-width: 2;
   border-color: #f4f4f4;

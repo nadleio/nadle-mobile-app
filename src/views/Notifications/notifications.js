@@ -1,5 +1,5 @@
 import React from "react";
-import { StatusBar, ScrollView } from "react-native";
+import { StatusBar, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
 import { ViewFlex, Margin } from "../../assets/styles/styles";
@@ -9,7 +9,8 @@ import {
   Row,
   IconCenter,
   TextContent,
-  IconBackground
+  IconBackground,
+  Header
 } from "./style";
 import { Information } from "../../components/Text";
 
@@ -28,33 +29,37 @@ function Notifications(props) {
       <StatusBar barStyle="dark-content" />
 
       <ScrollView>
-        <Margin top={5}>
-          <PaddingBox>
-            <Row>
+        <Header>
+          <Information size={22} weight="bold" color="black">
+            Notifications
+          </Information>
+        </Header>
+
+        <PaddingBox>
+          <Row>
+            <View>
               <ImageContent height={45} width={45} radius={22.5}>
                 <Images radius={20} height={40} width={40} source={CARLOS} />
               </ImageContent>
+            </View>
 
-              <TextContent>
-                <Information size={16} color="black" left={5}>
-                  <Information
-                    onPress={() =>
-                      props.navigation.navigate("SearchProfile", {
-                        id: 2
-                      })
-                    }
-                    size={16}
-                    color="black"
-                    weight="600"
-                  >
-                    ricardo
-                  </Information>{" "}
-                  subscribed on your Nadle profile
-                </Information>
-              </TextContent>
-            </Row>
+            <TextContent>
+              <Information size={16} color="black" left={5}>
+                <Information
+                  onPress={() =>
+                    props.navigation.navigate("SearchProfile", {
+                      id: 2
+                    })
+                  }
+                  size={16}
+                  color="black"
+                  weight="600"
+                >
+                  ricardo
+                </Information>{" "}
+                subscribed on your profile
+              </Information>
 
-            <Margin left={23}>
               <IconCenter>
                 <IconBackground background="#833fff">
                   <Images height={14} width={14} source={SUBS} />
@@ -70,29 +75,71 @@ function Notifications(props) {
                   4H ago
                 </Information>
               </IconCenter>
-            </Margin>
-          </PaddingBox>
+            </TextContent>
+          </Row>
+        </PaddingBox>
 
-          <PaddingBox>
-            <Row>
+        <PaddingBox>
+          <Row>
+            <View>
               <ImageContent height={45} width={45} radius={22.5}>
-                <Images radius={20} height={40} width={40} source={PAISAJE} />
+                <Images radius={20} height={40} width={40} source={CARLOS} />
               </ImageContent>
+            </View>
 
-              <TextContent>
-                <Information size={16} color="black" left={5}>
-                  <Information size={16} color="black" weight="600">
-                    carlos
-                  </Information>{" "}
-                  Let you a comment on your post{" "}
-                  <Information size={16} color="black" weight="600">
-                    How to release on react native
-                  </Information>
+            <TextContent>
+              <Information size={16} color="black" left={5}>
+                <Information
+                  onPress={() =>
+                    props.navigation.navigate("SearchProfile", {
+                      id: 2
+                    })
+                  }
+                  size={16}
+                  color="black"
+                  weight="600"
+                >
+                  ricardomalagon
+                </Information>{" "}
+                subscribed on your profile
+              </Information>
+
+              <IconCenter>
+                <IconBackground background="#833fff">
+                  <Images height={14} width={14} source={SUBS} />
+                </IconBackground>
+
+                <Information
+                  weight="600"
+                  color="#bdbdbd"
+                  size={12}
+                  left={5}
+                  top={4}
+                >
+                  4H ago
                 </Information>
-              </TextContent>
-            </Row>
+              </IconCenter>
+            </TextContent>
+          </Row>
+        </PaddingBox>
 
-            <Margin left={23}>
+        <PaddingBox>
+          <Row>
+            <ImageContent height={45} width={45} radius={22.5}>
+              <Images radius={20} height={40} width={40} source={PAISAJE} />
+            </ImageContent>
+
+            <TextContent>
+              <Information size={16} color="black" left={5}>
+                <Information size={16} color="black" weight="600">
+                  carlos
+                </Information>{" "}
+                Let you a comment on your post{" "}
+                <Information size={16} color="black" weight="600">
+                  How to release on react native
+                </Information>
+              </Information>
+
               <IconCenter>
                 <IconBackground background="#ff4986">
                   <Images height={14} width={14} source={COMMENT} />
@@ -108,64 +155,27 @@ function Notifications(props) {
                   4H ago
                 </Information>
               </IconCenter>
-            </Margin>
-          </PaddingBox>
+            </TextContent>
+          </Row>
+        </PaddingBox>
 
-          <PaddingBox>
-            <Row>
-              <ImageContent height={45} width={45} radius={22.5}>
-                <Images radius={20} height={40} width={40} source={JHOVANNA} />
-              </ImageContent>
+        <PaddingBox>
+          <Row>
+            <ImageContent height={45} width={45} radius={22.5}>
+              <Images radius={20} height={40} width={40} source={CARLOS} />
+            </ImageContent>
 
-              <TextContent>
-                <Information size={16} color="black" left={5}>
-                  <Information size={16} color="black" weight="600">
-                    ricardomalagon
-                  </Information>{" "}
-                  subscribed on your profile
+            <TextContent>
+              <Information size={16} color="black" left={5}>
+                <Information size={16} color="black" weight="600">
+                  carlos
+                </Information>{" "}
+                clap you on your post{" "}
+                <Information size={16} color="black" weight="600">
+                  How to release on react native
                 </Information>
-              </TextContent>
-            </Row>
+              </Information>
 
-            <Margin left={23}>
-              <IconCenter>
-                <IconBackground background="#833fff">
-                  <Images height={14} width={14} source={SUBS} />
-                </IconBackground>
-
-                <Information
-                  weight="600"
-                  color="#bdbdbd"
-                  size={12}
-                  left={5}
-                  top={4}
-                >
-                  4H ago
-                </Information>
-              </IconCenter>
-            </Margin>
-          </PaddingBox>
-
-          <PaddingBox>
-            <Row>
-              <ImageContent height={45} width={45} radius={22.5}>
-                <Images radius={20} height={40} width={40} source={CARLOS} />
-              </ImageContent>
-
-              <TextContent>
-                <Information size={16} color="black" left={5}>
-                  <Information size={16} color="black" weight="600">
-                    carlos
-                  </Information>{" "}
-                  clap you on your post{" "}
-                  <Information size={16} color="black" weight="600">
-                    How to release on react native
-                  </Information>
-                </Information>
-              </TextContent>
-            </Row>
-
-            <Margin left={23}>
               <IconCenter>
                 <IconBackground background="#ff8d52">
                   <Images height={14} width={14} source={CLAP} />
@@ -181,29 +191,27 @@ function Notifications(props) {
                   4H ago
                 </Information>
               </IconCenter>
-            </Margin>
-          </PaddingBox>
+            </TextContent>
+          </Row>
+        </PaddingBox>
 
-          <PaddingBox>
-            <Row>
-              <ImageContent height={45} width={45} radius={22.5}>
-                <Images radius={20} height={40} width={40} source={CARLOS} />
-              </ImageContent>
+        <PaddingBox>
+          <Row>
+            <ImageContent height={45} width={45} radius={22.5}>
+              <Images radius={20} height={40} width={40} source={CARLOS} />
+            </ImageContent>
 
-              <TextContent>
-                <Information size={16} color="black" left={5}>
-                  <Information size={16} color="black" weight="600">
-                    carlos
-                  </Information>{" "}
-                  bought your post{" "}
-                  <Information size={16} color="black" weight="600">
-                    How to release on react native
-                  </Information>
+            <TextContent>
+              <Information size={16} color="black" left={5}>
+                <Information size={16} color="black" weight="600">
+                  carlos
+                </Information>{" "}
+                bought your post{" "}
+                <Information size={16} color="black" weight="600">
+                  How to release on react native
                 </Information>
-              </TextContent>
-            </Row>
+              </Information>
 
-            <Margin left={23}>
               <IconCenter>
                 <IconBackground background="#1BCE33">
                   <Images height={14} width={14} source={MONEY} />
@@ -219,9 +227,9 @@ function Notifications(props) {
                   4H ago
                 </Information>
               </IconCenter>
-            </Margin>
-          </PaddingBox>
-        </Margin>
+            </TextContent>
+          </Row>
+        </PaddingBox>
       </ScrollView>
     </ViewFlex>
   );

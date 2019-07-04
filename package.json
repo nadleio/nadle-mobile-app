@@ -23,6 +23,7 @@
     "react-native-swiper": "^1.5.14",
     "react-native-syntax-highlighter": "^2.0.0",
     "react-native-timer-countdown": "^4.1.0",
+    "react-native-youtube": "^1.1.0",
     "react-navigation": "^3.9.1",
     "styled-components": "^4.2.0",
     "yup": "^0.27.0"

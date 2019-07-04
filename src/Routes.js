@@ -19,11 +19,13 @@ import InputEmail from "./views/ResetPassword/inputEmail";
 import SendCode from "./views/ResetPassword/sendCode";
 import ResetPassword from "./views/ResetPassword/resetPassword";
 import Feed from "./views/Feed/feed";
-import Feed2 from "./views/feed2";
 import MarkdownView from "./views/markdown";
 import Profile from "./views/Profile/profile";
 import SearchProfile from "./views/Profile/searchProfile";
 import Notifications from "./views/Notifications/notifications";
+import Post from "./views/Post/post";
+import Search from "./views/Search/search";
+import YoutubeForAndroid from "./views/Post/youtubeForAndroid";
 
 export const TabNavigator = createBottomTabNavigator(
   {
@@ -41,7 +43,7 @@ export const TabNavigator = createBottomTabNavigator(
     },
 
     Search: {
-      screen: Feed2,
+      screen: Search,
       navigationOptions: () => ({
         tabBarIcon: () => <Images height={21} width={21} source={SEARCH} />
       })
@@ -93,7 +95,9 @@ export const Root = createStackNavigator(
     InputEmail: { screen: InputEmail },
     SendCode: { screen: SendCode },
     ResetPassword: { screen: ResetPassword },
-    SearchProfile: { screen: SearchProfile }
+    SearchProfile: { screen: SearchProfile },
+    Post: { screen: Post },
+    YoutubeForAndroid: { screen: YoutubeForAndroid }
   },
   {
     header: null,

@@ -26,7 +26,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string></string>
+			<string/>
 			<key>CFBundleURLSchemes</key>
 			<array/>
 		</dict>
@@ -50,7 +50,7 @@
 		</dict>
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To include a photo on the post</string>
 	<key>UILaunchStoryboardName</key>
@@ -67,5 +67,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array/>
 </dict>
 </plist>

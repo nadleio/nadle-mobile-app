@@ -6,7 +6,7 @@ import { ProfileContent } from "../../components/ProfileContent";
 import ActionSheet from "react-native-actionsheet";
 
 function SearchProfile(props) {
-  const [myProfile, setMyProfile] = useState(false);
+  const [myProfile, setMyProfile] = useState(null);
   const [subscribeWord, setSubscribeWord] = useState({
     text: "Subscribe",
     count: 250
@@ -45,6 +45,11 @@ function SearchProfile(props) {
           subscribe={() => subscribe()}
           myProfile={myProfile}
           actionSheat={() => showActionSheet()}
+          viewPost={() =>
+            props.navigation.push("Post", {
+              id: 1
+            })
+          }
         />
       </ScrollView>
 

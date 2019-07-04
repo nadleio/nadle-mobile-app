@@ -4,7 +4,7 @@ import { ScrollView } from "react-native";
 import { ViewFlex } from "../../assets/styles/styles";
 import { ProfileContent } from "../../components/ProfileContent";
 
-function Profile() {
+function Profile(props) {
   const subscribeWord = {
     text: "Subscribe",
     count: 250
@@ -16,6 +16,11 @@ function Profile() {
           back={false}
           subscribeCotent={subscribeWord}
           myProfile={true}
+          viewPost={() =>
+            props.navigation.push("Post", {
+              id: 1
+            })
+          }
         />
       </ScrollView>
     </ViewFlex>

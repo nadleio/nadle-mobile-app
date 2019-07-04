@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     borderRadius: 3
   },
   image: {
-    height: 260,
+    height: 250,
     width: "100%",
     borderRadius: 8,
     overflow: "hidden"
@@ -73,18 +73,15 @@ const styles = StyleSheet.create({
 
 const rules = {
   table: (node, children, parent, styles) => (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-      <View key={node.key} style={[styles.table]}>
-        {children}
-      </View>
-    </ScrollView>
+    <View key={node.key} style={[styles.table]}>
+      {children}
+    </View>
   ),
 
   fence: (node, children, parent, styles) => (
     <View style={styles.codeBlock}>
       <SyntaxHighlighter
         language={node.sourceInfo}
-        // style={atomDark}
         highlighter={"prism" || "hljs"}
         fontSize={14}
         showsHorizontalScrollIndicator={false}
@@ -100,11 +97,9 @@ const rules = {
 export function Preview(props) {
   return (
     <ViewFlex>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <Markdown rules={rules} style={styles}>
-          {props.content}
-        </Markdown>
-      </ScrollView>
+      <Markdown rules={rules} style={styles}>
+        {props.content}
+      </Markdown>
     </ViewFlex>
   );
 }

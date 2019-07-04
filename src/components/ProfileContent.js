@@ -8,6 +8,7 @@ import {
   Align,
   Row,
   IconsBox,
+  PostContentPadding,
   PostTitleContent,
   Authorized,
   Subscribe,
@@ -151,12 +152,15 @@ export function ProfileContent(props) {
         </Information>
       </PostTitleContent>
 
-      <PreviewPost
-        title="How to get better in your React Native code"
-        name="Ricardo Malagon"
-        date="10 of march"
-        hashtags={["React Native", "React", "GraphQl", "NodeJS"]}
-      />
+      <PostContentPadding>
+        <PreviewPost
+          title="How to get better in your React Native code"
+          name="Ricardo Malagon"
+          date="10 of march"
+          hashtags={["React Native", "React", "GraphQl", "NodeJS", "5+"]}
+          viewPost={() => props.viewPost()}
+        />
+      </PostContentPadding>
     </ViewFlex>
   );
 }
