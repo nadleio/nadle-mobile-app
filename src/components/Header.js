@@ -26,12 +26,14 @@ export const TouchableOpacity = styled.TouchableOpacity`
 export function Header(props) {
   return (
     <HeaderContent justify={props.text ? "flex-start" : "space-between"}>
-      <TouchableOpacity onPress={() => props.back()}>
-        <Images height={20} width={20} source={BACK} />
-      </TouchableOpacity>
+      {props.backBool && (
+        <TouchableOpacity onPress={() => props.back()}>
+          <Images height={20} width={20} source={BACK} />
+        </TouchableOpacity>
+      )}
 
       {props.text && (
-        <Information size={18} weight="bold" left={10}>
+        <Information size={20} weight="bold" left={10}>
           {props.text}
         </Information>
       )}

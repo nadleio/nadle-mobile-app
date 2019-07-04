@@ -9,8 +9,7 @@ import {
   Row,
   IconCenter,
   TextContent,
-  IconBackground,
-  Header
+  IconBackground
 } from "./style";
 import { Information } from "../../components/Text";
 
@@ -21,6 +20,8 @@ import MONEY from "../../assets/img/money.png";
 import CLAP from "../../assets/img/clapping-white.png";
 import SUBS from "../../assets/img/subs-white.png";
 
+import { Header } from "../../components/Header";
+
 function Notifications(props) {
   return (
     <ViewFlex paddingBottom="0">
@@ -28,11 +29,7 @@ function Notifications(props) {
       <StatusBar barStyle="dark-content" />
 
       <ScrollView>
-        <Header>
-          <Information size={22} weight="bold">
-            Notifications
-          </Information>
-        </Header>
+        <Header backBool={false} text="Notifications" />
 
         <PaddingBox>
           <Row>

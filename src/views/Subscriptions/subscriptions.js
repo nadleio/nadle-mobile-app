@@ -34,6 +34,7 @@ function Subscriptions(props) {
       <SafeAreaView backgroundColor="white" />
       <StatusBar barStyle="dark-content" />
       <Header
+        backBool={true}
         back={() => props.navigation.goBack()}
         text={props.navigation.state.params.type}
       />

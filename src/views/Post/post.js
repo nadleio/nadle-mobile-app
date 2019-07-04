@@ -116,6 +116,7 @@ function Post(props) {
       <StatusBar barStyle="dark-content" />
 
       <Header
+        backBool={true}
         back={() => props.navigation.goBack()}
         buttons={
           <HeaderIcons>
