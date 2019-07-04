@@ -26,6 +26,7 @@ import Notifications from "./views/Notifications/notifications";
 import Post from "./views/Post/post";
 import Search from "./views/Search/search";
 import YoutubeForAndroid from "./views/Post/youtubeForAndroid";
+import Subscriptions from "./views/Subscriptions/subscriptions";
 
 export const TabNavigator = createBottomTabNavigator(
   {
@@ -97,7 +98,8 @@ export const Root = createStackNavigator(
     ResetPassword: { screen: ResetPassword },
     SearchProfile: { screen: SearchProfile },
     Post: { screen: Post },
-    YoutubeForAndroid: { screen: YoutubeForAndroid }
+    YoutubeForAndroid: { screen: YoutubeForAndroid },
+    Subscriptions: { screen: Subscriptions }
   },
   {
     header: null,

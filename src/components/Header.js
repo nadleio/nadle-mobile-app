@@ -1,19 +1,21 @@
 import React from "React";
+
 import styled from "styled-components";
 
 import { Images } from "../assets/styles/Image";
 import BACK from "../assets/img/back-black.png";
-import { Platform } from "react-native";
+import { Information } from "./Text";
 
 export const HeaderContent = styled.View`
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-top: ${props => props.paddingtop || "3%"};
-  padding-bottom: 3%;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 15px;
+  padding-bottom: 10px;
   border-bottom-color: #f4f4f4;
   border-bottom-width: 2;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: ${props => props.justify};
+  align-items: center;
 `;
 
 export const TouchableOpacity = styled.TouchableOpacity`
@@ -23,10 +25,16 @@ export const TouchableOpacity = styled.TouchableOpacity`
 
 export function Header(props) {
   return (
-    <HeaderContent paddingtop={Platform.OS === "android" ? "5%" : "3%"}>
+    <HeaderContent justify={props.text ? "flex-start" : "space-between"}>
       <TouchableOpacity onPress={() => props.back()}>
         <Images height={20} width={20} source={BACK} />
       </TouchableOpacity>
+
+      {props.text && (
+        <Information size={18} weight="bold" left={10}>
+          {props.text}
+        </Information>
+      )}
 
       {props.buttons}
     </HeaderContent>

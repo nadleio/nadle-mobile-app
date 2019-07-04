@@ -2,7 +2,7 @@ import React from "react";
 import { StatusBar, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
-import { ViewFlex, Margin } from "../../assets/styles/styles";
+import { ViewFlex } from "../../assets/styles/styles";
 import { Images, ImageContent } from "../../assets/styles/Image";
 import {
   PaddingBox,
@@ -17,7 +17,6 @@ import { Information } from "../../components/Text";
 import PAISAJE from "../../assets/img/paisaje.png";
 import CARLOS from "../../assets/img/pp.jpg";
 import COMMENT from "../../assets/img/comment-white.png";
-import JHOVANNA from "../../assets/img/jhovanna.jpg";
 import MONEY from "../../assets/img/money.png";
 import CLAP from "../../assets/img/clapping-white.png";
 import SUBS from "../../assets/img/subs-white.png";
@@ -30,7 +29,7 @@ function Notifications(props) {
 
       <ScrollView>
         <Header>
-          <Information size={22} weight="bold" color="black">
+          <Information size={22} weight="bold">
             Notifications
           </Information>
         </Header>
@@ -44,7 +43,7 @@ function Notifications(props) {
             </View>
 
             <TextContent>
-              <Information size={16} color="black" left={5}>
+              <Information size={16} left={5}>
                 <Information
                   onPress={() =>
                     props.navigation.navigate("SearchProfile", {
@@ -52,7 +51,6 @@ function Notifications(props) {
                     })
                   }
                   size={16}
-                  color="black"
                   weight="600"
                 >
                   ricardo
@@ -88,7 +86,7 @@ function Notifications(props) {
             </View>
 
             <TextContent>
-              <Information size={16} color="black" left={5}>
+              <Information size={16} left={5}>
                 <Information
                   onPress={() =>
                     props.navigation.navigate("SearchProfile", {
@@ -96,7 +94,6 @@ function Notifications(props) {
                     })
                   }
                   size={16}
-                  color="black"
                   weight="600"
                 >
                   ricardomalagon

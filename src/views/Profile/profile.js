@@ -16,6 +16,11 @@ function Profile(props) {
           back={false}
           subscribeCotent={subscribeWord}
           myProfile={true}
+          subscriptions={type =>
+            props.navigation.push("Subscriptions", {
+              type: type
+            })
+          }
           viewPost={() =>
             props.navigation.push("Post", {
               id: 1

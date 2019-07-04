@@ -11,7 +11,6 @@ import {
   PostContentPadding,
   PostTitleContent,
   Authorized,
-  Subscribe,
   Settings
 } from "../views/Profile/style";
 
@@ -24,6 +23,7 @@ import MORE from "../assets/img/more.png";
 
 import { Information, Title } from "./Text";
 import { PreviewPost } from "./PreviewPost";
+import { Subscribe } from "./Subscribe";
 
 export function ProfileContent(props) {
   return (
@@ -101,7 +101,11 @@ export function ProfileContent(props) {
               </ImageContent>
 
               <Margin left={5}>
-                <Information size={16} weight={600}>
+                <Information
+                  onPress={() => props.subscriptions("Subscriptors")}
+                  size={16}
+                  weight={600}
+                >
                   {props.subscribeCotent.count}
                 </Information>
                 <Information color="#727272" size={14} top={1}>
@@ -121,7 +125,11 @@ export function ProfileContent(props) {
               </ImageContent>
 
               <Margin left={5}>
-                <Information size={16} weight={600}>
+                <Information
+                  onPress={() => props.subscriptions("Subscriptions")}
+                  size={16}
+                  weight={600}
+                >
                   520
                 </Information>
                 <Information color="#727272" size={14} top={1}>

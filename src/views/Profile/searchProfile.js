@@ -45,6 +45,11 @@ function SearchProfile(props) {
           subscribe={() => subscribe()}
           myProfile={myProfile}
           actionSheat={() => showActionSheet()}
+          subscriptions={type =>
+            props.navigation.push("Subscriptions", {
+              type: type
+            })
+          }
           viewPost={() =>
             props.navigation.push("Post", {
               id: 1
