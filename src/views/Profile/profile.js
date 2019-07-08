@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView } from "react-native";
 
 import { ViewFlex } from "../../assets/styles/styles";
-import { ProfileContent } from "../../components/ProfileContent";
+import { ProfileContent } from "../../components/Profile/ProfileContent";
 
 function Profile(props) {
   const subscribeWord = {
@@ -16,6 +16,8 @@ function Profile(props) {
           back={false}
           subscribeCotent={subscribeWord}
           myProfile={true}
+          // type="organization"
+          type="user"
           subscriptions={type =>
             props.navigation.push("Subscriptions", {
               type: type

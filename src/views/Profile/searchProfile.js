@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
 
 import { ViewFlex } from "../../assets/styles/styles";
-import { ProfileContent } from "../../components/ProfileContent";
+import { ProfileContent } from "../../components/Profile/ProfileContent";
 import ActionSheet from "react-native-actionsheet";
 
 function SearchProfile(props) {
@@ -45,6 +45,7 @@ function SearchProfile(props) {
           subscribe={() => subscribe()}
           myProfile={myProfile}
           actionSheat={() => showActionSheet()}
+          type="user"
           subscriptions={type =>
             props.navigation.push("Subscriptions", {
               type: type

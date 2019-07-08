@@ -19,31 +19,49 @@ export const Row = styled(Align)`
   flex-direction: row;
 `;
 
+export const OrganizationSubs = styled(Row)`
+  margin-top: 20px;
+  justify-content: center;
+`;
+
+export const Wrap = styled(Row)`
+  flex-wrap: wrap;
+`;
+
+export const Organizations = styled.TouchableOpacity`
+  margin-top: 15px;
+  margin-right: ${props => props.marginright || 0};
+`;
+
 export const IconsBox = styled.View`
   flex-direction: row;
   margin-top: 25px;
   justify-content: space-between;
+  align-items: center;
+  padding-left: ${props => props.paddinghorizontal || 0};
+  padding-right: ${props => props.paddinghorizontal || 0};
 `;
 
 export const PostTitleContent = styled.View`
   height: 45px;
   padding-left: 5%;
   padding-right: 5%;
-  border-width: 2;
-  border-color: #f4f4f4;
   margin-top: ${props => props.margintop || -40};
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
 `;
 
 export const Authorized = styled.View`
   padding: 15px;
   padding-left: 5%;
   padding-right: 5%;
+`;
+
+export const BioContent = styled.View`
+  padding: 15px;
+  padding-left: 5%;
+  padding-right: 5%;
   margin-top: -50px;
-  border-width: 2;
-  border-color: #f4f4f4;
 `;
 
 export const Settings = styled.View`

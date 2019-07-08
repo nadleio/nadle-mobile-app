@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StatusBar, ScrollView } from "react-native";
+import { StatusBar, ScrollView, View } from "react-native";
 
 import { SafeAreaView } from "react-navigation";
 
@@ -46,9 +46,7 @@ function Subscriptions(props) {
           return (
             <Padding>
               <Row>
-                <ImageContent height={45} width={45} radius={22.5}>
-                  <Images radius={20} height={40} width={40} source={CARLOS} />
-                </ImageContent>
+                <Images radius={20} height={40} width={40} source={CARLOS} />
 
                 <TextContent onPress={() => goProfile(1)}>
                   <Information
@@ -65,11 +63,13 @@ function Subscriptions(props) {
                   </Information>
                 </TextContent>
 
-                <Subscribe onPress={() => subscribeFunc(i)}>
-                  <Information color="#833fff" size={14}>
-                    {text}
-                  </Information>
-                </Subscribe>
+                <View>
+                  <Subscribe onPress={() => subscribeFunc(i)}>
+                    <Information color="white" size={14}>
+                      {text}
+                    </Information>
+                  </Subscribe>
+                </View>
               </Row>
             </Padding>
           );

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   TextInput,
@@ -43,6 +43,7 @@ function MarkdownView() {
   const [photoAlert, setPhotoAlert] = useState(false);
   const [titleAlert, setTitleAlert] = useState(false);
   const [tableAlert, setTableAlert] = useState(false);
+  const [editable, setEditable] = useState(false);
   const inputRef = useRef("refComponent");
 
   var selectionNumber = Platform.OS === "android" ? 1 : 2;
@@ -64,6 +65,12 @@ function MarkdownView() {
     }
     startSign(sign);
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setEditable(true);
+    }, 100);
+  }, []);
 
   function startSign(simbol) {
     BeginSign(selection.start, selection.end, text, simbol).then(request => {
@@ -223,12 +230,11 @@ function MarkdownView() {
               value={text}
               multiline
               returnKeyType="next"
-              onKeyPress={this.onKeyPress}
               onSelectionChange={({ nativeEvent: { selection } }) => {
                 setSelection(selection);
               }}
               autoCapitalize="none"
-              editable={true}
+              editable={editable}
             />
           </View>
         </View>

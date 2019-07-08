@@ -3,7 +3,7 @@ import { StatusBar, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
 import { ViewFlex } from "../../assets/styles/styles";
-import { Images, ImageContent } from "../../assets/styles/Image";
+import { Images } from "../../assets/styles/Image";
 import {
   PaddingBox,
   Row,
@@ -34,9 +34,7 @@ function Notifications(props) {
         <PaddingBox>
           <Row>
             <View>
-              <ImageContent height={45} width={45} radius={22.5}>
-                <Images radius={20} height={40} width={40} source={CARLOS} />
-              </ImageContent>
+              <Images radius={20} height={40} width={40} source={CARLOS} />
             </View>
 
             <TextContent>
@@ -77,9 +75,7 @@ function Notifications(props) {
         <PaddingBox>
           <Row>
             <View>
-              <ImageContent height={45} width={45} radius={22.5}>
-                <Images radius={20} height={40} width={40} source={CARLOS} />
-              </ImageContent>
+              <Images radius={20} height={40} width={40} source={CARLOS} />
             </View>
 
             <TextContent>
@@ -119,9 +115,7 @@ function Notifications(props) {
 
         <PaddingBox>
           <Row>
-            <ImageContent height={45} width={45} radius={22.5}>
-              <Images radius={20} height={40} width={40} source={PAISAJE} />
-            </ImageContent>
+            <Images radius={20} height={40} width={40} source={PAISAJE} />
 
             <TextContent>
               <Information size={16} color="black" left={5}>
@@ -155,9 +149,7 @@ function Notifications(props) {
 
         <PaddingBox>
           <Row>
-            <ImageContent height={45} width={45} radius={22.5}>
-              <Images radius={20} height={40} width={40} source={CARLOS} />
-            </ImageContent>
+            <Images radius={20} height={40} width={40} source={CARLOS} />
 
             <TextContent>
               <Information size={16} color="black" left={5}>
@@ -191,9 +183,7 @@ function Notifications(props) {
 
         <PaddingBox>
           <Row>
-            <ImageContent height={45} width={45} radius={22.5}>
-              <Images radius={20} height={40} width={40} source={CARLOS} />
-            </ImageContent>
+            <Images radius={20} height={40} width={40} source={CARLOS} />
 
             <TextContent>
               <Information size={16} color="black" left={5}>

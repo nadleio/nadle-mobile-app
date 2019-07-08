@@ -1,10 +1,31 @@
 import styled from "styled-components";
+import { StyleSheet } from "react-native";
+
+export const styles = StyleSheet.create({
+  menu: {
+    flex: 1,
+    paddingTop: 60
+  },
+  menuContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderBottomWidth: 2,
+    borderColor: "#f4f4f4",
+    paddingHorizontal: "5%",
+    paddingVertical: 12
+  }
+});
 
 export const PaddingBox = styled.View`
   padding: 5%;
   padding-bottom: 3%;
   background-color: ${props => props.background || "white"};
   border-radius: ${props => props.radius || "0"};
+`;
+
+export const SpaceTag = styled(PaddingBox)`
+  justify-content: space-between;
+  flex-direction: row;
 `;
 
 export const PaddingBoxRecent = styled.View`
@@ -71,7 +92,7 @@ export const ContentBox = styled.View`
 export const CommentLine = styled.View`
   width: 3;
   background-color: #e6e6e6;
-  height: 290;
+  height: 310;
 `;
 
 export const ActivityBoxSeccion = styled.View`
@@ -90,4 +111,9 @@ export const ClapBox = styled.View`
   align-items: center;
   position: absolute;
   margin-top: -40;
+`;
+
+export const ContentTag = styled.TouchableOpacity`
+  width: 32px;
+  height: 32px;
 `;

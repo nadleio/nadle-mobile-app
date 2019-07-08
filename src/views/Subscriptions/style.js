@@ -15,6 +15,6 @@ export const Row = styled.View`
 `;
 
 export const TextContent = styled.TouchableOpacity`
-  width: 60%;
+  width: 57%;
   padding-right: 2%;
 `;
