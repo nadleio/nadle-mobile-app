@@ -6,6 +6,11 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
   "dependencies": {
     "axios": "^0.19.0",
     "formik": "^1.5.4",
@@ -24,6 +29,7 @@
     "react-native-swiper": "^1.5.14",
     "react-native-syntax-highlighter": "^2.0.0",
     "react-native-timer-countdown": "^4.1.0",
+    "react-native-vector-icons": "^6.6.0",
     "react-native-youtube": "^1.1.0",
     "react-navigation": "^3.9.1",
     "styled-components": "^4.2.0",

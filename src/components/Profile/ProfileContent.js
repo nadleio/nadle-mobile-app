@@ -5,7 +5,8 @@ import { ViewFlex, RadiusBox } from "../../assets/styles/styles";
 import {
   Images,
   ImageContent,
-  ImageBackground
+  ImageBackground,
+  SmallImageProfile
 } from "../../assets/styles/Image";
 
 import {
@@ -17,19 +18,18 @@ import {
   Authorized,
   Settings,
   Wrap,
-  BioContent
-} from "../../views/Profile/style";
+  BioContent,
+  Row
+} from "../../views/Profile/styled";
 
 import PROFILE from "../../assets/img/profile.jpg";
-import SETTINGS from "../../assets/img/settings.png";
-import BACK from "../../assets/img/back.png";
 import CARLOS from "../../assets/img/pp.jpg";
-import MORE from "../../assets/img/more.png";
 
 import { Information } from "../Text";
 import { PreviewPost } from "../PreviewPost";
 import { SubscribeSectionUser } from "./SubscribeSectionUser";
 import { SubscribeSectionOrganization } from "./SubscribeSectionOrganization";
+import { Icon } from "../Icon";
 
 export function ProfileContent(props) {
   const members = props.type == "user" ? "Organizations" : "Members";
@@ -40,13 +40,8 @@ export function ProfileContent(props) {
         <Settings>
           {props.back ? (
             <TouchableOpacity onPress={() => props.goBack()}>
-              <ImageContent
-                height={32}
-                width={32}
-                radius={14}
-                color="rgba(0,0,0,0.3)"
-              >
-                <Images height={19} width={19} source={BACK} />
+              <ImageContent height={30} width={30} radius={15} color="white">
+                <Icon size={20}></Icon>
               </ImageContent>
             </TouchableOpacity>
           ) : (
@@ -56,17 +51,8 @@ export function ProfileContent(props) {
           <TouchableOpacity
             onPress={() => (props.myProfile ? alert() : props.actionSheat())}
           >
-            <ImageContent
-              height={32}
-              width={32}
-              radius={14}
-              color="rgba(0,0,0,0.3)"
-            >
-              <Images
-                height={22}
-                width={22}
-                source={props.myProfile ? SETTINGS : MORE}
-              />
+            <ImageContent height={30} width={30} radius={15} color="white">
+              <Icon size={20}>{props.myProfile ? "" : ""}</Icon>
             </ImageContent>
           </TouchableOpacity>
         </Settings>
@@ -92,7 +78,7 @@ export function ProfileContent(props) {
               myProfile={props.myProfile}
               subsText={props.subscribeCotent.text}
               subscribe={() => props.subscribe()}
-              align="center"
+              align={props.myProfile ? "center" : "left"}
             />
           ) : (
             <SubscribeSectionOrganization
@@ -115,36 +101,59 @@ export function ProfileContent(props) {
           This the Official React channel we are posting interesting content for
           you all subscribe and enjoy it!
         </Information>
+
+        {props.type == "organization" && (
+          <View>
+            <Information size={16} top={10}>
+              <Icon color="black" size={16}>
+                
+              </Icon>{" "}
+              San Francisco, CA
+            </Information>
+
+            <Information size={16} top={6}>
+              <Icon color="black" size={16}>
+                
+              </Icon>{" "}
+              https://github.com
+            </Information>
+          </View>
+        )}
       </BioContent>
 
       <Authorized>
-        <Information size={16} weight={600}>
-          {members} (15)
-        </Information>
+        <Row>
+          <Information size={16} weight={600}>
+            {members} (15){" "}
+          </Information>
+          <Icon color="black" size={16}>
+            
+          </Icon>
+        </Row>
 
         <Wrap>
-          <Organizations marginright="5%">
-            <Images height={40} width={40} radius={20} source={CARLOS} />
+          <Organizations onPress={() => props.goToProfile()} marginright="5%">
+            <SmallImageProfile source={CARLOS} />
+          </Organizations>
+
+          <Organizations onPress={() => props.goToProfile()} marginright="5%">
+            <SmallImageProfile source={CARLOS} />
           </Organizations>
 
           <Organizations marginright="5%">
-            <Images height={40} width={40} radius={20} source={CARLOS} />
+            <SmallImageProfile source={CARLOS} />
           </Organizations>
 
           <Organizations marginright="5%">
-            <Images height={40} width={40} radius={20} source={CARLOS} />
+            <SmallImageProfile source={CARLOS} />
           </Organizations>
 
           <Organizations marginright="5%">
-            <Images height={40} width={40} radius={20} source={CARLOS} />
-          </Organizations>
-
-          <Organizations marginright="5%">
-            <Images height={40} width={40} radius={20} source={CARLOS} />
+            <SmallImageProfile source={CARLOS} />
           </Organizations>
 
           <Organizations>
-            <Images height={40} width={40} radius={20} source={CARLOS} />
+            <SmallImageProfile source={CARLOS} />
           </Organizations>
         </Wrap>
       </Authorized>

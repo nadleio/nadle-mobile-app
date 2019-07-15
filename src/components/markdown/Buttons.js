@@ -1,23 +1,10 @@
 import React from "react";
 import { ScrollView } from "react-native";
 
-import BOLD from "../../assets/img/bold.png";
-import LINE from "../../assets/img/line.png";
-import ITALIC from "../../assets/img/italic.png";
-import FONT from "../../assets/img/font.png";
-import LINK from "../../assets/img/link.png";
-import CENTERLINE from "../../assets/img/centerLine.png";
-import QUOTE from "../../assets/img/quote.png";
-import GIF from "../../assets/img/gif.png";
-import CODE from "../../assets/img/code.png";
-import CODELINE from "../../assets/img/codeLine.png";
-import LIST from "../../assets/img/list.png";
 import DOWN from "../../assets/img/angle-down.png";
-import IMAGE from "../../assets/img/image.png";
-import TABLE from "../../assets/img/table.png";
-import GIST from "../../assets/img/gist.png";
 
 import styled from "styled-components";
+import { Icon } from "../Icon";
 
 import { Images } from "../../assets/styles/Image";
 
@@ -48,59 +35,87 @@ export function Buttons(props) {
         </TouchableOpacity>
 
         <TouchableOpacity left={35} onPress={() => props.header()}>
-          <Images height={20} width={20} source={FONT} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.bold()}>
-          <Images height={20} width={20} source={BOLD} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.line()}>
-          <Images height={20} width={20} source={LINE} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.italic()}>
-          <Images height={20} width={20} source={ITALIC} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.link()} left={35}>
-          <Images height={20} width={20} source={LINK} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.gif()}>
-          <Images height={20} width={20} source={GIF} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.image()}>
-          <Images height={20} width={20} source={IMAGE} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.table()} left={35}>
-          <Images height={20} width={20} source={TABLE} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.centerLine()}>
-          <Images height={20} width={20} source={CENTERLINE} />
+          <Icon color="black" size={18}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.blocks()}>
-          <Images height={20} width={20} source={QUOTE} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.pointList()}>
-          <Images height={20} width={20} source={LIST} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => props.gist()}>
-          <Images height={20} width={20} source={GIST} />
+        <TouchableOpacity onPress={() => props.gist()} left={35}>
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.codeLine()}>
-          <Images height={20} width={20} source={CODELINE} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity right={20} onPress={() => props.code()}>
-          <Images height={20} width={20} source={CODE} />
+          <Icon color="black" size={20}>
+            
+          </Icon>
         </TouchableOpacity>
       </ScrollView>
     </Scroll>

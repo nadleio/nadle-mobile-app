@@ -10,10 +10,13 @@ import { ViewFlex, Margin } from "../../assets/styles/styles";
 import {
   Images,
   ImageBackground,
-  ImageContent
+  ImageContent,
+  SmallImageProfile
 } from "../../assets/styles/Image";
 import { Information } from "../../components/Text";
 import { ShareIt } from "../../lib/utils/Share";
+
+import { Icon } from "../../components/Icon";
 
 import json from "../../json/feed";
 
@@ -36,17 +39,12 @@ import {
   SpaceTag,
   styles,
   ContentTag
-} from "./style";
+} from "./styled";
 
 import FULL_LOGO from "../../assets/img/full-logo-color.png";
 import DEFAULT from "../../assets/img/default.jpg";
 import PAISAJE from "../../assets/img/paisaje.png";
-import SHARE from "../../assets/img/share.png";
 import CLAPPING from "../../assets/img/clapping.png";
-import BOOKMARK from "../../assets/img/bookmark.png";
-import BOOKMARKFILLED from "../../assets/img/bookmarkFilled.png";
-import CHAT from "../../assets/img/chat.png";
-import OPTIONS from "../../assets/img/options.png";
 import PREMIUM from "../../assets/img/premium.png";
 import CARLOS from "../../assets/img/pp.jpg";
 import CODE from "../../assets/img/code.jpg";
@@ -72,13 +70,13 @@ function Feed(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   function setAnimatableTrue(i) {
-    if (images[i] == CLAPPING) {
+    if (images[i] == "") {
       setAnimationFunc(true, i);
       setTimeout(setAnimatableFalse.bind(i), 1000);
     }
 
     const newImages = [...images];
-    newImages[i] = images[i] == CLAPPING ? CLAPFILLIED : CLAPPING;
+    newImages[i] = images[i] == "" ? "" : "";
     setImages(newImages);
   }
 
@@ -94,7 +92,7 @@ function Feed(props) {
 
   function savePost(i) {
     const newSave = [...save];
-    newSave[i] = save[i] == BOOKMARK ? BOOKMARKFILLED : BOOKMARK;
+    newSave[i] = save[i] == "" ? "" : "";
     setSave(newSave);
   }
 
@@ -133,8 +131,8 @@ function Feed(props) {
     });
 
     json[0].map(data => {
-      data.clapped ? images.push(CLAPFILLIED) : images.push(CLAPPING);
-      data.saved ? save.push(BOOKMARKFILLED) : save.push(BOOKMARK);
+      data.clapped ? images.push("") : images.push("");
+      data.saved ? save.push("") : save.push("");
       animation.push(false);
     });
 
@@ -204,9 +202,9 @@ function Feed(props) {
                 radius={14}
                 color="rgba(0,0,0,0.1)"
               >
-                <Information size={16} weight={500}>
-                  #
-                </Information>
+                <Icon color="black" size={16}>
+                  
+                </Icon>
               </ImageContent>
             </ContentTag>
           </SpaceTag>
@@ -284,12 +282,7 @@ function Feed(props) {
               <ActivityBox>
                 <Row>
                   <JustifyCenter>
-                    <Images
-                      radius={20}
-                      height={40}
-                      width={40}
-                      source={photosProfile[i]}
-                    />
+                    <SmallImageProfile source={photosProfile[i]} />
 
                     <CommentLine />
                   </JustifyCenter>
@@ -321,7 +314,7 @@ function Feed(props) {
                         <TouchableOpacity
                           onPress={() => showActionSheet(data.id)}
                         >
-                          <Images height={18} width={18} source={OPTIONS} />
+                          <Icon size={18}></Icon>
                         </TouchableOpacity>
                       </FlexRow>
                     </SpaceBetween>
@@ -386,11 +379,9 @@ function Feed(props) {
                                 key={i}
                               >
                                 <ClapBox>
-                                  <Images
-                                    height={20}
-                                    width={20}
-                                    source={CLAPPING}
-                                  />
+                                  <Icon color="black" size={20}>
+                                    
+                                  </Icon>
                                 </ClapBox>
                               </Animatable.View>
                             )}
@@ -398,11 +389,9 @@ function Feed(props) {
                             <TouchableOpacity
                               onPress={() => setAnimatableTrue(i)}
                             >
-                              <Images
-                                height={20}
-                                width={20}
-                                source={images[i]}
-                              />
+                              <Icon color="black" size={20}>
+                                {images[i]}
+                              </Icon>
                             </TouchableOpacity>
 
                             <Information color="#5c5c5c" size={12} left={5}>
@@ -412,7 +401,9 @@ function Feed(props) {
 
                           <FlexRow>
                             <TouchableOpacity onPress={() => alert(data.id)}>
-                              <Images height={18} width={18} source={CHAT} />
+                              <Icon color="black" size={18}>
+                                
+                              </Icon>
                             </TouchableOpacity>
 
                             <Information color="#5c5c5c" size={12} left={5}>
@@ -421,11 +412,15 @@ function Feed(props) {
                           </FlexRow>
 
                           <TouchableOpacity onPress={() => savePost(i)}>
-                            <Images height={18} width={18} source={save[i]} />
+                            <Icon color="black" size={18}>
+                              {save[i]}
+                            </Icon>
                           </TouchableOpacity>
 
                           <TouchableOpacity onPress={() => ShareIt(data.url)}>
-                            <Images height={19} width={19} source={SHARE} />
+                            <Icon color="black" size={18}>
+                              
+                            </Icon>
                           </TouchableOpacity>
                         </SpaceBetween>
                       </PaddingHorizontal>

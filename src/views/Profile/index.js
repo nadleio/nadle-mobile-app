@@ -9,6 +9,8 @@ function Profile(props) {
     text: "Subscribe",
     count: 250
   };
+  const type = "user";
+
   return (
     <ViewFlex paddingBottom="0%">
       <ScrollView>
@@ -16,8 +18,7 @@ function Profile(props) {
           back={false}
           subscribeCotent={subscribeWord}
           myProfile={true}
-          // type="organization"
-          type="user"
+          type={type}
           subscriptions={type =>
             props.navigation.push("Subscriptions", {
               type: type
@@ -28,6 +29,7 @@ function Profile(props) {
               id: 1
             })
           }
+          goToProfile={() => props.navigation.push("SearchProfile")}
         />
       </ScrollView>
     </ViewFlex>

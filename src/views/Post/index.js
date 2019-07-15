@@ -22,10 +22,14 @@ import {
   PostContentPadding,
   styles,
   HeaderIconsTouchable
-} from "./style";
+} from "./styled";
 
 import { ViewFlex, Margin } from "../../assets/styles/styles";
-import { Images, ImageContent } from "../../assets/styles/Image";
+import {
+  Images,
+  ImageContent,
+  SmallImageProfile
+} from "../../assets/styles/Image";
 
 import { Information, Title } from "../../components/Text";
 import { Preview } from "../../components/markdown/Preview";
@@ -168,12 +172,12 @@ function Post(props) {
         <PaddingBox>
           <NameContent>
             <ImageContent height={32} width={32} radius={16}>
-              <Images radius={14} height={28} width={28} source={JHOVANNA} />
+              <SmallImageProfile source={JHOVANNA} />
             </ImageContent>
 
             <View>
               <Information
-                left={5}
+                left={12}
                 size={14}
                 color="black"
                 weight="600"
@@ -190,7 +194,7 @@ function Post(props) {
               </Information>
 
               <Information
-                left={5}
+                left={12}
                 size={13}
                 top={2}
                 color="black"

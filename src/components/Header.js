@@ -2,8 +2,7 @@ import React from "React";
 
 import styled from "styled-components";
 
-import { Images } from "../assets/styles/Image";
-import BACK from "../assets/img/back-black.png";
+import { Icon } from "./Icon";
 import { Information } from "./Text";
 
 export const HeaderContent = styled.View`
@@ -19,8 +18,10 @@ export const HeaderContent = styled.View`
 `;
 
 export const TouchableOpacity = styled.TouchableOpacity`
-  height: 20px;
-  width: 20px;
+  height: 32px;
+  width: 32px;
+  margin-left: 2%;
+  margin-right: -10px;
 `;
 
 export function Header(props) {
@@ -28,7 +29,9 @@ export function Header(props) {
     <HeaderContent justify={props.text ? "flex-start" : "space-between"}>
       {props.backBool && (
         <TouchableOpacity onPress={() => props.back()}>
-          <Images height={20} width={20} source={BACK} />
+          <Icon color="black" size={32}>
+            
+          </Icon>
         </TouchableOpacity>
       )}
 

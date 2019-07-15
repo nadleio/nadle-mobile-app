@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 
-import { IconsBox } from "../../views/Profile/style";
+import { IconsBox } from "../../views/Profile/styled";
 
 import { Information } from "../Text";
 import { Subscribe } from "../Subscribe";

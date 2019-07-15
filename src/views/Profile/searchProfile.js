@@ -12,6 +12,8 @@ function SearchProfile(props) {
     count: 250
   });
 
+  const type = "organization";
+
   useEffect(() => {
     props.navigation.state.params.id == 1
       ? setMyProfile(true)
@@ -45,7 +47,7 @@ function SearchProfile(props) {
           subscribe={() => subscribe()}
           myProfile={myProfile}
           actionSheat={() => showActionSheet()}
-          type="user"
+          type={type}
           subscriptions={type =>
             props.navigation.push("Subscriptions", {
               type: type
@@ -56,6 +58,7 @@ function SearchProfile(props) {
               id: 1
             })
           }
+          goToProfile={() => props.navigation.push("SearchProfile")}
         />
       </ScrollView>
 

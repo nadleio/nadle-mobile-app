@@ -3,20 +3,19 @@ import { StatusBar, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
 import { ViewFlex } from "../../assets/styles/styles";
-import { Images } from "../../assets/styles/Image";
+import { SmallImageProfile, Images } from "../../assets/styles/Image";
 import {
   PaddingBox,
   Row,
   IconCenter,
   TextContent,
   IconBackground
-} from "./style";
+} from "./styled";
 import { Information } from "../../components/Text";
+import { Icon } from "../../components/Icon";
 
 import PAISAJE from "../../assets/img/paisaje.png";
 import CARLOS from "../../assets/img/pp.jpg";
-import COMMENT from "../../assets/img/comment-white.png";
-import MONEY from "../../assets/img/money.png";
 import CLAP from "../../assets/img/clapping-white.png";
 import SUBS from "../../assets/img/subs-white.png";
 
@@ -34,7 +33,7 @@ function Notifications(props) {
         <PaddingBox>
           <Row>
             <View>
-              <Images radius={20} height={40} width={40} source={CARLOS} />
+              <SmallImageProfile source={CARLOS} />
             </View>
 
             <TextContent>
@@ -130,7 +129,9 @@ function Notifications(props) {
 
               <IconCenter>
                 <IconBackground background="#ff4986">
-                  <Images height={14} width={14} source={COMMENT} />
+                  <Icon color="white" size={14}>
+                    
+                  </Icon>
                 </IconBackground>
 
                 <Information
@@ -164,7 +165,9 @@ function Notifications(props) {
 
               <IconCenter>
                 <IconBackground background="#ff8d52">
-                  <Images height={14} width={14} source={CLAP} />
+                  <Icon size={14} color="white">
+                    
+                  </Icon>
                 </IconBackground>
 
                 <Information
@@ -198,7 +201,9 @@ function Notifications(props) {
 
               <IconCenter>
                 <IconBackground background="#1BCE33">
-                  <Images height={14} width={14} source={MONEY} />
+                  <Icon size={14} color="white">
+                    
+                  </Icon>
                 </IconBackground>
 
                 <Information

@@ -4,8 +4,8 @@ import { StatusBar, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
 import { ViewFlex } from "../../assets/styles/styles";
-import { Images, ImageContent } from "../../assets/styles/Image";
-import { Padding, Row, TextContent } from "./style";
+import { SmallImageProfile } from "../../assets/styles/Image";
+import { Padding, Row, TextContent } from "./styled";
 
 import { Information } from "../../components/Text";
 import { Header } from "../../components/Header";
@@ -46,7 +46,7 @@ function Subscriptions(props) {
           return (
             <Padding>
               <Row>
-                <Images radius={20} height={40} width={40} source={CARLOS} />
+                <SmallImageProfile source={CARLOS} />
 
                 <TextContent onPress={() => goProfile(1)}>
                   <Information

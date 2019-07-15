@@ -21,3 +21,10 @@ export const ImageContent = styled.View`
   justify-content: center;
   align-items: center;
 `;
+
+export const SmallImageProfile = styled.Image`
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  background-color: #e6e6e6;
+`;

@@ -5,8 +5,6 @@ export const PaddingBox = styled.View`
   padding-bottom: 3%;
   padding-top: 3%;
   background-color: white;
-  border-bottom-width: 2;
-  border-bottom-color: #f4f4f4;
 `;
 
 export const Row = styled.View`
@@ -25,8 +23,11 @@ export const TextContent = styled.View`
 
 export const IconBackground = styled.View`
   background-color: ${props => props.background || "white"};
-  padding: 1%;
+  height: 22px;
+  width: 22px;
   border-radius: 4;
+  justify-content: center;
+  align-items: center;
   margin-top: 4px;
   margin-left: 5px;
 `;

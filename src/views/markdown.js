@@ -15,7 +15,7 @@ import { PaddingHorizontal } from "../assets/styles/styles";
 
 import { Alert } from "../components/alerts/Alert";
 import { Preview } from "../components/markdown/Preview";
-import { Header, Row } from "../components/markdown/styles";
+import { Header, IconContent, Save } from "../components/markdown/styles";
 import { Gif } from "../components/Gif";
 import { Gist } from "../components/Gist";
 import { Buttons } from "../components/markdown/Buttons";
@@ -31,6 +31,7 @@ import { MarkDownTitles } from "../components/markdown/MarkDownTitles";
 import { SetTable } from "../components/markdown/SetTable";
 import { Table } from "../components/markdown//functions/Table";
 import { Information } from "../components/Text";
+import { Icon } from "../components/Icon";
 
 function MarkdownView() {
   const [modal, setModal] = useState(false);
@@ -174,34 +175,33 @@ function MarkdownView() {
       <SafeAreaView backgroundColor="white" />
       <StatusBar barStyle="dark-content" />
 
-      <Row>
-        <Information
-          color={text.length == 0 ? "#cccccc" : "#833fff"}
-          size={18}
-          // onPress={() => text.length != 0 && setModal(true)}
-        >
-          Tutorial
-        </Information>
-
-        <Header>
-          <Information
+      <Header>
+        <IconContent>
+          <Icon
             onPress={() => text.length != 0 && setModal(true)}
-            color={text.length == 0 ? "#cccccc" : "#833fff"}
-            size={18}
-            right={15}
+            color="black"
+            size={22}
           >
-            Preview
-          </Information>
+            
+          </Icon>
 
-          <Information
-            // onPress={() => text.length != 0 && setModal(true)}
-            color={text.length == 0 ? "#cccccc" : "#833fff"}
-            size={18}
-          >
-            Next
-          </Information>
-        </Header>
-      </Row>
+          <Icon color="black" size={22}>
+            
+          </Icon>
+
+          <Save backgroundColor="#2a2a2a">
+            <Information color="white" size={14}>
+              DRAFT
+            </Information>
+          </Save>
+
+          <Save>
+            <Information color="white" size={14}>
+              NEXT
+            </Information>
+          </Save>
+        </IconContent>
+      </Header>
 
       <ViewFlex>
         <View paddingHorizontal="5%">

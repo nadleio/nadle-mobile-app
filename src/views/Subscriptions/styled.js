@@ -5,8 +5,6 @@ export const Padding = styled.View`
   padding-bottom: 3%;
   padding-top: 3%;
   background-color: white;
-  border-bottom-width: 2;
-  border-bottom-color: #f4f4f4;
 `;
 
 export const Row = styled.View`

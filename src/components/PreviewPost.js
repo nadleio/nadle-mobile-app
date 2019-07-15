@@ -17,6 +17,13 @@ export const TitlePost = styled.View`
   margin-left: 5%;
 `;
 
+export const Row = styled.View`
+  flex-direction: row;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
+
 export function PreviewPost(props) {
   return (
     <PostContent activeOpacity={0.8} onPress={() => props.viewPost()}>
@@ -30,11 +37,12 @@ export function PreviewPost(props) {
           • {props.title}
         </Information>
 
-        <Information color="black" size={14} top={10}>
-          {props.name}
-        </Information>
-
-        <Information color="#727272" size={13} top={2} />
+        <Row>
+          <Images height={16} width={16} radius={8} source={PAISAJE} />
+          <Information color="black" size={14} left={5}>
+            {props.name}
+          </Information>
+        </Row>
 
         <Hashtags data={props.hashtags} />
       </TitlePost>
