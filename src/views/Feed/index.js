@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-navigation";
 import * as Animatable from "react-native-animatable";
 import Swiper from "react-native-swiper";
 import ActionSheet from "react-native-actionsheet";
+import SideMenu from "react-native-side-menu";
 
 import { ViewFlex, Margin } from "../../assets/styles/styles";
 import {
@@ -13,13 +14,6 @@ import {
   ImageContent,
   SmallImageProfile
 } from "../../assets/styles/Image";
-import { Information } from "../../components/Text";
-import { ShareIt } from "../../lib/utils/Share";
-
-import { Icon } from "../../components/Icon";
-
-import json from "../../json/feed";
-
 import {
   PaddingBox,
   ActivityBox,
@@ -41,30 +35,23 @@ import {
   ContentTag
 } from "./styled";
 
-import FULL_LOGO from "../../assets/img/full-logo-color.png";
-import DEFAULT from "../../assets/img/default.jpg";
-import PAISAJE from "../../assets/img/paisaje.png";
-import CLAPPING from "../../assets/img/clapping.png";
-import PREMIUM from "../../assets/img/premium.png";
-import CARLOS from "../../assets/img/pp.jpg";
-import CODE from "../../assets/img/code.jpg";
-import VUE from "../../assets/img/vue2.jpg";
-import FLUTTER from "../../assets/img/flutter.jpg";
-import JHOVANNA from "../../assets/img/jhovanna.jpg";
-import VISQUEL from "../../assets/img/pp-1.jpg";
-import DANIEL from "../../assets/img/pp-2.jpg";
-import CLAPFILLIED from "../../assets/img/clapFilled.png";
+import { Information } from "../../components/Text";
+import { ModalBucket } from "../../components/ModalBucket";
+import { Icon } from "../../components/Icon";
+import { ShareIt } from "../../lib/utils/Share";
 
-import SideMenu from "react-native-side-menu";
+import json from "../../json/feed";
+
+import FULL_LOGO from "../../assets/img/full-logo-color.png";
+import PREMIUM from "../../assets/img/premium.png";
 
 function Feed(props) {
   const [colors, SetColor] = useState(["#7b44ff", "#d6d6d6", "#d6d6d6"]);
   const [animation, setAnimation] = useState([]);
   const [save, setSave] = useState([]);
   const [images, setImages] = useState([]);
+  const [modalbucket, setModalbucket] = useState(false);
 
-  const photos = [VUE, PAISAJE, CODE, FLUTTER]; // esto se tiene que eliminar al momento de traer las fotos
-  const photosProfile = [DEFAULT, JHOVANNA, DANIEL, VISQUEL];
   const [id, setId] = useState();
   const inputRef = useRef("refComponent");
   const [isOpen, setIsOpen] = useState(false);
@@ -94,6 +81,7 @@ function Feed(props) {
     const newSave = [...save];
     newSave[i] = save[i] == "" ? "" : "";
     setSave(newSave);
+    save[i] == "" && setModalbucket(true);
   }
 
   function goToProfile(id) {
@@ -153,7 +141,14 @@ function Feed(props) {
       </View>
 
       <View style={styles.menuContent}>
-        <Images height={20} width={20} radius={4} source={PAISAJE} />
+        <Images
+          height={20}
+          width={20}
+          radius={4}
+          source={{
+            uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/paisaje.png"
+          }}
+        />
 
         <Information size={16} left={8} weight={500}>
           React
@@ -161,7 +156,14 @@ function Feed(props) {
       </View>
 
       <View style={styles.menuContent}>
-        <Images height={20} width={20} radius={4} source={PAISAJE} />
+        <Images
+          height={20}
+          width={20}
+          radius={4}
+          source={{
+            uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/paisaje.png"
+          }}
+        />
 
         <Information size={16} left={8} weight={500}>
           Vue
@@ -169,7 +171,14 @@ function Feed(props) {
       </View>
 
       <View style={styles.menuContent}>
-        <Images height={20} width={20} radius={4} source={PAISAJE} />
+        <Images
+          height={20}
+          width={20}
+          radius={4}
+          source={{
+            uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/paisaje.png"
+          }}
+        />
 
         <Information size={16} left={8} weight={500}>
           Javascript
@@ -282,7 +291,7 @@ function Feed(props) {
               <ActivityBox>
                 <Row>
                   <JustifyCenter>
-                    <SmallImageProfile source={photosProfile[i]} />
+                    <SmallImageProfile source={{ uri: data.imageProfile }} />
 
                     <CommentLine />
                   </JustifyCenter>
@@ -362,7 +371,7 @@ function Feed(props) {
                           radius={8}
                           height={200}
                           width="100%"
-                          source={photos[i]}
+                          source={{ uri: data.photo }}
                         />
                       </Margin>
                     </TouchableOpacity>
@@ -429,7 +438,12 @@ function Feed(props) {
                 </Row>
 
                 <Row>
-                  <Images radius={20} height={40} width={40} source={CARLOS} />
+                  <Images
+                    radius={20}
+                    height={40}
+                    width={40}
+                    source={{ uri: data.commentUserPhoto }}
+                  />
 
                   <ContentBox>
                     <SpaceBetween>
@@ -486,6 +500,8 @@ function Feed(props) {
             report(index);
           }}
         />
+
+        {modalbucket && <ModalBucket close={() => setModalbucket(false)} />}
       </ViewFlex>
     </SideMenu>
   );

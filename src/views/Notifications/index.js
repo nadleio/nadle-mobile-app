@@ -14,9 +14,6 @@ import {
 import { Information } from "../../components/Text";
 import { Icon } from "../../components/Icon";
 
-import PAISAJE from "../../assets/img/paisaje.png";
-import CARLOS from "../../assets/img/pp.jpg";
-import CLAP from "../../assets/img/clapping-white.png";
 import SUBS from "../../assets/img/subs-white.png";
 
 import { Header } from "../../components/Header";
@@ -28,12 +25,21 @@ function Notifications(props) {
       <StatusBar barStyle="dark-content" />
 
       <ScrollView>
-        <Header backBool={false} text="Notifications" />
+        <Header
+          backBool={true}
+          back={() => props.navigation.goBack()}
+          text="Notifications"
+        />
 
         <PaddingBox>
           <Row>
             <View>
-              <SmallImageProfile source={CARLOS} />
+              <SmallImageProfile
+                source={{
+                  uri:
+                    "https://nadle-assets.nyc3.digitaloceanspaces.com/pp-2.jpg"
+                }}
+              />
             </View>
 
             <TextContent>
@@ -74,7 +80,15 @@ function Notifications(props) {
         <PaddingBox>
           <Row>
             <View>
-              <Images radius={20} height={40} width={40} source={CARLOS} />
+              <Images
+                radius={20}
+                height={40}
+                width={40}
+                source={{
+                  uri:
+                    "https://nadle-assets.nyc3.digitaloceanspaces.com/pp-2.jpg"
+                }}
+              />
             </View>
 
             <TextContent>
@@ -114,7 +128,15 @@ function Notifications(props) {
 
         <PaddingBox>
           <Row>
-            <Images radius={20} height={40} width={40} source={PAISAJE} />
+            <Images
+              radius={20}
+              height={40}
+              width={40}
+              source={{
+                uri:
+                  "https://nadle-assets.nyc3.digitaloceanspaces.com/paisaje.png"
+              }}
+            />
 
             <TextContent>
               <Information size={16} color="black" left={5}>
@@ -150,7 +172,14 @@ function Notifications(props) {
 
         <PaddingBox>
           <Row>
-            <Images radius={20} height={40} width={40} source={CARLOS} />
+            <Images
+              radius={20}
+              height={40}
+              width={40}
+              source={{
+                uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/pp-2.jpg"
+              }}
+            />
 
             <TextContent>
               <Information size={16} color="black" left={5}>
@@ -186,7 +215,14 @@ function Notifications(props) {
 
         <PaddingBox>
           <Row>
-            <Images radius={20} height={40} width={40} source={CARLOS} />
+            <Images
+              radius={20}
+              height={40}
+              width={40}
+              source={{
+                uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/pp-2.jpg"
+              }}
+            />
 
             <TextContent>
               <Information size={16} color="black" left={5}>

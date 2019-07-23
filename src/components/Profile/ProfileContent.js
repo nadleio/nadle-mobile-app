@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 
-import { ViewFlex, RadiusBox } from "../../assets/styles/styles";
+import { ViewFlex, RadiusBox, Margin } from "../../assets/styles/styles";
 import {
   Images,
   ImageContent,
@@ -23,10 +23,10 @@ import {
 } from "../../views/Profile/styled";
 
 import PROFILE from "../../assets/img/profile.jpg";
-import CARLOS from "../../assets/img/pp.jpg";
 
 import { Information } from "../Text";
 import { PreviewPost } from "../PreviewPost";
+import { PreviewCollection } from "../PreviewCollection";
 import { SubscribeSectionUser } from "./SubscribeSectionUser";
 import { SubscribeSectionOrganization } from "./SubscribeSectionOrganization";
 import { Icon } from "../Icon";
@@ -48,20 +48,48 @@ export function ProfileContent(props) {
             <View />
           )}
 
-          <TouchableOpacity
-            onPress={() => (props.myProfile ? alert() : props.actionSheat())}
-          >
-            <ImageContent height={30} width={30} radius={15} color="white">
-              <Icon size={20}>{props.myProfile ? "" : ""}</Icon>
-            </ImageContent>
-          </TouchableOpacity>
+          {props.myProfile ? (
+            <Row>
+              <Margin right={7}>
+                <TouchableOpacity onPress={() => props.notifications()}>
+                  <ImageContent
+                    height={30}
+                    width={30}
+                    radius={15}
+                    color="white"
+                  >
+                    <Icon size={20}></Icon>
+                  </ImageContent>
+                </TouchableOpacity>
+              </Margin>
+
+              <TouchableOpacity onPress={() => alert()}>
+                <ImageContent height={30} width={30} radius={15} color="white">
+                  <Icon size={20}></Icon>
+                </ImageContent>
+              </TouchableOpacity>
+            </Row>
+          ) : (
+            <TouchableOpacity onPress={() => props.actionSheat()}>
+              <ImageContent height={30} width={30} radius={15} color="white">
+                <Icon size={20}></Icon>
+              </ImageContent>
+            </TouchableOpacity>
+          )}
         </Settings>
       </ImageBackground>
 
       <Padding>
         <RadiusBox top={-60}>
           <Align>
-            <Images height={80} width={80} radius={40} source={CARLOS} />
+            <Images
+              height={80}
+              width={80}
+              radius={40}
+              source={{
+                uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/pp.jpg"
+              }}
+            />
 
             <Information weight={600} size={18} top={10}>
               Ricardo Malagon
@@ -133,33 +161,57 @@ export function ProfileContent(props) {
 
         <Wrap>
           <Organizations onPress={() => props.goToProfile()} marginright="5%">
-            <SmallImageProfile source={CARLOS} />
+            <SmallImageProfile
+              source={{
+                uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/pp.jpg"
+              }}
+            />
           </Organizations>
 
           <Organizations onPress={() => props.goToProfile()} marginright="5%">
-            <SmallImageProfile source={CARLOS} />
+            <SmallImageProfile
+              source={{
+                uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/pp.jpg"
+              }}
+            />
           </Organizations>
 
           <Organizations marginright="5%">
-            <SmallImageProfile source={CARLOS} />
+            <SmallImageProfile
+              source={{
+                uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/pp.jpg"
+              }}
+            />
           </Organizations>
 
           <Organizations marginright="5%">
-            <SmallImageProfile source={CARLOS} />
+            <SmallImageProfile
+              source={{
+                uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/pp.jpg"
+              }}
+            />
           </Organizations>
 
           <Organizations marginright="5%">
-            <SmallImageProfile source={CARLOS} />
+            <SmallImageProfile
+              source={{
+                uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/pp.jpg"
+              }}
+            />
           </Organizations>
 
           <Organizations>
-            <SmallImageProfile source={CARLOS} />
+            <SmallImageProfile
+              source={{
+                uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/pp.jpg"
+              }}
+            />
           </Organizations>
         </Wrap>
       </Authorized>
 
       <PostTitleContent margintop={1}>
-        <Information size={16} weight={600}>
+        <Information onPress={() => props.seeAllPosts()} size={16} weight={600}>
           Pinned posts (15)
         </Information>
       </PostTitleContent>
@@ -171,6 +223,14 @@ export function ProfileContent(props) {
           date="10 of march"
           hashtags={["React Native", "React", "GraphQl", "NodeJS", "5+"]}
           viewPost={() => props.viewPost()}
+        />
+      </PostContentPadding>
+
+      <PostContentPadding>
+        <PreviewCollection
+          title="Introduction to React"
+          name="Ricardo Malagon"
+          posts={() => props.collection()}
         />
       </PostContentPadding>
     </ViewFlex>

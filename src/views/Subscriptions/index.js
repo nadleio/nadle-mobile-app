@@ -13,8 +13,6 @@ import { Subscribe } from "../../components/Subscribe";
 
 import json from "../../json/subscriptions";
 
-import CARLOS from "../../assets/img/pp.jpg";
-
 function Subscriptions(props) {
   const [subscribe, setSubscribe] = useState([]);
 
@@ -46,7 +44,12 @@ function Subscriptions(props) {
           return (
             <Padding>
               <Row>
-                <SmallImageProfile source={CARLOS} />
+                <SmallImageProfile
+                  source={{
+                    uri:
+                      "https://nadle-assets.nyc3.digitaloceanspaces.com/pp.jpg"
+                  }}
+                />
 
                 <TextContent onPress={() => goProfile(1)}>
                   <Information

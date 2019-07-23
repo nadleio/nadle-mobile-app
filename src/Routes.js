@@ -6,7 +6,6 @@ import {
   createAppContainer
 } from "react-navigation";
 
-import PROFILE from "./assets/img/default.jpg";
 import { Images } from "./assets/styles/Image";
 import { Icon } from "./components/Icon";
 
@@ -24,6 +23,9 @@ import Post from "./views/Post";
 import Search from "./views/Search";
 import YoutubeForAndroid from "./views/Post/youtubeForAndroid";
 import Subscriptions from "./views/Subscriptions";
+import UserPosts from "./views/UserPosts";
+import CollectionPosts from "./views/CollectionPosts";
+import Saved from "./views/Saved";
 
 export const TabNavigator = createBottomTabNavigator(
   {
@@ -81,17 +83,17 @@ export const TabNavigator = createBottomTabNavigator(
       })
     },
 
-    Notifications: {
-      screen: Notifications,
+    Saved: {
+      screen: Saved,
       navigationOptions: () => ({
         tabBarIcon: ({ tintColor }) =>
           tintColor == "grey" ? (
             <Icon color="grey" size={20}>
-              
+              
             </Icon>
           ) : (
             <Icon color="#2f5de9" size={20}>
-              
+              
             </Icon>
           )
       })
@@ -101,7 +103,15 @@ export const TabNavigator = createBottomTabNavigator(
       screen: Profile,
       navigationOptions: () => ({
         tabBarIcon: () => (
-          <Images height={22} width={22} radius={11} source={PROFILE} />
+          <Images
+            height={22}
+            width={22}
+            radius={11}
+            source={{
+              uri:
+                "https://nadle-assets.nyc3.digitaloceanspaces.com/default.jpg"
+            }}
+          />
         )
       })
     }
@@ -130,7 +140,10 @@ export const Root = createStackNavigator(
     SearchProfile: { screen: SearchProfile },
     Post: { screen: Post },
     YoutubeForAndroid: { screen: YoutubeForAndroid },
-    Subscriptions: { screen: Subscriptions }
+    Subscriptions: { screen: Subscriptions },
+    UserPosts: { screen: UserPosts },
+    CollectionPosts: { screen: CollectionPosts },
+    Notifications: { screen: Notifications }
   },
   {
     header: null,

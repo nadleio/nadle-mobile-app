@@ -11,7 +11,6 @@ import { BottomAuth } from "../../components/BottomAuth";
 import { Alert } from "../../components/alerts/Alert";
 import * as Yup from "yup";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import CHECK from "../../assets/img/check.png";
 
 const SignupSchema = Yup.object().shape({
   password: Yup.string().min(8, "Minimum 8 characters")
@@ -100,14 +99,14 @@ function ResetPassword(props) {
           </View>
         </ViewFlex>
       </ViewFlex>
-
+      {/* 
       <Alert
         title="Password changed succefully"
         buttonText="Continue to my account"
         isShowingAlert={showAlert}
-        image={CHECK}
+        image={}
         action={() => props.navigation.navigate("Login")}
-      />
+      /> */}
     </KeyboardAwareScrollView>
   );
 }

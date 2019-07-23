@@ -59,6 +59,12 @@ function SearchProfile(props) {
             })
           }
           goToProfile={() => props.navigation.push("SearchProfile")}
+          seeAllPosts={() => props.navigation.push("UserPosts")}
+          collection={() =>
+            props.navigation.push("CollectionPosts", {
+              title: "Introduction to React"
+            })
+          }
         />
       </ScrollView>
 

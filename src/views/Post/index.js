@@ -37,17 +37,8 @@ import { Hashtags } from "../../components/Hashtags";
 import { Header } from "../../components/Header";
 import { PreviewPost } from "../../components/PreviewPost";
 import { ShareIt } from "../../lib/utils/Share";
+import { Icon } from "../../components/Icon";
 
-import PAISAJE from "../../assets/img/paisaje.png";
-import COMMENT from "../../assets/img/chat.png";
-import JHOVANNA from "../../assets/img/jhovanna.jpg";
-import SHARE from "../../assets/img/share.png";
-import BOOKMARK from "../../assets/img/bookmark.png";
-import BOOKMARKFILLED from "../../assets/img/bookmarkFilled.png";
-import CLAP from "../../assets/img/clapping.png";
-import CLAPFILLIED from "../../assets/img/clapFilled.png";
-import BOOK from "../../assets/img/book.png";
-import ISSUE from "../../assets/img/issue.png";
 import YOUTUBE from "../../assets/img/youtube.png";
 
 const copy = `
@@ -127,19 +118,21 @@ function Post(props) {
             <HeaderIconsTouchable
               onPress={() => (save ? setSave(false) : setSave(true))}
             >
-              <Images
-                height={18}
-                width={18}
-                source={save ? BOOKMARKFILLED : BOOKMARK}
-              />
+              <Icon color="black" size={18}>
+                {save ? "" : ""}
+              </Icon>
             </HeaderIconsTouchable>
 
             <HeaderIconsTouchable>
-              <Images height={18} width={18} source={ISSUE} />
+              <Icon color="black" size={18}>
+                
+              </Icon>
             </HeaderIconsTouchable>
 
             <HeaderIconsTouchable onPress={() => ShareIt("https://nadle.io")}>
-              <Images height={18} width={18} source={SHARE} />
+              <Icon color="black" size={18}>
+                
+              </Icon>
             </HeaderIconsTouchable>
           </HeaderIcons>
         }
@@ -172,7 +165,12 @@ function Post(props) {
         <PaddingBox>
           <NameContent>
             <ImageContent height={32} width={32} radius={16}>
-              <SmallImageProfile source={JHOVANNA} />
+              <SmallImageProfile
+                source={{
+                  uri:
+                    "https://nadle-assets.nyc3.digitaloceanspaces.com/jhovanna.jpg"
+                }}
+              />
             </ImageContent>
 
             <View>
@@ -216,7 +214,15 @@ function Post(props) {
           </Information>
 
           <Margin top={5}>
-            <Images radius={8} height={250} width="100%" source={PAISAJE} />
+            <Images
+              radius={8}
+              height={250}
+              width="100%"
+              source={{
+                uri:
+                  "https://nadle-assets.nyc3.digitaloceanspaces.com/paisaje.png"
+              }}
+            />
           </Margin>
 
           <Margin top={10}>
@@ -225,11 +231,11 @@ function Post(props) {
 
           <ClapsContent margintop={20}>
             <TouchableOpacity onPress={() => setClapFunc()}>
-              <Images
+              {/* <Images
                 height={20}
                 width={20}
                 source={clap.filled ? CLAPFILLIED : CLAP}
-              />
+              /> */}
             </TouchableOpacity>
             <Information
               size={14}
@@ -241,7 +247,9 @@ function Post(props) {
               {clap.count} claps
             </Information>
 
-            <Images height={20} width={20} source={COMMENT} />
+            <Icon color="black" size={18}>
+              
+            </Icon>
 
             <Information size={14} color="#0091ff" weight="400" left={5}>
               239 comments
@@ -311,7 +319,9 @@ function Post(props) {
 
             <Repos>
               <NameContent>
-                <Images height={18} width={18} source={BOOK} />
+                <Icon color="black" size={18}>
+                  
+                </Icon>
 
                 <Information size={16} left={5} color="black" weight="400">
                   Repo name
@@ -319,7 +329,7 @@ function Post(props) {
               </NameContent>
             </Repos>
 
-            <Repos>
+            {/* <Repos>
               <NameContent>
                 <Images height={18} width={18} source={BOOK} />
 
@@ -327,7 +337,7 @@ function Post(props) {
                   Repo name
                 </Information>
               </NameContent>
-            </Repos>
+            </Repos> */}
           </BoxesContent>
 
           <BoxesContent line="white">

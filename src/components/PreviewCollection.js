@@ -1,8 +1,8 @@
 import React from "react";
 
 import { Images } from "../assets/styles/Image";
-import { Information } from "../components/Text";
-import { Hashtags } from "../components/Hashtags";
+import { Information } from "./Text";
+import { Icon } from "./Icon";
 
 import styled from "styled-components";
 
@@ -23,24 +23,26 @@ export const Row = styled.View`
   margin-bottom: 10px;
 `;
 
-export function PreviewPost(props) {
+export const IconContent = styled.View`
+  border-radius: 8px;
+  height: 65px;
+  width: 65px;
+  border-width: 2px;
+  border-color: #f4f4f4;
+  justify-content: center;
+  align-items: center;
+`;
+
+export function PreviewCollection(props) {
   return (
-    <PostContent activeOpacity={0.8} onPress={() => props.viewPost()}>
-      <Images
-        height={60}
-        width={60}
-        radius={8}
-        source={{
-          uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/paisaje.png"
-        }}
-      />
+    <PostContent activeOpacity={0.8} onPress={() => props.posts()}>
+      <IconContent>
+        <Icon size={30}></Icon>
+      </IconContent>
 
       <TitlePost>
         <Information size={16} weight={600}>
-          <Information size={16} color="#727272">
-            {props.date}
-          </Information>{" "}
-          • {props.title}
+          {props.title}
         </Information>
 
         <Row>
@@ -49,15 +51,14 @@ export function PreviewPost(props) {
             width={16}
             radius={8}
             source={{
-              uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/pp-2.jpg"
+              uri:
+                "https://nadle-assets.nyc3.digitaloceanspaces.com/jhovanna.jpg"
             }}
           />
-          <Information color="black" size={14} left={5}>
+          <Information size={14} left={5}>
             {props.name}
           </Information>
         </Row>
-
-        <Hashtags data={props.hashtags} />
       </TitlePost>
     </PostContent>
   );
