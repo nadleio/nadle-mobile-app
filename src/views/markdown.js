@@ -32,6 +32,7 @@ import { SetTable } from "../components/markdown/SetTable";
 import { Table } from "../components/markdown//functions/Table";
 import { Information } from "../components/Text";
 import { Icon } from "../components/Icon";
+import { Draft } from "../components/markdown/Draft";
 
 function MarkdownView() {
   const [modal, setModal] = useState(false);
@@ -45,6 +46,7 @@ function MarkdownView() {
   const [titleAlert, setTitleAlert] = useState(false);
   const [tableAlert, setTableAlert] = useState(false);
   const [editable, setEditable] = useState(false);
+  const [modalDraft, setModalDraft] = useState(false);
   const inputRef = useRef("refComponent");
 
   var selectionNumber = Platform.OS === "android" ? 1 : 2;
@@ -189,7 +191,7 @@ function MarkdownView() {
             
           </Icon>
 
-          <Save backgroundColor="#2a2a2a">
+          <Save onPress={() => setModalDraft(true)} backgroundColor="#2a2a2a">
             <Information color="white" size={14}>
               DRAFT
             </Information>
@@ -268,6 +270,24 @@ function MarkdownView() {
                 hide={() => setModal(false)}
                 show={modal}
                 content={text}
+              />
+            </PaddingHorizontal>
+          }
+        />
+      )}
+
+      {modalDraft && (
+        <ModalView
+          show={modalDraft}
+          hide={() => setModalDraft(false)}
+          content={
+            <PaddingHorizontal>
+              <Draft
+                saveText={text}
+                setDraft={text => {
+                  setText(text);
+                  setModalDraft(false);
+                }}
               />
             </PaddingHorizontal>
           }

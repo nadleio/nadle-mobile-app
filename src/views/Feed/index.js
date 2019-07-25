@@ -46,7 +46,7 @@ import FULL_LOGO from "../../assets/img/full-logo-color.png";
 import PREMIUM from "../../assets/img/premium.png";
 
 function Feed(props) {
-  const [colors, SetColor] = useState(["#7b44ff", "#d6d6d6", "#d6d6d6"]);
+  const [colors, SetColor] = useState(["#325ad2", "#d6d6d6", "#d6d6d6"]);
   const [animation, setAnimation] = useState([]);
   const [save, setSave] = useState([]);
   const [images, setImages] = useState([]);
@@ -93,13 +93,13 @@ function Feed(props) {
   function changeColor(index) {
     switch (index) {
       case 0:
-        SetColor(["#7b44ff", "#d6d6d6", "#d6d6d6"]);
+        SetColor(["#325ad2", "#d6d6d6", "#d6d6d6"]);
         break;
       case 1:
-        SetColor(["#d6d6d6", "#7b44ff", "#d6d6d6"]);
+        SetColor(["#d6d6d6", "#325ad2", "#d6d6d6"]);
         break;
       case 2:
-        SetColor(["#d6d6d6", "#d6d6d6", "#7b44ff"]);
+        SetColor(["#d6d6d6", "#d6d6d6", "#325ad2"]);
         break;
     }
   }

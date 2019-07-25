@@ -4,14 +4,14 @@ import { Information } from "../components/Text";
 
 export const HashtagsContent = styled.TouchableOpacity`
   padding: 3%;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  background-color: rgba(131, 63, 255, 0.09);
-  border-radius: 8;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+  background-color: #eaeefa;
+  border-radius: 4;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
-  margin-right: 5px;
+  margin-right: 6px;
 `;
 
 export const RowTechs = styled.View`
@@ -25,7 +25,7 @@ export function Hashtags(props) {
     <RowTechs>
       {props.data.map(data => (
         <HashtagsContent>
-          <Information color="#833fff" size={14}>
+          <Information color="#325ad2" size={14}>
             {data}
           </Information>
         </HashtagsContent>

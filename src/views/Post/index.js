@@ -21,7 +21,8 @@ import {
   ClapsContent,
   PostContentPadding,
   styles,
-  HeaderIconsTouchable
+  HeaderIconsTouchable,
+  LineDivisor
 } from "./styled";
 
 import { ViewFlex, Margin } from "../../assets/styles/styles";
@@ -119,7 +120,7 @@ function Post(props) {
               onPress={() => (save ? setSave(false) : setSave(true))}
             >
               <Icon color="black" size={18}>
-                {save ? "" : ""}
+                {save ? "" : ""}
               </Icon>
             </HeaderIconsTouchable>
 
@@ -142,13 +143,13 @@ function Post(props) {
         <ProgressBarAndroid
           styleAttr="Horizontal"
           progress={progress_count}
-          color="#833fff"
+          color="#325ad2"
           indeterminate={false}
           style={{ width: "100%" }}
         />
       ) : (
         <ProgressViewIOS
-          progressTintColor="#833fff"
+          progressTintColor="#325ad2"
           style={{ width: "100%" }}
           progress={progress_count}
         />
@@ -162,7 +163,17 @@ function Post(props) {
         onLayout={event => setHeight(event.nativeEvent.layout.height)}
         scrollEventThrottle={12}
       >
+        <Images
+          height={180}
+          width="100%"
+          source={{
+            uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/paisaje.png"
+          }}
+        />
+
         <PaddingBox>
+          <Title>How to release on React Native project</Title>
+
           <NameContent>
             <ImageContent height={32} width={32} radius={16}>
               <SmallImageProfile
@@ -176,7 +187,7 @@ function Post(props) {
             <View>
               <Information
                 left={12}
-                size={14}
+                size={16}
                 color="black"
                 weight="600"
                 onPress={() =>
@@ -186,44 +197,36 @@ function Post(props) {
                 }
               >
                 Ricardo Malagon •{" "}
-                <Information size={12} weight="normal">
+                <Information size={14} weight="normal">
                   17 July, 2019
                 </Information>
               </Information>
 
               <Information
                 left={12}
-                size={13}
+                size={14}
                 top={2}
                 color="black"
                 weight="400"
               >
                 Published in{" "}
-                <Information color="#0091ff" size={13} weight="400">
+                <Information color="#0091ff" size={14} weight="400">
                   @react
                 </Information>
               </Information>
             </View>
           </NameContent>
 
-          <Title top={15}>How to release on React Native project</Title>
+          <Margin top={8}>
+            <Hashtags data={HashtagsArr} />
+          </Margin>
 
-          <Information size={16} top={5} color="black">
+          <Information size={16} top={15}>
             A project to shoe how to release on the react native project in ios
             and android
           </Information>
 
-          <Margin top={5}>
-            <Images
-              radius={8}
-              height={250}
-              width="100%"
-              source={{
-                uri:
-                  "https://nadle-assets.nyc3.digitaloceanspaces.com/paisaje.png"
-              }}
-            />
-          </Margin>
+          <LineDivisor />
 
           <Margin top={10}>
             <Preview content={copy} />
@@ -231,11 +234,9 @@ function Post(props) {
 
           <ClapsContent margintop={20}>
             <TouchableOpacity onPress={() => setClapFunc()}>
-              {/* <Images
-                height={20}
-                width={20}
-                source={clap.filled ? CLAPFILLIED : CLAP}
-              /> */}
+              <Icon color="black" size={18}>
+                {clap.filled ? "" : ""}
+              </Icon>
             </TouchableOpacity>
             <Information
               size={14}
@@ -255,14 +256,6 @@ function Post(props) {
               239 comments
             </Information>
           </ClapsContent>
-
-          <BoxesContent>
-            <Information size={16} bottom={5} color="black" weight="bold">
-              Hashtags
-            </Information>
-
-            <Hashtags data={HashtagsArr} />
-          </BoxesContent>
 
           <BoxesContent>
             <Information
@@ -310,34 +303,6 @@ function Post(props) {
                 />
               </ScrollView>
             )}
-          </BoxesContent>
-
-          <BoxesContent>
-            <Information size={16} bottom={5} color="black" weight="bold">
-              Repositories
-            </Information>
-
-            <Repos>
-              <NameContent>
-                <Icon color="black" size={18}>
-                  
-                </Icon>
-
-                <Information size={16} left={5} color="black" weight="400">
-                  Repo name
-                </Information>
-              </NameContent>
-            </Repos>
-
-            {/* <Repos>
-              <NameContent>
-                <Images height={18} width={18} source={BOOK} />
-
-                <Information size={16} left={5} color="black" weight="400">
-                  Repo name
-                </Information>
-              </NameContent>
-            </Repos> */}
           </BoxesContent>
 
           <BoxesContent line="white">

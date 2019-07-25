@@ -20,11 +20,12 @@ export const Row = styled.View`
 
 export const HeaderIcons = styled(Row)`
   justify-content: space-between;
-  width: 30%;
+  width: 28%;
 `;
 
 export const NameContent = styled(Row)`
   align-items: center;
+  margin-top: 15px;
 `;
 
 export const BoxesContent = styled.View`
@@ -50,6 +51,12 @@ export const PostContentPadding = styled.View`
 `;
 
 export const HeaderIconsTouchable = styled.TouchableOpacity`
-  height: 18px;
-  width: 18px;
+  height: 20px;
+  width: 20px;
+`;
+
+export const LineDivisor = styled.View`
+  height: 1px;
+  background-color: #f4f4f4;
+  margin-top: 20px;
 `;
