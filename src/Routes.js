@@ -27,6 +27,7 @@ import UserPosts from "./views/UserPosts";
 import CollectionPosts from "./views/CollectionPosts";
 import Saved from "./views/Saved";
 import MarkdownForm from "./views/MarkdownForm";
+import Comments from "./views/Comments";
 
 export const TabNavigator = createBottomTabNavigator(
   {
@@ -145,7 +146,8 @@ export const Root = createStackNavigator(
     UserPosts: { screen: UserPosts },
     CollectionPosts: { screen: CollectionPosts },
     Notifications: { screen: Notifications },
-    MarkdownForm: { screen: MarkdownForm }
+    MarkdownForm: { screen: MarkdownForm },
+    Comments: { screen: Comments }
   },
   {
     header: null,

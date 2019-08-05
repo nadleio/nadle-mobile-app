@@ -11,12 +11,12 @@ import {
   TextContent,
   IconBackground
 } from "./styled";
+
 import { Information } from "../../components/Text";
 import { Icon } from "../../components/Icon";
+import { Header } from "../../components/Header";
 
 import SUBS from "../../assets/img/subs-white.png";
-
-import { Header } from "../../components/Header";
 
 function Notifications(props) {
   return (

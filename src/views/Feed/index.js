@@ -410,7 +410,11 @@ function Feed(props) {
                           </FlexRow>
 
                           <FlexRow>
-                            <TouchableOpacity onPress={() => alert(data.id)}>
+                            <TouchableOpacity
+                              onPress={() =>
+                                props.navigation.navigate("Comments")
+                              }
+                            >
                               <Icon color="black" size={18}>
                                 
                               </Icon>
