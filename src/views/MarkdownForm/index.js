@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { StatusBar, ScrollView, View, Modal } from "react-native";
+import { StatusBar, ScrollView } from "react-native";
 
 import Collapsible from "react-native-collapsible";
 import { SafeAreaView } from "react-navigation";
-import RadioForm from "react-native-simple-radio-button";
 import DialogInput from "react-native-dialog-input";
 
 import { Header } from "../../components/Header";
@@ -13,6 +12,7 @@ import { Information } from "../../components/Text";
 import { Icon } from "../../components/Icon";
 import { Photo } from "../../components/Photo";
 import { ViewFlex } from "../../assets/styles/styles";
+import { Button } from "../../components/Button";
 
 import {
   Padding,
@@ -20,7 +20,9 @@ import {
   CollapsedContainer,
   AssetsContainer,
   RemoveImageContainer,
-  ModalStyle
+  ModalStyle,
+  Row,
+  MarginLeft
 } from "./styled";
 
 function MarkdownForm(props) {
@@ -33,14 +35,8 @@ function MarkdownForm(props) {
 
   const [organizationTextColor, setOrganizationTextColor] = useState("#bcbcc2");
   const [collapsed, setCollapsed] = useState(true);
-  const [value, setValue] = useState(0);
   const [youtube, setYoutube] = useState(false);
-  const [youtubeVideoId, setYoutubeId] = useState("");
-
-  var radio_props = [
-    { label: "Free", value: 0 },
-    { label: "Premium", value: 1 }
-  ];
+  const [youtubeVideo, setYoutubeVideo] = useState([]);
 
   function photo() {
     Photo().then(image => {
@@ -50,6 +46,20 @@ function MarkdownForm(props) {
         });
       }
     });
+  }
+
+  function youtubeVideoFunc(video) {
+    if (video !== "") {
+      setYoutubeVideo([...youtubeVideo, video]);
+      setYoutube(false);
+    }
+  }
+
+  function removeVideo(i) {
+    var removed = youtubeVideo;
+    removed.splice(i, 1);
+    setYoutubeVideo([...removed]);
+    //#2f5de9
   }
 
   return (
@@ -65,7 +75,6 @@ function MarkdownForm(props) {
       <ScrollView>
         <Padding>
           <TextInput
-            // onChangeText={text => setPostInfo({ title: text })}
             onChangeText={text => {
               setPostInfo(prevState => {
                 return { ...prevState, title: text };
@@ -77,7 +86,6 @@ function MarkdownForm(props) {
             }}
             returnKeyType="next"
           />
-
           <TextInput
             onChangeText={text => {
               setPostInfo(prevState => {
@@ -92,13 +100,11 @@ function MarkdownForm(props) {
             returnKeyType="next"
             multiline={true}
           />
-
           <CollapsedContainer onPress={() => setCollapsed(!collapsed)}>
             <Information color={organizationTextColor} bottom={10} size={16}>
               {postInfo.organization}
             </Information>
           </CollapsedContainer>
-
           <Collapsible collapsed={collapsed} align="center">
             <Organization
               onPress={() => {
@@ -123,41 +129,9 @@ function MarkdownForm(props) {
               </Information>
             </Organization>
           </Collapsible>
-
-          <Information bottom={15} weight="500" top={15} size={16}>
-            Your post going to be
-          </Information>
-
-          <RadioForm
-            radio_props={radio_props}
-            initial={0}
-            onPress={value => setValue(value)}
-            buttonColor="#325ad2"
-            selectedButtonColor="#325ad2"
-          />
-
-          {value == 1 && (
-            <View>
-              <Information bottom={15} weight="500" top={15} size={16}>
-                Put the price for your post
-              </Information>
-
-              <TextInput
-                // onChangeText={text => setPostInfo({ title: text })}
-                placeholder="50 USD"
-                ref={input => {
-                  this.description = input;
-                }}
-                returnKeyType="next"
-                keyboardType="numeric"
-              />
-            </View>
-          )}
-
           <Information bottom={15} weight="500" top={15} size={16}>
             Image
           </Information>
-
           {postInfo.image == null ? (
             <AssetsContainer onPress={() => photo()}>
               <Icon color="grey" size={22}>
@@ -186,16 +160,43 @@ function MarkdownForm(props) {
               </RemoveImageContainer>
             </ImageBackground>
           )}
-
           <Information bottom={15} top={15} weight="500" top={15} size={16}>
             Youtube videos
           </Information>
 
-          <AssetsContainer onPress={() => setYoutube(true)}>
-            <Icon color="grey" size={22}>
-              
-            </Icon>
-          </AssetsContainer>
+          <Row>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            >
+              <AssetsContainer onPress={() => setYoutube(true)}>
+                <Icon color="grey" size={22}>
+                  
+                </Icon>
+              </AssetsContainer>
+
+              {youtubeVideo.map((data, i) => {
+                return (
+                  <MarginLeft id={i}>
+                    <ImageBackground
+                      height={100}
+                      width={100}
+                      radius={8}
+                      source={{
+                        uri: `https://img.youtube.com/vi/${data}/default.jpg`
+                      }}
+                    >
+                      <RemoveImageContainer onPress={() => removeVideo(i)}>
+                        <Icon color="red" size={22}>
+                          
+                        </Icon>
+                      </RemoveImageContainer>
+                    </ImageBackground>
+                  </MarginLeft>
+                );
+              })}
+            </ScrollView>
+          </Row>
 
           {youtube && (
             <ModalStyle>
@@ -204,10 +205,13 @@ function MarkdownForm(props) {
                 title={"Youtube video"}
                 message={"Put your youtube video ID"}
                 hintInput={"SvO3jKeBCRM"}
-                dialogStyle={{ backgroundColor: "white" }}
+                dialogStyle={{
+                  backgroundColor: "white",
+                  borderWidth: 1,
+                  borderColor: "#cccccc"
+                }}
                 submitInput={inputText => {
-                  setYoutubeId(inputText);
-                  setYoutube(false);
+                  youtubeVideoFunc(inputText);
                 }}
                 closeDialog={() => {
                   setYoutube(false);
@@ -215,6 +219,16 @@ function MarkdownForm(props) {
               />
             </ModalStyle>
           )}
+
+          <Button
+            haveIcon={false}
+            disabled={false}
+            text="POST IT!"
+            top={30}
+            color={["#2f5de9", "#2f5de9"]}
+            borderColor="#2f5de9"
+            TextColor="white"
+          />
         </Padding>
       </ScrollView>
     </ViewFlex>

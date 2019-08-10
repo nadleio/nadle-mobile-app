@@ -4,6 +4,14 @@ export const Padding = styled.View`
   padding: 5%;
 `;
 
+export const Row = styled.View`
+  flex-direction: row;
+`;
+
+export const MarginLeft = styled.View`
+  margin-left: 10px;
+`;
+
 export const Organization = styled.TouchableOpacity`
   background-color: #fefefe;
   flex-direction: row;
