@@ -1,9 +1,10 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
-import { ActionLink } from "../components/Text";
 import styled from "styled-components";
 import LinearGradient from "react-native-linear-gradient";
+
+import { ActionLink } from "../components/Text";
 import { Images } from "../assets/styles/Image";
 
 const TouchableOpacity = styled.TouchableOpacity`

@@ -1,8 +1,9 @@
 import React from "React";
 import styled from "styled-components";
+
 import { Information } from "../components/Text";
 
-export const HashtagsContent = styled.TouchableOpacity`
+const HashtagsContent = styled.TouchableOpacity`
   padding: 3%;
   padding-top: 1.5%;
   padding-bottom: 1.5%;
@@ -14,7 +15,7 @@ export const HashtagsContent = styled.TouchableOpacity`
   margin-right: 6px;
 `;
 
-export const RowTechs = styled.View`
+const RowTechs = styled.View`
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;

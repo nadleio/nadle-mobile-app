@@ -34,7 +34,7 @@ import { Information } from "../components/Text";
 import { Icon } from "../components/Icon";
 import { Draft } from "../components/markdown/Draft";
 
-function MarkdownView() {
+function MarkdownView(props) {
   const [modal, setModal] = useState(false);
   const [text, setText] = useState("");
   const [selection, setSelection] = useState({ start: 0, end: 0 });
@@ -197,7 +197,11 @@ function MarkdownView() {
             </Information>
           </Save>
 
-          <Save>
+          <Save
+            onPress={() =>
+              props.navigation.navigate("MarkdownForm", { text: text })
+            }
+          >
             <Information color="white" size={14}>
               NEXT
             </Information>

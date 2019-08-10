@@ -1,14 +1,15 @@
 import React from "react";
 import { View } from "react-native";
 
+import * as Yup from "yup";
+import { Formik } from "formik";
+
 import { AuthHeader } from "../../components/Auth/Header";
 import { Title, InputValidation } from "../../components/Text";
 import { TextInput } from "../../components/form/Input";
 import { ViewFlex, Margin } from "../../assets/styles/styles";
-import { Formik } from "formik";
 import { Button } from "../../components/Button";
 import { BottomAuth } from "../../components/BottomAuth";
-import * as Yup from "yup";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email")

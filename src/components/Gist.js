@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
 
 import styled from "styled-components";
-import { ViewFlex, Margin } from "../assets/styles/styles";
-import { Title, Information } from "./Text";
-import { Images, ImageContent } from "../assets/styles/Image";
-
-import { ModalView } from "../components/ModalView";
-
 import axios from "axios";
 import Collapsible from "react-native-collapsible";
+
+import { Title, Information } from "./Text";
+import { ModalView } from "../components/ModalView";
+
+import { ViewFlex, Margin } from "../assets/styles/styles";
+import { Images, ImageContent } from "../assets/styles/Image";
 
 export const TouchableOpacity = styled.TouchableOpacity`
   margin-top: 10;

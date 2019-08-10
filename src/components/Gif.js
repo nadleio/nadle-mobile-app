@@ -2,22 +2,21 @@ import React, { useState, useEffect } from "react";
 import { TouchableOpacity, ActivityIndicator } from "react-native";
 
 import styled from "styled-components";
-
-import { ViewFlex, Margin } from "../assets/styles/styles";
-import { Images, ImageContent } from "../assets/styles/Image";
+import axios from "axios";
 
 import { Button } from "../components/Button";
 import { ModalView } from "../components/ModalView";
 
-import axios from "axios";
+import { ViewFlex, Margin } from "../assets/styles/styles";
+import { Images, ImageContent } from "../assets/styles/Image";
 
-export const Content = styled.View`
+const Content = styled.View`
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
 `;
 
-export const Padding = styled.View`
+const Padding = styled.View`
   padding: 5%;
   padding-bottom: 10%;
 `;

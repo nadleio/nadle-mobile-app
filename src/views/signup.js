@@ -1,15 +1,16 @@
 import React from "react";
 import { View, Keyboard } from "react-native";
 
+import * as Yup from "yup";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Formik } from "formik";
+
 import { AuthHeader } from "../components/Auth/Header";
 import { Title, InputValidation } from "../components/Text";
 import { TextInput } from "../components/form/Input";
-import { ViewFlex, Margin } from "../assets/styles/styles";
-import { Formik } from "formik";
 import { Button } from "../components/Button";
 import { BottomAuth } from "../components/BottomAuth";
-import * as Yup from "yup";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { ViewFlex, Margin } from "../assets/styles/styles";
 
 const SignupSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email"),
@@ -17,10 +18,8 @@ const SignupSchema = Yup.object().shape({
   username: Yup.string().min(3, "Minimum 3 characters")
 });
 
-function Register(props) {
-  function save(values) {
-    console.log(values);
-  }
+function Signup(props) {
+  function save(values) {}
   return (
     <KeyboardAwareScrollView>
       <ViewFlex>
@@ -154,5 +153,5 @@ function Register(props) {
   );
 }
 
-Register.navigationOptions = { header: null };
-export default Register;
+Signup.navigationOptions = { header: null };
+export default Signup;

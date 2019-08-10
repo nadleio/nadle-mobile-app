@@ -2,12 +2,14 @@ import React from "react";
 import { View } from "react-native";
 
 import styled from "styled-components";
+import { isIphoneX } from "react-native-iphone-x-helper";
+
 import { Margin } from "../../assets/styles/styles";
 import { Images } from "../../assets/styles/Image";
 import { SwitchTheme } from "../SwitchTheme";
+
 import ImageBackground from "../../assets/img/auth-header.png";
 import WHITE_LOGO from "../../assets/img/white-logo.png";
-import { isIphoneX } from "react-native-iphone-x-helper";
 
 const Background = styled.ImageBackground`
   height: ${isIphoneX() ? 220 : 190};

@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -43,8 +42,8 @@
 		45B0A4E1D32149089A0CD957 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1264EB63F24D4BC4B50028B5 /* Zocial.ttf */; };
 		493A3FDB8B5F4221BC111FC3 /* libRCTYouTube.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CF4DA3C88B74B26B3EDBCC6 /* libRCTYouTube.a */; };
 		6B0793105F3848D5BBB91215 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B5427E3ED79549E4B2C81436 /* AntDesign.ttf */; };
-		747AE0B922DCF44500C1388E /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 747AE0B822DCF44500C1388E /* icomoon.ttf */; };
 		748D455A22CBF16900531A27 /* YTPlayerView-iframe-player.html in Resources */ = {isa = PBXBuildFile; fileRef = 748D455922CBF16900531A27 /* YTPlayerView-iframe-player.html */; };
+		74A6F16522F63D1000709B75 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 74A6F16422F63D1000709B75 /* icomoon.ttf */; };
 		74FDEFA922B1912C00A5E38B /* RSKImageCropper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FDEFA822B1912C00A5E38B /* RSKImageCropper.framework */; };
 		74FDEFAA22B1912C00A5E38B /* RSKImageCropper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 74FDEFA822B1912C00A5E38B /* RSKImageCropper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		74FDEFD722B1913100A5E38B /* QBImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74FDEFD622B1913100A5E38B /* QBImagePicker.framework */; };
@@ -461,6 +460,7 @@
 		734A3C627F3A46939CAEE53E /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		747AE0B822DCF44500C1388E /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = icomoon.ttf; path = "../../../Downloads/nadle-icons-master/font/fonts/icomoon.ttf"; sourceTree = "<group>"; };
 		748D455922CBF16900531A27 /* YTPlayerView-iframe-player.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "YTPlayerView-iframe-player.html"; path = "../node_modules/react-native-youtube/assets/YTPlayerView-iframe-player.html"; sourceTree = "<group>"; };
+		74A6F16422F63D1000709B75 /* icomoon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = icomoon.ttf; path = ../src/assets/fonts/icomoon.ttf; sourceTree = "<group>"; };
 		74C6375722BD4165008B4052 /* nadle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = nadle.entitlements; path = nadle/nadle.entitlements; sourceTree = "<group>"; };
 		74C637C222BD5E3C008B4052 /* GoogleSignIn.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignIn.framework; path = ../../../Downloads/googleSignin/GoogleSignIn.framework; sourceTree = "<group>"; };
 		74C637C422BD5E58008B4052 /* GoogleSignInDependencies.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleSignInDependencies.framework; path = ../../../Downloads/googleSignin/GoogleSignInDependencies.framework; sourceTree = "<group>"; };
@@ -827,6 +827,7 @@
 			isa = PBXGroup;
 			children = (
 				747AE0B822DCF44500C1388E /* icomoon.ttf */,
+				74A6F16422F63D1000709B75 /* icomoon.ttf */,
 				748D455922CBF16900531A27 /* YTPlayerView-iframe-player.html */,
 				74FDEFD622B1913100A5E38B /* QBImagePicker.framework */,
 				74FDEFA822B1912C00A5E38B /* RSKImageCropper.framework */,
@@ -1394,7 +1395,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				747AE0B922DCF44500C1388E /* icomoon.ttf in Resources */,
+				74A6F16522F63D1000709B75 /* icomoon.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				748D455A22CBF16900531A27 /* YTPlayerView-iframe-player.html in Resources */,

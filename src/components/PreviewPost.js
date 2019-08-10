@@ -1,10 +1,10 @@
 import React from "react";
 
+import styled from "styled-components";
+
 import { Images } from "../assets/styles/Image";
 import { Information } from "../components/Text";
 import { Hashtags } from "../components/Hashtags";
-
-import styled from "styled-components";
 
 export const PostContent = styled.TouchableOpacity`
   padding-bottom: 10px;

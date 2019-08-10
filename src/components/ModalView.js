@@ -2,6 +2,7 @@ import React from "react";
 import { ScrollView, Modal, ActivityIndicator } from "react-native";
 
 import styled from "styled-components";
+
 import { ViewFlex, Margin } from "../assets/styles/styles";
 import { Images } from "../assets/styles/Image";
 import { PaddingHorizontal } from "../assets/styles/styles";

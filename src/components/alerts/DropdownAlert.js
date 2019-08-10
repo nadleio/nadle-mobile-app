@@ -2,6 +2,7 @@ import React from "react";
 import { SafeAreaView } from "react-native";
 
 import styled from "styled-components";
+
 import { Images } from "../../assets/styles/Image";
 import { Information } from "../../components/Text";
 import CLOSE from "../../assets/img/close.png";

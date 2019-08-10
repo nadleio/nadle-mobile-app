@@ -2,8 +2,8 @@ import React from "react";
 import { Modal, KeyboardAvoidingView, Platform } from "react-native";
 
 import styled from "styled-components";
-import { Images } from "../assets/styles/Image";
 import { Information } from "./Text";
+import { Images } from "../assets/styles/Image";
 
 import CLOSE from "../assets/img/cancel.png";
 

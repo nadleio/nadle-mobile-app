@@ -10,7 +10,7 @@ import { Images } from "./assets/styles/Image";
 import { Icon } from "./components/Icon";
 
 import Login from "./views/login";
-import Register from "./views/register";
+import Signup from "./views/signup";
 import InputEmail from "./views/ResetPassword/inputEmail";
 import SendCode from "./views/ResetPassword/sendCode";
 import ResetPassword from "./views/ResetPassword/resetPassword";
@@ -26,6 +26,7 @@ import Subscriptions from "./views/Subscriptions";
 import UserPosts from "./views/UserPosts";
 import CollectionPosts from "./views/CollectionPosts";
 import Saved from "./views/Saved";
+import MarkdownForm from "./views/MarkdownForm";
 
 export const TabNavigator = createBottomTabNavigator(
   {
@@ -133,7 +134,7 @@ export const Root = createStackNavigator(
   {
     TabNavigator,
     Login: { screen: Login },
-    Register: { screen: Register },
+    Signup: { screen: Signup },
     InputEmail: { screen: InputEmail },
     SendCode: { screen: SendCode },
     ResetPassword: { screen: ResetPassword },
@@ -143,7 +144,8 @@ export const Root = createStackNavigator(
     Subscriptions: { screen: Subscriptions },
     UserPosts: { screen: UserPosts },
     CollectionPosts: { screen: CollectionPosts },
-    Notifications: { screen: Notifications }
+    Notifications: { screen: Notifications },
+    MarkdownForm: { screen: MarkdownForm }
   },
   {
     header: null,
@@ -153,7 +155,7 @@ export const Root = createStackNavigator(
 
 export const NotLoginRoot = createStackNavigator({
   Login: { screen: Login },
-  Register: { screen: Register },
+  Signup: { screen: Signup },
   InputEmail: { screen: InputEmail },
   SendCode: { screen: SendCode },
   ResetPassword: { screen: ResetPassword },

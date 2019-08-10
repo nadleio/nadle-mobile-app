@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView, StatusBar, Modal } from "react-native";
+import { ScrollView, StatusBar } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
 import Collapsible from "react-native-collapsible";
@@ -19,8 +19,7 @@ import {
   HeaderIconsTouchable,
   HeaderIcons,
   Contrary,
-  Lines,
-  ModalContent
+  Lines
 } from "./styled";
 
 function UserPosts(props) {

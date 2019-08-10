@@ -2,6 +2,7 @@ import React from "react";
 import { View } from "react-native";
 
 import styled from "styled-components";
+
 import { Information } from "./Text";
 import { Icon } from "./Icon";
 import { Images } from "../assets/styles/Image";

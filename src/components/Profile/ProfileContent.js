@@ -22,8 +22,6 @@ import {
   Row
 } from "../../views/Profile/styled";
 
-import PROFILE from "../../assets/img/profile.jpg";
-
 import { Information } from "../Text";
 import { PreviewPost } from "../PreviewPost";
 import { PreviewCollection } from "../PreviewCollection";
@@ -36,7 +34,13 @@ export function ProfileContent(props) {
 
   return (
     <ViewFlex>
-      <ImageBackground height={250} width="100%" source={PROFILE}>
+      <ImageBackground
+        height={250}
+        width="100%"
+        source={{
+          uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/profile.jpg"
+        }}
+      >
         <Settings>
           {props.back ? (
             <TouchableOpacity onPress={() => props.goBack()}>

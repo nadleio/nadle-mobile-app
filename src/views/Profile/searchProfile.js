@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { ScrollView } from "react-native";
 
+import ActionSheet from "react-native-actionsheet";
+
 import { ViewFlex } from "../../assets/styles/styles";
 import { ProfileContent } from "../../components/Profile/ProfileContent";
-import ActionSheet from "react-native-actionsheet";
 
 function SearchProfile(props) {
   const [myProfile, setMyProfile] = useState(null);

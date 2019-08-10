@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import { View, Keyboard } from "react-native";
 
+import { Formik } from "formik";
+import styled from "styled-components";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 import { AuthHeader } from "../../components/Auth/Header";
 import { Title, Information, ActionLink } from "../../components/Text";
 import { TextInput } from "../../components/form/Input";
-import { ViewFlex, Margin } from "../../assets/styles/styles";
-import { Formik } from "formik";
 import { Button } from "../../components/Button";
 import { BottomAuth } from "../../components/BottomAuth";
+import { ViewFlex, Margin } from "../../assets/styles/styles";
 import TimerCount from "../../lib/utils/TimerCount";
-import styled from "styled-components";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export const DidntReceive = styled.View`
   margin-top: 11.5;
@@ -47,7 +48,6 @@ function SendCode(props) {
   }
 
   function resetPassword(values) {
-    console.log(values);
     props.navigation.navigate("ResetPassword");
   }
 

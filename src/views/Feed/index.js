@@ -217,6 +217,7 @@ function Feed(props) {
               </ImageContent>
             </ContentTag>
           </SpaceTag>
+
           <ActivityBoxSeccion>
             <FlexRow>
               <Information weight="600" size={16}>

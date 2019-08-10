@@ -2,7 +2,6 @@ import React from "react";
 import { View } from "react-native";
 
 import { OrganizationSubs } from "../../views/Profile/styled";
-
 import { Information } from "../Text";
 import { SubscribeOrganization } from "../Subscribe";
 

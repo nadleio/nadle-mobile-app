@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 
+import styled from "styled-components";
+
 import { Margin } from "../assets/styles/styles";
 import { Images } from "../assets/styles/Image";
-import styled from "styled-components";
+
 import Sun from "../assets/img/sun.png";
 import Moon from "../assets/img/moon.png";
 

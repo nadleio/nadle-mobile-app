@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TextInput = styled.TextInput`
-  height: 40;
+  min-height: 40;
   width: ${props => props.width || "100%"};
   border-bottom-width: 2.5;
   border-bottom-color: rgb(244, 244, 244);
