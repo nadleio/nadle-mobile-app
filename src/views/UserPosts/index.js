@@ -2,8 +2,8 @@ import React from "react";
 import { ScrollView, StatusBar } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
-import { PreviewPost } from "../../components/PreviewPost";
-import { PreviewCollection } from "../../components/PreviewCollection";
+import PreviewPost from "../../components/ShortPost";
+import ShortBucket from "../../components/ShortBucket";
 import { ViewFlex } from "../../assets/styles/styles";
 import { Header } from "../../components/Header";
 
@@ -38,7 +38,7 @@ function UserPosts(props) {
           </Margintop>
 
           <Margintop>
-            <PreviewCollection
+            <ShortBucket
               title="Introduction to React"
               name="Ricardo Malagon"
               posts={() =>

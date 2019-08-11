@@ -2,7 +2,7 @@ import React from "react";
 import { ScrollView, StatusBar } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
-import { PreviewPost } from "../../components/PreviewPost";
+import { PreviewPost } from "../../components/ShortPost";
 import { ViewFlex } from "../../assets/styles/styles";
 import { Header } from "../../components/Header";
 

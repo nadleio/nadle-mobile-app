@@ -4,12 +4,12 @@ import { SafeAreaView } from "react-navigation";
 
 import Collapsible from "react-native-collapsible";
 
-import { PreviewPost } from "../../components/PreviewPost";
-import { PreviewCollection } from "../../components/PreviewCollection";
+import { PreviewPost } from "../../components/ShortPost";
+import ShortBucket from "../../components/ShortBucket";
 import { ViewFlex } from "../../assets/styles/styles";
 import { Header } from "../../components/Header";
 import { BucketList } from "../../components/BucketList";
-import { Icon } from "../../components/Icon";
+import Icon from "../../components/Icon";
 import { Information, Title } from "../../components/Text";
 import { CreateBucket } from "../../components/CreateBucket";
 
@@ -88,7 +88,7 @@ function UserPosts(props) {
           </Margintop>
 
           <Margintop>
-            <PreviewCollection
+            <ShortBucket
               title="Introduction to React"
               name="Ricardo Malagon"
               posts={() =>

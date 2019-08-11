@@ -2,7 +2,7 @@ import React from "React";
 
 import styled from "styled-components";
 
-import { Icon } from "./Icon";
+import Icon from "./Icon";
 import { Information } from "./Text";
 
 export const HeaderContent = styled.View`

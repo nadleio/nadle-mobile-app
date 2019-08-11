@@ -6,7 +6,7 @@ import {
   SendContainer
 } from "../views/Comments/styled";
 
-import { Icon } from "./Icon";
+import Icon from "./Icon";
 
 export class Mention extends Component {
   constructor() {
@@ -82,9 +82,7 @@ export class Mention extends Component {
       const boundary =
         this.props.triggerLocation === "new-word-only" ? "B" : "";
       const pattern = new RegExp(
-        `\\${boundary}${this.props.trigger}[a-z0-9_-]+|\\${boundary}${
-          this.props.trigger
-        }`,
+        `\\${boundary}${this.props.trigger}[a-z0-9_-]+|\\${boundary}${this.props.trigger}`,
         `gi`
       );
       const keywordArray = val.match(pattern);

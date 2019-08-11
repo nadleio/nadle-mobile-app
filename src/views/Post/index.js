@@ -34,11 +34,11 @@ import {
 
 import { Information, Title } from "../../components/Text";
 import { Preview } from "../../components/markdown/Preview";
-import { Hashtags } from "../../components/Hashtags";
+import Tags from "../../components/Tags";
 import { Header } from "../../components/Header";
-import { PreviewPost } from "../../components/PreviewPost";
+import { PreviewPost } from "../../components/ShortPost";
 import { ShareIt } from "../../lib/utils/Share";
-import { Icon } from "../../components/Icon";
+import Icon from "../../components/Icon";
 
 import YOUTUBE from "../../assets/img/youtube.png";
 
@@ -91,7 +91,7 @@ function Post(props) {
   const [height, setHeight] = useState(0);
   const [scrollContent, setScrollContent] = useState(0);
   const [progress_count, setProgress_count] = useState(0);
-  const HashtagsArr = ["NodeJS", "React", "React Native", "Vue", "Javascript"];
+  const TagsArr = ["NodeJS", "React", "React Native", "Vue", "Javascript"];
   const [clap, setClap] = useState({ filled: false, count: 239 });
   const [save, setSave] = useState(false);
 
@@ -218,7 +218,7 @@ function Post(props) {
           </NameContent>
 
           <Margin top={8}>
-            <Hashtags data={HashtagsArr} />
+            <Tags data={TagsArr} />
           </Margin>
 
           <Information size={16} top={15}>

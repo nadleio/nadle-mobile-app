@@ -4,7 +4,7 @@ import { ScrollView } from "react-native";
 import DOWN from "../../assets/img/angle-down.png";
 
 import styled from "styled-components";
-import { Icon } from "../Icon";
+import Icon from "../Icon";
 
 import { Images } from "../../assets/styles/Image";
 

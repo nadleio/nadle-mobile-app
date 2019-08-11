@@ -9,7 +9,7 @@ import { Header } from "../../components/Header";
 import { TextInput } from "../../components/form/Input";
 import { Images, ImageBackground } from "../../assets/styles/Image";
 import { Information } from "../../components/Text";
-import { Icon } from "../../components/Icon";
+import Icon from "../../components/Icon";
 import { Photo } from "../../components/Photo";
 import { ViewFlex } from "../../assets/styles/styles";
 import { Button } from "../../components/Button";

@@ -31,7 +31,7 @@ import { MarkDownTitles } from "../components/markdown/MarkDownTitles";
 import { SetTable } from "../components/markdown/SetTable";
 import { Table } from "../components/markdown//functions/Table";
 import { Information } from "../components/Text";
-import { Icon } from "../components/Icon";
+import Icon from "../components/Icon";
 import { Draft } from "../components/markdown/Draft";
 
 function MarkdownView(props) {

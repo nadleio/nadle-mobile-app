@@ -24,14 +24,14 @@ export const InputValidation = styled.Text`
 `;
 
 export const Information = styled.Text`
+  color: ${props => props.color || "black"};
   font-family: "System";
   font-size: ${props => props.size || 14};
-  color: ${props => props.color || "black"};
+  font-weight: ${props => props.weight || "normal"};
+  text-align: ${props => props.align || "left"};
   margin-top: ${props => props.top || 0};
   margin-left: ${props => props.left || 0};
   margin-right: ${props => props.right || 0};
   margin-bottom: ${props => props.bottom || 0};
-  font-weight: ${props => props.weight || "normal"};
-  text-align: ${props => props.align || "left"};
   max-width: 100%;
 `;

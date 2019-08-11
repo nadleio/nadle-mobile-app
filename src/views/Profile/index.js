@@ -1,46 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView } from "react-native";
+import styled from "styled-components";
+import _ from "lodash";
 
-import { ViewFlex } from "../../assets/styles/styles";
-import { ProfileContent } from "../../components/Profile/ProfileContent";
+import Header from "../../components/Profile/Header";
+import Biography from "../../components/Profile/Biography";
+import Members from "../../components/Profile/Members";
+import Organizations from "../../components/Profile/Organizations";
+import Posts from "../../components/Profile/Posts";
+import Buckets from "../../components/Profile/Buckets";
 
-function Profile(props) {
-  const subscribeWord = {
-    text: "Subscribe",
-    count: 250
+const Container = styled.View`
+  flex: 1;
+  background-color: ${props => props.theme.styled.BACKGROUND};
+`;
+
+function Profile({ self, navigation }) {
+  const account = _.get(navigation, "state.params.account", null) || self;
+  const showBack = navigation.state.routeName !== "Profile";
+  const [offset, setOffset] = useState(0);
+
+  const onScroll = event => {
+    const currentOffset = event.nativeEvent.contentOffset.y;
+    const direction = currentOffset > offset ? "down" : "up";
+    setOffset(currentOffset)
+    console.log(direction);
   };
-  const type = "user";
 
   return (
-    <ViewFlex paddingBottom="0%">
-      <ScrollView>
-        <ProfileContent
-          back={false}
-          subscribeCotent={subscribeWord}
-          myProfile={true}
-          type={type}
-          subscriptions={type =>
-            props.navigation.push("Subscriptions", {
-              type: type
-            })
-          }
-          viewPost={() =>
-            props.navigation.push("Post", {
-              id: 1
-            })
-          }
-          goToProfile={() => props.navigation.push("SearchProfile")}
-          seeAllPosts={() => props.navigation.push("UserPosts")}
-          collection={() =>
-            props.navigation.push("CollectionPosts", {
-              title: "Introduction to React"
-            })
-          }
-          notifications={() => props.navigation.push("Notifications")}
-          config={() => props.navigation.push("Configuration")}
+    <Container>
+      <ScrollView
+        onScroll={onScroll}
+      >
+        <Header
+          account={account}
+          {...showBack && { back: () => navigation.goBack() }}
         />
+
+        <Biography account={account} />
+
+        {account.type === "USER" ? <Organizations /> : <Members />}
+
+        <Posts />
+
+        <Buckets />
       </ScrollView>
-    </ViewFlex>
+    </Container>
   );
 }
 

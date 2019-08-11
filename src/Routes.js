@@ -1,13 +1,17 @@
 import React from "react";
+import { compose } from "redux";
+import styled, { css, withTheme } from "styled-components";
 import {
   createBottomTabNavigator,
   createStackNavigator,
   createSwitchNavigator,
-  createAppContainer
+  createAppContainer,
+  BottomTabBar
 } from "react-navigation";
 
-import { Images } from "./assets/styles/Image";
-import { Icon } from "./components/Icon";
+import { withSelf } from "./lib/ContextSelf";
+
+import Icon from "./components/Icon";
 
 import Login from "./views/login";
 import Signup from "./views/signup";
@@ -17,7 +21,6 @@ import ResetPassword from "./views/ResetPassword/resetPassword";
 import Feed from "./views/Feed";
 import MarkdownView from "./views/markdown";
 import Profile from "./views/Profile";
-import SearchProfile from "./views/Profile/searchProfile";
 import Notifications from "./views/Notifications";
 import Post from "./views/Post";
 import Search from "./views/Search";
@@ -35,21 +38,40 @@ import MyOrganizations from "./views/myOrganizations";
 import ShareNadle from "./views/shareNadle";
 import Suggestions from "./views/suggestions";
 
+const Picture = styled.Image`
+  border-radius: 12;
+  height: 24px;
+  width: 24px;
+
+  ${props =>
+    props.focused &&
+    css`
+      border: 2px ${props => props.theme.colors.PRIMARY} solid;
+    `}
+`;
+
+const ProfileTab = compose(withSelf)(({ focused, self }) => {
+  return <Picture focused={focused} source={{ uri: self.picture }} />;
+});
+
+const IconTab = compose(withTheme)(({ focused, theme, icon }) => {
+  return (
+    <Icon
+      color={focused ? theme.colors.PRIMARY : "#999"}
+      size={20}
+      name={`${focused ? "solid" : "outline"}-${icon}`}
+    />
+  );
+});
+
 export const TabNavigator = createBottomTabNavigator(
   {
     Feed: {
       screen: Feed,
       navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) =>
-          tintColor == "grey" ? (
-            <Icon color="grey" size={20}>
-              
-            </Icon>
-          ) : (
-            <Icon color="#2f5de9" size={20}>
-              
-            </Icon>
-          ),
+        tabBarIcon: function TabNewsPaper(props) {
+          return <IconTab {...props} icon="newspaper" />;
+        },
         tabBarOnPress: tab => {
           if (tab.navigation.isFocused()) {
             tab.navigation.state.params.scrollToTop();
@@ -62,65 +84,34 @@ export const TabNavigator = createBottomTabNavigator(
     Search: {
       screen: Search,
       navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) =>
-          tintColor == "grey" ? (
-            <Icon color="grey" size={20}>
-              
-            </Icon>
-          ) : (
-            <Icon color="#2f5de9" size={20}>
-              
-            </Icon>
-          )
+        tabBarIcon: function TabSearch(props) {
+          return <IconTab {...props} icon="search" />;
+        }
       })
     },
 
     Add: {
       screen: MarkdownView,
       navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) =>
-          tintColor == "grey" ? (
-            <Icon color="grey" size={20}>
-              
-            </Icon>
-          ) : (
-            <Icon color="#2f5de9" size={20}>
-              
-            </Icon>
-          )
+        tabBarIcon: function TabAddPosts(props) {
+          return <IconTab {...props} icon="plus-circle" />;
+        }
       })
     },
 
     Saved: {
       screen: Saved,
       navigationOptions: () => ({
-        tabBarIcon: ({ tintColor }) =>
-          tintColor == "grey" ? (
-            <Icon color="grey" size={20}>
-              
-            </Icon>
-          ) : (
-            <Icon color="#2f5de9" size={20}>
-              
-            </Icon>
-          )
+        tabBarIcon: function TabBookedPosts(props) {
+          return <IconTab {...props} icon="bookmark" />;
+        }
       })
     },
 
     Profile: {
-      screen: Profile,
+      screen: compose(withSelf)(Profile),
       navigationOptions: () => ({
-        tabBarIcon: () => (
-          <Images
-            height={22}
-            width={22}
-            radius={11}
-            source={{
-              uri:
-                "https://nadle-assets.nyc3.digitaloceanspaces.com/default.jpg"
-            }}
-          />
-        )
+        tabBarIcon: ProfileTab
       })
     }
   },
@@ -129,11 +120,21 @@ export const TabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       showLabel: false,
       showIcon: true,
-      animate: false,
+      animate: true,
       activeTintColor: "black",
       inactiveTintColor: "grey"
     },
-    tabBarPosition: "bottom"
+    tabBarPosition: "bottom",
+    tabBarComponent: compose(withTheme)(function TabBarComponent(props) {
+      return (
+        <BottomTabBar
+          {...props}
+          style={{
+            backgroundColor: props.theme.styled.BOX_BACKGROUND
+          }}
+        />
+      );
+    })
   }
 );
 
@@ -145,7 +146,7 @@ export const Root = createStackNavigator(
     InputEmail: { screen: InputEmail },
     SendCode: { screen: SendCode },
     ResetPassword: { screen: ResetPassword },
-    SearchProfile: { screen: SearchProfile },
+    SearchProfile: { screen: Profile },
     Post: { screen: Post },
     YoutubeForAndroid: { screen: YoutubeForAndroid },
     Subscriptions: { screen: Subscriptions },
@@ -173,7 +174,7 @@ export const NotLoginRoot = createStackNavigator({
   InputEmail: { screen: InputEmail },
   SendCode: { screen: SendCode },
   ResetPassword: { screen: ResetPassword },
-  SearchProfile: { screen: SearchProfile }
+  SearchProfile: { screen: Profile }
 });
 
 export const AppContainer = (signedIn = false) =>

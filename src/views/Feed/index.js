@@ -37,7 +37,7 @@ import {
 
 import { Information } from "../../components/Text";
 import { ModalBucket } from "../../components/ModalBucket";
-import { Icon } from "../../components/Icon";
+import Icon from "../../components/Icon";
 import { ShareIt } from "../../lib/utils/Share";
 
 import json from "../../json/feed";
@@ -84,9 +84,9 @@ function Feed(props) {
     save[i] == "" && setModalbucket(true);
   }
 
-  function goToProfile(id) {
+  function goToProfile(account) {
     props.navigation.navigate("SearchProfile", {
-      id: id
+      account
     });
   }
 
@@ -249,7 +249,15 @@ function Feed(props) {
                   <PaddingBox background="#f4f4f4" radius={8} height={112}>
                     <SpaceBetween>
                       <Information
-                        onPress={() => goToProfile(data.id)}
+                        onPress={() =>
+                          goToProfile({
+                            uid: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
+                            type: "USER",
+                            picture: "https://i.pravatar.cc/500",
+                            username: "ricardo",
+                            name: "Ricardo Malagón"
+                          })
+                        }
                         weight="600"
                         color="black"
                         size={16}
@@ -265,7 +273,15 @@ function Feed(props) {
                     <Information color="#43485e" size={14} top={7}>
                       Replied to{" "}
                       <Information
-                        onPress={() => goToProfile(data.id)}
+                        onPress={() =>
+                          goToProfile({
+                            uid: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
+                            type: "USER",
+                            picture: "https://i.pravatar.cc/500",
+                            username: "ricardo",
+                            name: "Ricardo Malagón"
+                          })
+                        }
                         weight="bold"
                       >
                         {data.toReply}
@@ -300,7 +316,17 @@ function Feed(props) {
                   <ContentBox>
                     <SpaceBetween>
                       <FlexRow>
-                        <TouchableOpacity onPress={() => goToProfile(data.id)}>
+                        <TouchableOpacity
+                          onPress={() =>
+                            goToProfile({
+                              uid: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
+                              type: "ORGANIZATION",
+                              picture: "https://i.pravatar.cc/500",
+                              username: "ricardo",
+                              name: "Ricardo Malagón"
+                            })
+                          }
+                        >
                           <Information weight="600" size={16}>
                             {data.name}
                           </Information>
@@ -333,7 +359,15 @@ function Feed(props) {
                       <Information top={1} size={16}>
                         from{" "}
                         <Information
-                          onPress={() => goToProfile(data.id)}
+                          onPress={() =>
+                            goToProfile({
+                              uid: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
+                              type: "USER",
+                              picture: "https://i.pravatar.cc/500",
+                              username: "ricardo",
+                              name: "Ricardo Malagón"
+                            })
+                          }
                           color="#0091ff"
                           size={16}
                         >
@@ -453,7 +487,17 @@ function Feed(props) {
                   <ContentBox>
                     <SpaceBetween>
                       <FlexRow>
-                        <TouchableOpacity onPress={() => goToProfile(data.id)}>
+                        <TouchableOpacity
+                          onPress={() =>
+                            goToProfile({
+                              uid: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
+                              type: "USER",
+                              picture: "https://i.pravatar.cc/500",
+                              username: "ricardo",
+                              name: "Ricardo Malagón"
+                            })
+                          }
+                        >
                           <Information weight="600" color="black" size={16}>
                             {data.commentUser}
                           </Information>

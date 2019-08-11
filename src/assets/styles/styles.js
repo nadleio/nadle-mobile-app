@@ -20,9 +20,8 @@ export const PaddingHorizontal = styled.View`
 
 export const RadiusBox = styled.View`
   padding: 5%;
-  background-color: white;
+  background-color: ${props => props.theme.styled.BOX_BACKGROUND};
+  box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.05);
   border-radius: 8;
   margin-top: ${props => props.top || 0};
-  border-width: 2;
-  border-color: #f4f4f4;
 `;
