@@ -11,7 +11,8 @@ import { Header } from "../../components/Header";
 
 const PersonalConfig = [
   {
-    title: "Modifed your profile"
+    title: "Modifed your profile",
+    view: "EditProfile"
   },
   {
     title: "Change password"
@@ -73,6 +74,7 @@ function Configuration(props) {
             bottomDivider={true}
             key={i}
             title={data.title}
+            onPress={() => props.navigation.navigate(data.view)}
           />
         ))}
 

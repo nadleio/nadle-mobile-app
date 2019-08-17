@@ -28,3 +28,9 @@ export const SmallImageProfile = styled.Image`
   border-radius: 20px;
   background-color: #e6e6e6;
 `;
+
+export const ImageProfile = styled.Image`
+  height: 80px;
+  width: 80px;
+  border-radius: 40px;
+`;

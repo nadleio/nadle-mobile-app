@@ -1,7 +1,6 @@
 import React from "react";
 import { View, Keyboard } from "react-native";
 
-import * as Yup from "yup";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Formik } from "formik";
 
@@ -10,13 +9,8 @@ import { Title, InputValidation } from "../components/Text";
 import { TextInput } from "../components/form/Input";
 import { Button } from "../components/Button";
 import { BottomAuth } from "../components/BottomAuth";
+import { SignupSchema } from "../components/form/Validations";
 import { ViewFlex, Margin } from "../assets/styles/styles";
-
-const SignupSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email"),
-  password: Yup.string().min(8, "Minimum 8 characters"),
-  username: Yup.string().min(3, "Minimum 3 characters")
-});
 
 function Signup(props) {
   function save(values) {}

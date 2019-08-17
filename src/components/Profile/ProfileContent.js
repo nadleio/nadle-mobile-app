@@ -3,7 +3,7 @@ import { View, TouchableOpacity } from "react-native";
 
 import { ViewFlex, RadiusBox, Margin } from "../../assets/styles/styles";
 import {
-  Images,
+  ImageProfile,
   ImageContent,
   ImageBackground,
   SmallImageProfile
@@ -86,10 +86,7 @@ export function ProfileContent(props) {
       <Padding>
         <RadiusBox top={-60}>
           <Align>
-            <Images
-              height={80}
-              width={80}
-              radius={40}
+            <ImageProfile
               source={{
                 uri: "https://nadle-assets.nyc3.digitaloceanspaces.com/pp.jpg"
               }}

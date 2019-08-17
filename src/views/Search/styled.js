@@ -8,7 +8,7 @@ export const Row = styled.View`
   flex-direction: row;
 `;
 
-export const SearchContainer = styled.TouchableOpacity`
+export const SearchContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -35,7 +35,7 @@ export const Margintop = styled.View`
   margin-top: 20px;
 `;
 
-export const SearchButtonContainer = styled.View`
+export const SearchButtonContainer = styled.TouchableOpacity`
   border-radius: 4px;
   background-color: #325ad2;
   justify-content: center;

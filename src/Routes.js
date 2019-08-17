@@ -29,6 +29,7 @@ import Saved from "./views/Saved";
 import MarkdownForm from "./views/MarkdownForm";
 import Comments from "./views/Comments";
 import Configuration from "./views/Configuration";
+import EditProfile from "./views/EditProfile";
 
 export const TabNavigator = createBottomTabNavigator(
   {
@@ -149,7 +150,8 @@ export const Root = createStackNavigator(
     Notifications: { screen: Notifications },
     MarkdownForm: { screen: MarkdownForm },
     Comments: { screen: Comments },
-    Configuration: { screen: Configuration }
+    Configuration: { screen: Configuration },
+    EditProfile: { screen: EditProfile }
   },
   {
     header: null,
