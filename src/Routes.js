@@ -31,6 +31,7 @@ import Comments from "./views/Comments";
 import Configuration from "./views/Configuration";
 import EditProfile from "./views/EditProfile";
 import ChangePassword from "./views/ChangePassword";
+import MyOrganizations from "./views/myOrganizations";
 
 export const TabNavigator = createBottomTabNavigator(
   {
@@ -153,7 +154,8 @@ export const Root = createStackNavigator(
     Comments: { screen: Comments },
     Configuration: { screen: Configuration },
     EditProfile: { screen: EditProfile },
-    ChangePassword: { screen: ChangePassword }
+    ChangePassword: { screen: ChangePassword },
+    MyOrganizations: { screen: MyOrganizations }
   },
   {
     header: null,

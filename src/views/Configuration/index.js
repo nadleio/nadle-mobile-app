@@ -19,7 +19,8 @@ const PersonalConfig = [
     view: "ChangePassword"
   },
   {
-    title: "Organizations"
+    title: "Organizations",
+    view: "MyOrganizations"
   }
 ];
 
