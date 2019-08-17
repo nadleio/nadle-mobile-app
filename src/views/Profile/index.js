@@ -37,6 +37,7 @@ function Profile(props) {
             })
           }
           notifications={() => props.navigation.push("Notifications")}
+          config={() => props.navigation.push("Configuration")}
         />
       </ScrollView>
     </ViewFlex>

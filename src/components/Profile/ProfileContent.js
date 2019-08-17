@@ -67,7 +67,7 @@ export function ProfileContent(props) {
                 </TouchableOpacity>
               </Margin>
 
-              <TouchableOpacity onPress={() => alert()}>
+              <TouchableOpacity onPress={() => props.config()}>
                 <ImageContent height={30} width={30} radius={15} color="white">
                   <Icon size={20}></Icon>
                 </ImageContent>
