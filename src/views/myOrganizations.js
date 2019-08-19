@@ -4,10 +4,10 @@ import { ScrollView } from "react-native";
 
 import { SafeAreaView } from "react-navigation";
 import { ListItem } from "react-native-elements";
-import styled from "styled-components";
 
 import { ViewFlex } from "../assets/styles/styles";
 import { Header } from "../components/Header";
+import { Information } from "../components/Text";
 
 const organizations = [
   {
@@ -38,8 +38,11 @@ function MyOrganizations(props) {
         {organizations.map((data, i) => (
           <ListItem
             leftAvatar={{ source: { uri: data.image } }}
-            rightSubtitle="Leave"
-            rightSubtitleStyle={{ color: "red" }}
+            rightElement={
+              <Information size={16} color="red" onPress={() => alert()}>
+                Leave
+              </Information>
+            }
             bottomDivider={true}
             key={i}
             title={data.name}

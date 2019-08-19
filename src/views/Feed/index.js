@@ -208,7 +208,7 @@ function Feed(props) {
               <ImageContent
                 height={32}
                 width={32}
-                radius={14}
+                radius={16}
                 color="rgba(0,0,0,0.1)"
               >
                 <Icon color="black" size={16}>
