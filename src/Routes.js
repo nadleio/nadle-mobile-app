@@ -32,6 +32,8 @@ import Configuration from "./views/Configuration";
 import EditProfile from "./views/EditProfile";
 import ChangePassword from "./views/ChangePassword";
 import MyOrganizations from "./views/myOrganizations";
+import ShareNadle from "./views/shareNadle";
+import Suggestions from "./views/suggestions";
 
 export const TabNavigator = createBottomTabNavigator(
   {
@@ -155,7 +157,9 @@ export const Root = createStackNavigator(
     Configuration: { screen: Configuration },
     EditProfile: { screen: EditProfile },
     ChangePassword: { screen: ChangePassword },
-    MyOrganizations: { screen: MyOrganizations }
+    MyOrganizations: { screen: MyOrganizations },
+    ShareNadle: { screen: ShareNadle },
+    Suggestions: { screen: Suggestions }
   },
   {
     header: null,

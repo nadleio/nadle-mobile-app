@@ -38,11 +38,13 @@ const GeneralConfig = [
 const ExtrasForNadle = [
   {
     title: "Invite members",
-    topDivider: true
+    topDivider: true,
+    view: "ShareNadle"
   },
   {
-    title: "Send comments",
-    topDivider: false
+    title: "Suggestions",
+    topDivider: false,
+    view: "Suggestions"
   },
   {
     title: "Qualify Nadle",
@@ -103,6 +105,7 @@ function Configuration(props) {
               bottomDivider={true}
               key={i}
               title={data.title}
+              onPress={() => props.navigation.navigate(data.view)}
             />
           ))}
         </MarginTop>
