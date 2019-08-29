@@ -6,10 +6,10 @@ import { SafeAreaView } from "react-navigation";
 
 import { Header } from "../../components/Header";
 import { TextInputSearch } from "../../components/form/Input";
-import { Icon } from "../../components/Icon";
-import { PreviewPost } from "../../components/PreviewPost";
+import Icon from "../../components/Icon";
+import PreviewPost from "../../components/ShortPost";
 import { Information } from "../../components/Text";
-import { Hashtags } from "../../components/Hashtags";
+import Tags from "../../components/Tags";
 import { ViewFlex } from "../../assets/styles/styles";
 import {
   Padding,
@@ -48,7 +48,7 @@ function Search(props) {
             Recomended Hashtags
           </Information>
 
-          <Hashtags
+          <Tags
             data={["React Native", "React", "GraphQl", "NodeJS", "Apollo"]}
           />
 
