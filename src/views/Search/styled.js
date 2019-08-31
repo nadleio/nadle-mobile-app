@@ -8,6 +8,11 @@ export const Row = styled.View`
   flex-direction: row;
 `;
 
+export const Wrap = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
 export const SearchContainer = styled.View`
   flex-direction: row;
   justify-content: space-between;

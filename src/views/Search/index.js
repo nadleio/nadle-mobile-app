@@ -17,7 +17,8 @@ import {
   PostContainer,
   Margintop,
   SearchButtonContainer,
-  SearchContainer
+  SearchContainer,
+  Wrap
 } from "./styled";
 
 function Search(props) {
@@ -48,9 +49,17 @@ function Search(props) {
             Recomended Hashtags
           </Information>
 
-          <Tags
-            data={["React Native", "React", "GraphQl", "NodeJS", "Apollo"]}
-          />
+          <Wrap>
+            <Tags
+              tags={[
+                { text: "React Native", uid: "12" },
+                { text: "React", uid: "123" },
+                { text: "GraphQl", uid: "1234" },
+                { text: "NodeJs", uid: "1235" },
+                { text: "Apollo", uid: "123456" }
+              ]}
+            />
+          </Wrap>
 
           <Margintop>
             <PostContainer>

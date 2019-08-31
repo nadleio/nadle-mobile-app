@@ -13,8 +13,8 @@ const Container = styled.TouchableOpacity`
 `;
 
 function Tags({ tags, ...props }) {
-  return tags.map((tag, index) => (
-    <Container key={`${props.postUid}-${index}-tag`}>
+  return tags.map(tag => (
+    <Container key={tag.uid}>
       <Text
         style={{
           color: props.theme.colors.PRIMARY,
