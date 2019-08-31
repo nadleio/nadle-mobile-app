@@ -2,7 +2,7 @@ import React from "react";
 import { StatusBar } from "react-native";
 import styled, { ThemeProvider } from "styled-components";
 
-import { AppContainer } from "./Routes";
+import { AppContainer } from "./Router";
 
 import ContextTheme from "./lib/ContextTheme";
 

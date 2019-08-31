@@ -10,7 +10,7 @@ const theme = {
     BODY: 14,
     SMALL: 12
   },
-  // Themes
+  // App Themes
   light: {
     BACKGROUND: "#ffffff",
     BACKGROUND_ALT: "#ffffff",

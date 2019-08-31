@@ -13,11 +13,14 @@ import { withSelf } from "./lib/ContextSelf";
 
 import Icon from "./components/Icon";
 
+// Auth Views
 import Login from "./views/login";
 import Signup from "./views/signup";
 import InputEmail from "./views/ResetPassword/inputEmail";
 import SendCode from "./views/ResetPassword/sendCode";
 import ResetPassword from "./views/ResetPassword/resetPassword";
+
+// App Views
 import Feed from "./views/Feed";
 import MarkdownView from "./views/markdown";
 import Profile from "./views/Profile";
@@ -64,7 +67,7 @@ const IconTab = compose(withTheme)(({ focused, theme, icon }) => {
   );
 });
 
-export const TabNavigator = createBottomTabNavigator(
+const TabNavigator = createBottomTabNavigator(
   {
     Feed: {
       screen: Feed,
@@ -120,9 +123,7 @@ export const TabNavigator = createBottomTabNavigator(
     tabBarOptions: {
       showLabel: false,
       showIcon: true,
-      animate: true,
-      activeTintColor: "black",
-      inactiveTintColor: "grey"
+      animate: true
     },
     tabBarPosition: "bottom",
     tabBarComponent: compose(withTheme)(function TabBarComponent(props) {
@@ -138,7 +139,7 @@ export const TabNavigator = createBottomTabNavigator(
   }
 );
 
-export const Root = createStackNavigator(
+const Root = createStackNavigator(
   {
     TabNavigator,
     Login: { screen: Login },
@@ -168,7 +169,7 @@ export const Root = createStackNavigator(
   }
 );
 
-export const NotLoginRoot = createStackNavigator({
+export const NotAuthenticatedRoot = createStackNavigator({
   Login: { screen: Login },
   Signup: { screen: Signup },
   InputEmail: { screen: InputEmail },
@@ -177,15 +178,15 @@ export const NotLoginRoot = createStackNavigator({
   SearchProfile: { screen: Profile }
 });
 
-export const AppContainer = (signedIn = false) =>
+export const AppContainer = (authenticated = false) =>
   createAppContainer(
     createSwitchNavigator(
       {
-        NotLoginRoot: { screen: NotLoginRoot },
+        NotAuthenticatedRoot: { screen: NotAuthenticatedRoot },
         Root: { screen: Root }
       },
 
-      { initialRouteName: signedIn ? "Root" : "Root" }
-      // { initialRouteName: false ? "NotLoginRoot" : "NotLoginRoot" }
+      { initialRouteName: authenticated ? "Root" : "Root" }
+      // { initialRouteName: false ? "NotAuthenticatedRoot" : "NotAuthenticatedRoot" }
     )
   );

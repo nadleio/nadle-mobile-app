@@ -23,18 +23,16 @@ function Profile({ self, navigation }) {
   const onScroll = event => {
     const currentOffset = event.nativeEvent.contentOffset.y;
     const direction = currentOffset > offset ? "down" : "up";
-    setOffset(currentOffset)
+    setOffset(currentOffset);
     console.log(direction);
   };
 
   return (
     <Container>
-      <ScrollView
-        onScroll={onScroll}
-      >
+      <ScrollView onScroll={onScroll}>
         <Header
           account={account}
-          {...showBack && { back: () => navigation.goBack() }}
+          {...(showBack && { back: () => navigation.goBack() })}
         />
 
         <Biography account={account} />
