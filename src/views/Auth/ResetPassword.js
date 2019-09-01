@@ -59,15 +59,14 @@ function ResetPassword({ theme, navigation }) {
     ? { label: "GENERATE NEW CODE", action: () => timer.restart() }
     : { label: "DIDN'T RECEIVE THE CODE?", action: () => timer.restart() };
 
-
   const sendToken = () => {
     if (!tokenSent) setTokenSent(true);
     timer.restart();
-  }
+  };
 
   const verifyToken = () => {
     setVerifiedToken(true);
-  }
+  };
 
   const handleAuthForm = () => {
     // Something here...
