@@ -15,7 +15,7 @@ const Title = styled.TouchableOpacity`
 
 const Text = styled.Text`
   color: ${props => props.theme.styled.TITLE};
-  font-size: 16;
+  font-size: ${props => props.theme.fontSize.TITLE};
   font-weight: 600;
   max-width: 100%;
 `;

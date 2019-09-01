@@ -82,7 +82,7 @@ function User({ self, account, ...props }) {
             <Label
               style={{
                 color: props.theme.colors.WHITE,
-                fontSize: 14,
+                fontSize: props.theme.fontSize.BODY,
                 fontWeight: "600"
               }}
             >
@@ -121,8 +121,8 @@ function Organization({ self, ...props }) {
           <Label
             style={{
               color: props.theme.colors.WHITE,
-              fontWeight: "600",
-              fontSize: 14
+              fontSize: props.theme.fontSize.BODY,
+              fontWeight: "600"
             }}
           >
             SUBSCRIBE
@@ -140,8 +140,8 @@ function Organization({ self, ...props }) {
           <Label
             style={{
               color: props.theme.styled.OPPOSITE_TITLE,
-              fontWeight: "600",
-              fontSize: 14
+              fontSize: props.theme.fontSize.BODY,
+              fontWeight: "600"
             }}
           >
             560k

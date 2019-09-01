@@ -1,20 +1,23 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 import styled from "styled-components";
 import LinearGradient from "react-native-linear-gradient";
 
-import { ActionLink } from "../components/Text";
-import { Images } from "../assets/styles/Image";
-
-const TouchableOpacity = styled.TouchableOpacity`
-  height: 48px;
+const Container = styled.TouchableOpacity`
   width: 100%;
 `;
 
-const IconContent = styled.View`
+const ActionLink = styled.Text`
+  color: ${props => props.color || "black"};
+  font-size: ${props => props.theme.fontSize.BODY};
+  font-weight: 600;
+  text-align: center;
+`;
+
+const IconContainer = styled.View`
   position: absolute;
-  margin-left: 5%;
+  margin-left: 16px;
 `;
 
 const styles = StyleSheet.create({
@@ -22,14 +25,14 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 8,
     justifyContent: "center",
-    borderWidth: 2
+    padding: 16
   }
 });
 
-export function Button(props) {
+function Button({ style, containerStyle, ...props }) {
   return (
-    <View marginTop={props.top || 0}>
-      <TouchableOpacity
+    <View style={style}>
+      <Container
         disabled={props.disabled}
         borderColor={props.borderColor}
         onPress={() => props.action()}
@@ -38,22 +41,14 @@ export function Button(props) {
           colors={props.disabled ? ["#b2b2b2", "#b2b2b2"] : props.color}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          style={[
-            styles.container,
-            { borderColor: props.borderColor || "white" }
-          ]}
+          style={[styles.container, containerStyle]}
         >
-          {props.haveIcon && (
-            <IconContent>
-              <Images height={30} width={30} source={props.image} />
-            </IconContent>
-          )}
-
-          <ActionLink size={15} color={props.TextColor}>
-            {props.text}
-          </ActionLink>
+          {props.icon && <IconContainer>{props.icon}</IconContainer>}
+          <ActionLink color={props.textColor}>{props.text}</ActionLink>
         </LinearGradient>
-      </TouchableOpacity>
+      </Container>
     </View>
   );
 }
+
+export default Button;

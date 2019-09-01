@@ -9,7 +9,7 @@ const colorMap = {
 };
 
 const useTheme = () => {
-  const [mode, setMode] = useState("BLUE_MODE");
+  const [mode, setMode] = useState("LIGHT_MODE");
 
   const theme = {
     ...colors,

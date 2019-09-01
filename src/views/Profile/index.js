@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components";
 import _ from "lodash";
@@ -18,18 +18,10 @@ const Container = styled.View`
 function Profile({ self, navigation }) {
   const account = _.get(navigation, "state.params.account", null) || self;
   const showBack = navigation.state.routeName !== "Profile";
-  const [offset, setOffset] = useState(0);
-
-  const onScroll = event => {
-    const currentOffset = event.nativeEvent.contentOffset.y;
-    const direction = currentOffset > offset ? "down" : "up";
-    setOffset(currentOffset);
-    console.log(direction);
-  };
 
   return (
     <Container>
-      <ScrollView onScroll={onScroll}>
+      <ScrollView>
         <Header
           account={account}
           {...(showBack && { back: () => navigation.goBack() })}

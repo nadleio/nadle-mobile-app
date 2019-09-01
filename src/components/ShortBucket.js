@@ -18,12 +18,13 @@ const Thumbnail = styled.Image`
 
 const Title = styled.Text`
   color: ${props => props.theme.styled.TITLE};
+  font-size: ${props => props.theme.fontSize.BODY};
   font-weight: 600;
 `;
 
 const ShortBucket = () => {
   return (
-    <TouchableOpacity onPress={() => console.log("ACTION")}>
+    <TouchableOpacity onPress={() => {}}>
       <Container>
         <Thumbnail source={{ uri: "https://source.unsplash.com/random" }} />
         <Title>Lorem ipsum</Title>

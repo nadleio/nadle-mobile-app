@@ -13,8 +13,8 @@ const Container = styled.View`
 const Thumbnail = styled.Image`
   border-radius: 4px;
   margin-right: 8px;
-  height: 56px;
-  width: 56px;
+  height: 64px;
+  width: 64px;
 `;
 
 const Content = styled.View`
@@ -40,7 +40,7 @@ const TagsContainer = styled.View`
   margin-top: 8px;
 `;
 
-const ShortPost = () => {
+const ShortPost = ({ theme }) => {
   return (
     <Container>
       <TouchableOpacity onPress={() => console.log("ACTION")}>
@@ -53,7 +53,13 @@ const ShortPost = () => {
         <ActionLink to={() => console.log("ACTION")} text="@python" />
 
         <TouchableOpacity onPress={() => console.log("ACTION")}>
-          <Text style={{ marginTop: 4 }}>
+          <Text
+            style={{
+              marginTop: 4,
+              lineHeight: 20,
+              fontSize: theme.fontSize.BODY
+            }}
+          >
             <DateText>May 16, 2018</DateText>
             <Separator>{" • "}</Separator>
             <PostTitle>

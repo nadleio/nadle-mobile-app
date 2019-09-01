@@ -1,14 +1,17 @@
 const theme = {
   colors: {
     PRIMARY: "#2f5de9",
+    SECONDARY: "#4f6ede",
+    LINK: "#59a9fb",
     BLUE_DARK: "#090d23",
     GRAY_LIGHTER: "#f2f3f5",
+    GRAY_F4: "#f4f4f4",
     WHITE: "#ffffff"
   },
   fontSize: {
-    TITLE: 16,
-    BODY: 14,
-    SMALL: 12
+    TITLE: 18,
+    BODY: 16,
+    SMALL: 14
   },
   // App Themes
   light: {

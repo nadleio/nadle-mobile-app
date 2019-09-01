@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-navigation";
 import DialogInput from "react-native-dialog-input";
 
 import { Header } from "../../components/Header";
-import { TextInput } from "../../components/form/Input";
+import { TextInput } from "../../components/Form/Input";
 import { Images, ImageBackground } from "../../assets/styles/Image";
 import { Information } from "../../components/Text";
 import Icon from "../../components/Icon";

@@ -8,7 +8,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import styled from "styled-components";
 
 import { ViewFlex, PaddingHorizontal } from "../assets/styles/styles";
-import { TextInput } from "../components/form/Input";
+import { TextInput } from "../components/Form/Input";
 import { Header } from "../components/Header";
 import { Information, InputValidation } from "../components/Text";
 import { ImageProfile } from "../assets/styles/Image";

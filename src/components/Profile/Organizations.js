@@ -29,8 +29,8 @@ const ThumbnailAction = styled.TouchableOpacity`
 `;
 
 const Thumbnail = styled.Image`
-  height: 32px;
-  width: 32px;
+  height: 40px;
+  width: 40px;
 `;
 
 const Organizations = () => {

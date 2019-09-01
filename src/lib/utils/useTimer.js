@@ -10,6 +10,10 @@ function useTimer(seconds, options = {}) {
   const { intervalTime = 1000 } = options;
   const [timeLeft, setTimeLeft] = useState(seconds * 1000);
 
+  const restart = () => {
+    setTimeLeft(seconds * 1000);
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeLeft(current => {
@@ -25,7 +29,7 @@ function useTimer(seconds, options = {}) {
     return () => clearInterval(interval);
   }, [intervalTime]);
 
-  return { timeLeft: parseMS(timeLeft), completed: timeLeft === 0 };
+  return { timeLeft: parseMS(timeLeft), completed: timeLeft === 0, restart };
 }
 
 export default useTimer;

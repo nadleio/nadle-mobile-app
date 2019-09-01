@@ -1,39 +1,47 @@
 import React from "react";
-import { View } from "react-native";
+import { SafeAreaView } from "react-native";
+import styled, { withTheme } from "styled-components";
+import LinearGradient from "react-native-linear-gradient";
 
-import styled from "styled-components";
-import { isIphoneX } from "react-native-iphone-x-helper";
+import NadleWhiteLogo from "../../assets/images/editable-main-nadle--white.svg";
+import ShapesBackground from "../../assets/images/header__shapes.svg";
 
-import { Margin } from "../../assets/styles/styles";
-import { Images } from "../../assets/styles/Image";
-import { SwitchTheme } from "../SwitchTheme";
-
-import ImageBackground from "../../assets/img/auth-header.png";
-import WHITE_LOGO from "../../assets/img/white-logo.png";
-
-const Background = styled.ImageBackground`
-  height: ${isIphoneX() ? 220 : 190};
-  width: 100%;
-  justify-content: center;
-  padding-left: 8%;
+const Container = styled.View`
+  flex: 1;
 `;
 
-export function AuthHeader(props) {
-  return (
-    <View>
-      <Background source={ImageBackground}>
-        <Margin top={10}>
-          <Images height={54} width={180} source={WHITE_LOGO} />
-        </Margin>
-      </Background>
+const LogoContainer = styled.View`
+  margin: 56px 16px 0 16px;
+`;
 
-      {props.withThemeSwitch && (
-        <View alignSelf="flex-end">
-          <Margin right={20} top={-9}>
-            <SwitchTheme change={value => console.log(value)} />
-          </Margin>
-        </View>
-      )}
-    </View>
+const AbsoluteContainer = styled.View`
+  position: absolute;
+`;
+
+const Background = styled(LinearGradient)`
+  height: 184px;
+`;
+
+function AuthHeader(props) {
+  return (
+    <Container>
+      <Background
+        colors={[props.theme.colors.PRIMARY, props.theme.colors.SECONDARY]}
+        start={{ x: 0, y: 1 }}
+        end={{ x: 1, y: 0 }}
+      >
+        <AbsoluteContainer>
+          <ShapesBackground />
+        </AbsoluteContainer>
+
+        <SafeAreaView>
+          <LogoContainer>
+            <NadleWhiteLogo width={144} height={42} />
+          </LogoContainer>
+        </SafeAreaView>
+      </Background>
+    </Container>
   );
 }
+
+export default withTheme(AuthHeader);

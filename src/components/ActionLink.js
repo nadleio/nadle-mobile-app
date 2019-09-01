@@ -3,13 +3,14 @@ import { TouchableOpacity } from "react-native";
 import styled from "styled-components";
 
 const Action = styled.Text`
-  color: ${props => props.theme.colors.PRIMARY};
+  color: ${props => props.theme.colors.LINK};
+  font-weight: 600;
 `;
 
-const ActionLink = ({ to, text }) => {
+const ActionLink = ({ to, text, style }) => {
   return (
     <TouchableOpacity onPress={to}>
-      <Action>{text}</Action>
+      <Action style={style}>{text}</Action>
     </TouchableOpacity>
   );
 };

@@ -6,7 +6,7 @@ import styled, { css, withTheme } from "styled-components";
 import HeaderSubscribe from "./HeaderSubscribe";
 import Icon from "../Icon";
 
-import { withThemeProvider } from "../../lib/ContextTheme";
+import { withNadleTheme } from "../../lib/ContextTheme";
 import { withSelf } from "../../lib/ContextSelf";
 
 const Container = styled.View`
@@ -65,9 +65,9 @@ const ProfileBox = styled.View`
 `;
 
 const ProfilePicture = styled.Image`
-  height: 56px;
-  width: 56px;
-  border-radius: 28px;
+  height: 64px;
+  width: 64px;
+  border-radius: 32px;
   margin-bottom: 8px;
 `;
 
@@ -160,5 +160,5 @@ function Header({ account = {}, self, theme, appTheme, ...props }) {
 export default compose(
   withSelf,
   withTheme,
-  withThemeProvider
+  withNadleTheme
 )(Header);

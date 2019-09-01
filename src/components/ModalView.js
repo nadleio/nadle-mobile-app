@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { ViewFlex, Margin } from "../assets/styles/styles";
 import { Images } from "../assets/styles/Image";
 import { PaddingHorizontal } from "../assets/styles/styles";
-import { TextInput } from "./form/Input";
+import { TextInput } from "./Form/Input";
 
 import CLOSE from "../assets/img/cancel.png";
 

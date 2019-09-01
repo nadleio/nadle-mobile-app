@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { ViewFlex } from "../../assets/styles/styles";
 
-import { TextInput } from "../form/Input";
+import { TextInput } from "../Form/Input";
 import { Information } from "../Text";
 import { ModalOptions } from "../ModalOptions";
 

@@ -7,8 +7,8 @@ const ContextTheme = React.createContext({
   }
 });
 
-export function withThemeProvider(Component) {
-  return function contextTheme(props) {
+export function withNadleTheme(Component) {
+  return function contextNadleTheme(props) {
     return (
       <ContextTheme.Consumer>
         {withTheme => <Component {...props} appTheme={withTheme} />}

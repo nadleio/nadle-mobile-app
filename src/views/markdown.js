@@ -13,7 +13,7 @@ import { SafeAreaView } from "react-navigation";
 import { ViewFlex } from "../assets/styles/styles";
 import { PaddingHorizontal } from "../assets/styles/styles";
 
-import { Alert } from "../components/alerts/Alert";
+import { Alert } from "../components/Alerts/Alert";
 import { Preview } from "../components/markdown/Preview";
 import { Header, IconContent, Save } from "../components/markdown/styles";
 import { Gif } from "../components/Gif";

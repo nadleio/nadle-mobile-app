@@ -19,7 +19,7 @@ const Title = styled.Text`
 const Content = styled.Text`
   color: ${props => props.theme.styled.CONTENT};
   font-size: ${props => props.theme.fontSize.BODY};
-  line-height: 21;
+  line-height: 20;
   font-weight: 400;
   text-align: left;
 `;

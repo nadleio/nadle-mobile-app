@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { Information } from "../components/Text";
 import { ViewFlex, PaddingHorizontal } from "../assets/styles/styles";
 import { Header } from "../components/Header";
-import { TextInput } from "../components/form/Input";
+import { TextInput } from "../components/Form/Input";
 import { Button } from "../components/Button";
 import { ShareIt } from "../lib/utils/Share";
 

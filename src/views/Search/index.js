@@ -5,7 +5,7 @@ import { ScrollView } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
 import { Header } from "../../components/Header";
-import { TextInputSearch } from "../../components/form/Input";
+import { TextInputSearch } from "../../components/Form/Input";
 import Icon from "../../components/Icon";
 import PreviewPost from "../../components/ShortPost";
 import { Information } from "../../components/Text";

@@ -7,7 +7,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import { AuthHeader } from "../../components/Auth/Header";
 import { Title, InputValidation } from "../../components/Text";
-import { TextInput } from "../../components/form/Input";
+import { TextInput } from "../../components/Form/Input";
 import { ViewFlex, Margin } from "../../assets/styles/styles";
 import { Button } from "../../components/Button";
 import { BottomAuth } from "../../components/BottomAuth";

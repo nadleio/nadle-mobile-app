@@ -14,32 +14,30 @@ import { withSelf } from "./lib/ContextSelf";
 import Icon from "./components/Icon";
 
 // Auth Views
-import Login from "./views/login";
-import Signup from "./views/signup";
-import InputEmail from "./views/ResetPassword/inputEmail";
-import SendCode from "./views/ResetPassword/sendCode";
-import ResetPassword from "./views/ResetPassword/resetPassword";
+import Login from "./views/Auth/Login";
+import Signup from "./views/Auth/Signup";
+import ResetPassword from "./views/Auth/ResetPassword";
 
 // App Views
 import Feed from "./views/Feed";
 import MarkdownView from "./views/markdown";
 import Profile from "./views/Profile";
-import Notifications from "./views/Notifications";
-import Post from "./views/Post";
+// import Notifications from "./views/Notifications";
+// import Post from "./views/Post";
 import Search from "./views/Search";
-import YoutubeForAndroid from "./views/Post/youtubeForAndroid";
-import Subscriptions from "./views/Subscriptions";
-import UserPosts from "./views/UserPosts";
-import CollectionPosts from "./views/CollectionPosts";
+// import YoutubeForAndroid from "./views/Post/youtubeForAndroid";
+// import Subscriptions from "./views/Subscriptions";
+// import UserPosts from "./views/UserPosts";
+// import CollectionPosts from "./views/CollectionPosts";
 import Saved from "./views/Saved";
-import MarkdownForm from "./views/MarkdownForm";
-import Comments from "./views/Comments";
-import Configuration from "./views/Configuration";
-import EditProfile from "./views/EditProfile";
-import ChangePassword from "./views/ChangePassword";
-import MyOrganizations from "./views/myOrganizations";
-import ShareNadle from "./views/shareNadle";
-import Suggestions from "./views/suggestions";
+// import MarkdownForm from "./views/MarkdownForm";
+// import Comments from "./views/Comments";
+// import Configuration from "./views/Configuration";
+// import EditProfile from "./views/EditProfile";
+// import ChangePassword from "./views/ChangePassword";
+// import MyOrganizations from "./views/myOrganizations";
+// import ShareNadle from "./views/shareNadle";
+// import Suggestions from "./views/suggestions";
 
 const Picture = styled.Image`
   border-radius: 12;
@@ -144,24 +142,24 @@ const Root = createStackNavigator(
     TabNavigator,
     Login: { screen: Login },
     Signup: { screen: Signup },
-    InputEmail: { screen: InputEmail },
-    SendCode: { screen: SendCode },
-    ResetPassword: { screen: ResetPassword },
-    SearchProfile: { screen: Profile },
-    Post: { screen: Post },
-    YoutubeForAndroid: { screen: YoutubeForAndroid },
-    Subscriptions: { screen: Subscriptions },
-    UserPosts: { screen: UserPosts },
-    CollectionPosts: { screen: CollectionPosts },
-    Notifications: { screen: Notifications },
-    MarkdownForm: { screen: MarkdownForm },
-    Comments: { screen: Comments },
-    Configuration: { screen: Configuration },
-    EditProfile: { screen: EditProfile },
-    ChangePassword: { screen: ChangePassword },
-    MyOrganizations: { screen: MyOrganizations },
-    ShareNadle: { screen: ShareNadle },
-    Suggestions: { screen: Suggestions }
+    // InputEmail: { screen: InputEmail },
+    // SendCode: { screen: SendCode },
+    // ResetPassword: { screen: ResetPassword },
+    SearchProfile: { screen: Profile }
+    // Post: { screen: Post },
+    // YoutubeForAndroid: { screen: YoutubeForAndroid },
+    // Subscriptions: { screen: Subscriptions },
+    // UserPosts: { screen: UserPosts },
+    // CollectionPosts: { screen: CollectionPosts },
+    // Notifications: { screen: Notifications },
+    // MarkdownForm: { screen: MarkdownForm },
+    // Comments: { screen: Comments },
+    // Configuration: { screen: Configuration },
+    // EditProfile: { screen: EditProfile },
+    // ChangePassword: { screen: ChangePassword },
+    // MyOrganizations: { screen: MyOrganizations },
+    // ShareNadle: { screen: ShareNadle },
+    // Suggestions: { screen: Suggestions }
   },
   {
     header: null,
@@ -169,14 +167,18 @@ const Root = createStackNavigator(
   }
 );
 
-export const NotAuthenticatedRoot = createStackNavigator({
-  Login: { screen: Login },
-  Signup: { screen: Signup },
-  InputEmail: { screen: InputEmail },
-  SendCode: { screen: SendCode },
-  ResetPassword: { screen: ResetPassword },
-  SearchProfile: { screen: Profile }
-});
+export const NotAuthenticatedRoot = createStackNavigator(
+  {
+    ResetPassword: { screen: ResetPassword },
+    Login: { screen: Login },
+    Signup: { screen: Signup }
+    // SearchProfile: { screen: Profile }
+  },
+  {
+    header: null,
+    headerMode: "none"
+  }
+);
 
 export const AppContainer = (authenticated = false) =>
   createAppContainer(
@@ -186,7 +188,6 @@ export const AppContainer = (authenticated = false) =>
         Root: { screen: Root }
       },
 
-      { initialRouteName: authenticated ? "Root" : "Root" }
-      // { initialRouteName: false ? "NotAuthenticatedRoot" : "NotAuthenticatedRoot" }
+      { initialRouteName: authenticated ? "Root" : "NotAuthenticatedRoot" }
     )
   );
