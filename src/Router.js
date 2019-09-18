@@ -139,13 +139,13 @@ const TabNavigator = createBottomTabNavigator(
 
 const Root = createStackNavigator(
   {
-    TabNavigator,
-    Login: { screen: Login },
-    Signup: { screen: Signup },
+    TabNavigator
+    // Login: { screen: Login },
+    // Signup: { screen: Signup },
     // InputEmail: { screen: InputEmail },
     // SendCode: { screen: SendCode },
     // ResetPassword: { screen: ResetPassword },
-    SearchProfile: { screen: Profile }
+    // SearchProfile: { screen: Profile }
     // Post: { screen: Post },
     // YoutubeForAndroid: { screen: YoutubeForAndroid },
     // Subscriptions: { screen: Subscriptions },
@@ -180,7 +180,7 @@ export const NotAuthenticatedRoot = createStackNavigator(
   }
 );
 
-export const AppContainer = (authenticated = false) =>
+export const AppContainer = (authenticated = true) =>
   createAppContainer(
     createSwitchNavigator(
       {

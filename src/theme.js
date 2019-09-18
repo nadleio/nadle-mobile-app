@@ -6,6 +6,7 @@ const theme = {
     BLUE_DARK: "#090d23",
     GRAY_LIGHTER: "#f2f3f5",
     GRAY_F4: "#f4f4f4",
+    GRAY_D6: "#d6d6d6",
     WHITE: "#ffffff"
   },
   fontSize: {
@@ -22,7 +23,10 @@ const theme = {
     ICON: "#000000",
     TITLE: "#000000",
     OPPOSITE_TITLE: "#ffffff",
-    CONTENT: "#5c5c5c"
+    CONTENT: "#5c5c5c",
+    FEED_SWIPPER: "#f4f4f4",
+    COUNTER_SWIPPER: "#000000",
+    HASHTAG_FEED: "#f4f4f4"
   },
   dark: {
     BACKGROUND: "#1f1f1f",
@@ -32,7 +36,10 @@ const theme = {
     ICON: "#ffffff",
     TITLE: "#ffffff",
     OPPOSITE_TITLE: "#000000",
-    CONTENT: "#b2b2b2"
+    CONTENT: "#b2b2b2",
+    FEED_SWIPPER: "#333333",
+    COUNTER_SWIPPER: "#ffffff",
+    HASHTAG_FEED: "#ffffff"
   },
   blue: {
     BACKGROUND: "#17202a",
@@ -42,7 +49,10 @@ const theme = {
     ICON: "#ffffff",
     TITLE: "#ffffff",
     OPPOSITE_TITLE: "#000000",
-    CONTENT: "#b2b2b2"
+    CONTENT: "#b2b2b2",
+    FEED_SWIPPER: "#1c2733",
+    COUNTER_SWIPPER: "#ffffff",
+    HASHTAG_FEED: "#ffffff"
   }
 };
 
