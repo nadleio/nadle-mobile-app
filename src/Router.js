@@ -169,8 +169,8 @@ const Root = createStackNavigator(
 
 export const NotAuthenticatedRoot = createStackNavigator(
   {
-    ResetPassword: { screen: ResetPassword },
     Login: { screen: Login },
+    ResetPassword: { screen: ResetPassword },
     Signup: { screen: Signup }
     // SearchProfile: { screen: Profile }
   },
@@ -180,7 +180,7 @@ export const NotAuthenticatedRoot = createStackNavigator(
   }
 );
 
-export const AppContainer = (authenticated = true) =>
+export const AppContainer = (authenticated = false) =>
   createAppContainer(
     createSwitchNavigator(
       {

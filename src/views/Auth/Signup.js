@@ -1,7 +1,12 @@
-import React from "react";
+import React, { useState, useContext, useCallback } from "react";
+import AsyncStorage from "@react-native-community/async-storage";
 import styled, { withTheme } from "styled-components";
 import { Keyboard, ScrollView, View } from "react-native";
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 import { Formik } from "formik";
+
+import ContextAuth from "../../lib/ContextAuth";
 
 import AuthHeader from "../../components/Auth/Header";
 
@@ -33,10 +38,54 @@ const FormContainer = styled.View`
   margin: 0 16px 16px 16px;
 `;
 
+const MUTATION_SIGNUP = gql`
+  mutation(
+    $firstName: String!
+    $lastName: String!
+    $email: String!
+    $password: String!
+  ) {
+    signup(
+      firstName: $firstName
+      lastName: $lastName
+      email: $email
+      password: $password
+    ) {
+      success
+    }
+  }
+`;
+
 function Signup({ theme, navigation }) {
-  const handleAuthForm = () => {
-    // Something here...
-  };
+  const { setLogged } = useContext(ContextAuth);
+  const [signup] = useMutation(MUTATION_SIGNUP);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleAuthForm = useCallback(
+    async values => {
+      setIsLoading(true);
+      try {
+        const { data } = await signup({
+          variables: {
+            firstName: "John",
+            lastName: "Doe",
+            email: values.email,
+            password: values.password
+          }
+        });
+
+        if (data.signup.success) {
+          setLogged(true);
+          await AsyncStorage.setItem("authToken", "I like to save it.");
+        }
+      } catch (error) {
+        // Sentry Catch
+      }
+      setIsLoading(false);
+    },
+    [signup]
+  );
 
   return (
     <Container>
@@ -50,7 +99,7 @@ function Signup({ theme, navigation }) {
         <FormContainer>
           <Formik
             initialValues={{ username: "", email: "", password: "" }}
-            onSubmit={values => handleAuthForm(values)}
+            onSubmit={handleAuthForm}
             validationSchema={LOGIN_SCHEMA}
           >
             {({ handleChange, handleSubmit }) => (
@@ -59,12 +108,6 @@ function Signup({ theme, navigation }) {
                   onChangeText={handleChange("username")}
                   label="Username"
                   autoCapitalize="none"
-                  ref={input => {
-                    this.username = input;
-                  }}
-                  onSubmitEditing={() => {
-                    this.email.focus();
-                  }}
                   returnKeyType="next"
                   spellCheck={false}
                   style={{ marginBottom: 32 }}
@@ -74,12 +117,6 @@ function Signup({ theme, navigation }) {
                   onChangeText={handleChange("email")}
                   label="Email"
                   autoCapitalize="none"
-                  ref={input => {
-                    this.email = input;
-                  }}
-                  onSubmitEditing={() => {
-                    this.password.focus();
-                  }}
                   returnKeyType="next"
                   spellCheck={false}
                   style={{ marginBottom: 32 }}
@@ -89,9 +126,6 @@ function Signup({ theme, navigation }) {
                   onChangeText={handleChange("password")}
                   label="Password"
                   secureTextEntry={true}
-                  ref={input => {
-                    this.password = input;
-                  }}
                   onSubmitEditing={() => {
                     Keyboard.dismiss();
                   }}
@@ -102,6 +136,7 @@ function Signup({ theme, navigation }) {
                 <Button
                   action={handleSubmit}
                   text="SIGN UP"
+                  isLoading={isLoading}
                   color={[theme.colors.PRIMARY, theme.colors.PRIMARY]}
                   style={{ marginTop: 16 }}
                   textColor="#fff"
