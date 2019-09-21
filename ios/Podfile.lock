@@ -84,14 +84,22 @@ PODS:
     - React-Core (= 0.60.5)
   - React-RCTWebSocket (0.60.5):
     - React-Core (= 0.60.5)
+<<<<<<< HEAD
+  - RNGestureHandler (1.4.1):
+=======
+  - RNCAsyncStorage (1.6.1):
+>>>>>>> f01d886abdccb1bb9f773240d9d928dc48413f58
+    - React
   - RNGestureHandler (1.4.1):
     - React
-  - RNImageCropPicker (0.25.0):
+  - RNImageCropPicker (0.25.2):
     - QBImagePickerController
     - React-Core
     - React-RCTImage
     - RSKImageCropper
-  - RNSVG (9.8.1):
+  - RNReanimated (1.2.0):
+    - React
+  - RNSVG (9.9.4):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -121,8 +129,10 @@ DEPENDENCIES:
   - React-RCTText (from `../node_modules/react-native/Libraries/Text`)
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-RCTWebSocket (from `../node_modules/react-native/Libraries/WebSocket`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
+  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -178,10 +188,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   React-RCTWebSocket:
     :path: "../node_modules/react-native/Libraries/WebSocket"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-community/async-storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
+  RNReanimated:
+    :path: "../node_modules/react-native-reanimated"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
@@ -214,9 +228,11 @@ SPEC CHECKSUMS:
   React-RCTText: b074d89033583d4f2eb5faf7ea2db3a13c7553a2
   React-RCTVibration: 2105b2e0e2b66a6408fc69a46c8a7fb5b2fdade0
   React-RCTWebSocket: cd932a16b7214898b6b7f788c8bddb3637246ac4
-  RNGestureHandler: d439ed01c50665abff3b24e6c2e146b41cf4c8ce
-  RNImageCropPicker: 0a731d984e64ee4c28bddaa7ce52262e4b80979f
-  RNSVG: 1bf07c4638c2d7c4cb9a90c8964f72c3397300a6
+  RNCAsyncStorage: 2e2e3feb9bdadc752a026703d8c4065ca912e75a
+  RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
+  RNImageCropPicker: f675353bbe18f66113a39b319c0aeb36655a6e4c
+  RNReanimated: 1b52415c4302f198cb581282a0166690bad62c43
+  RNSVG: 435cda60cd9e1ea6188eb0e21c12fc0f85def8e8
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   RSKImageCropper: a446db0e8444a036b34f3c43db01b2373baa4b2a
   yoga: 312528f5bbbba37b4dcea5ef00e8b4033fdd9411

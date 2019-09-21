@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
+import { MaterialIndicator as Spinner } from "react-native-indicators";
 
 import styled from "styled-components";
 import LinearGradient from "react-native-linear-gradient";
@@ -43,8 +44,14 @@ function Button({ style, containerStyle, ...props }) {
           end={{ x: 1, y: 0 }}
           style={[styles.container, containerStyle]}
         >
-          {props.icon && <IconContainer>{props.icon}</IconContainer>}
-          <ActionLink color={props.textColor}>{props.text}</ActionLink>
+          {props.isLoading ? (
+            <Spinner size={20} animationDuration={1400} color="white" />
+          ) : (
+            <React.Fragment>
+              {props.icon && <IconContainer>{props.icon}</IconContainer>}
+              <ActionLink color={props.textColor}>{props.text}</ActionLink>
+            </React.Fragment>
+          )}
         </LinearGradient>
       </Container>
     </View>
