@@ -24,6 +24,7 @@ function App() {
   const { themeMode, setThemeMode, theme } = useTheme();
   const [loaded, setLoaded] = useState(false);
   const [logged, setLogged] = useState(false);
+  // AsyncStorage.removeItem("authToken");
 
   const [self, setSelf] = useState({
     uid: "b1b758d8-0d57-42c9-b086-4576bd1951ed",

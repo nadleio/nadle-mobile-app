@@ -7,6 +7,11 @@ import { Formik } from "formik";
 
 import { SIGNUP_SCHEMA } from "../../lib/form/authValidations";
 
+import AuthHeader from "../../components/Auth/Header";
+
+import { SIGNUP_SCHEMA } from "../../lib/form/authValidations";
+
+
 import ERROR from "../../nadle-i18/errors";
 
 import AuthHeader from "../../components/Auth/Header";
