@@ -1,21 +1,20 @@
-import React, { useState, useContext, useCallback } from "react";
-import AsyncStorage from "@react-native-community/async-storage";
+import React, { useState, useCallback } from "react";
 import styled, { withTheme } from "styled-components";
 import { Keyboard, ScrollView, View } from "react-native";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Formik } from "formik";
 
-import ContextAuth from "../../lib/ContextAuth";
+import { SIGNUP_SCHEMA } from "../../lib/form/authValidations";
+
+import ERROR from "../../nadle-i18/errors";
 
 import AuthHeader from "../../components/Auth/Header";
-
-import { LOGIN_SCHEMA } from "../../lib/form/authValidations";
-
 import Separator from "../../components/Separator";
 import Button from "../../components/Button";
 import Input from "../../components/Form/Input";
 import ActionLink from "../../components/ActionLink";
+import { InputValidation } from "../../components/Text";
 
 const Container = styled.View`
   flex: 1;
@@ -39,25 +38,16 @@ const FormContainer = styled.View`
 `;
 
 const MUTATION_SIGNUP = gql`
-  mutation(
-    $firstName: String!
-    $lastName: String!
-    $email: String!
-    $password: String!
-  ) {
-    signup(
-      firstName: $firstName
-      lastName: $lastName
-      email: $email
-      password: $password
-    ) {
+  mutation($email: String!, $username: String!, $password: String!) {
+    signup(email: $email, username: $username, password: $password) {
+      message
       success
+      errorCode
     }
   }
 `;
 
 function Signup({ theme, navigation }) {
-  const { setLogged } = useContext(ContextAuth);
   const [signup] = useMutation(MUTATION_SIGNUP);
 
   const [isLoading, setIsLoading] = useState(false);
@@ -68,16 +58,17 @@ function Signup({ theme, navigation }) {
       try {
         const { data } = await signup({
           variables: {
-            firstName: "John",
-            lastName: "Doe",
             email: values.email,
+            username: values.username,
             password: values.password
           }
         });
 
         if (data.signup.success) {
-          setLogged(true);
-          await AsyncStorage.setItem("authToken", "I like to save it.");
+          alert("Please check your email to confirm your account");
+          navigation.navigate("Login");
+        } else {
+          alert(ERROR[data.signup.errorCode]);
         }
       } catch (error) {
         // Sentry Catch
@@ -100,9 +91,9 @@ function Signup({ theme, navigation }) {
           <Formik
             initialValues={{ username: "", email: "", password: "" }}
             onSubmit={handleAuthForm}
-            validationSchema={LOGIN_SCHEMA}
+            validationSchema={SIGNUP_SCHEMA}
           >
-            {({ handleChange, handleSubmit }) => (
+            {({ handleChange, handleSubmit, values, errors }) => (
               <View>
                 <Input
                   onChangeText={handleChange("username")}
@@ -110,8 +101,11 @@ function Signup({ theme, navigation }) {
                   autoCapitalize="none"
                   returnKeyType="next"
                   spellCheck={false}
-                  style={{ marginBottom: 32 }}
                 />
+
+                <InputValidation style={{ marginBottom: 22 }} top={10}>
+                  {errors.username}
+                </InputValidation>
 
                 <Input
                   onChangeText={handleChange("email")}
@@ -119,8 +113,11 @@ function Signup({ theme, navigation }) {
                   autoCapitalize="none"
                   returnKeyType="next"
                   spellCheck={false}
-                  style={{ marginBottom: 32 }}
                 />
+
+                <InputValidation style={{ marginBottom: 22 }} top={10}>
+                  {errors.email}
+                </InputValidation>
 
                 <Input
                   onChangeText={handleChange("password")}
@@ -130,10 +127,19 @@ function Signup({ theme, navigation }) {
                     Keyboard.dismiss();
                   }}
                   returnKeyType="next"
-                  style={{ marginBottom: 32 }}
                 />
 
+                <InputValidation style={{ marginBottom: 22 }} top={10}>
+                  {errors.password}
+                </InputValidation>
+
                 <Button
+                  disabled={
+                    isLoading ||
+                    values.username === "" ||
+                    values.email === "" ||
+                    values.password === ""
+                  }
                   action={handleSubmit}
                   text="SIGN UP"
                   isLoading={isLoading}

@@ -26,39 +26,48 @@ const FormContainer = styled.View`
   margin: 32px 16px 16px 16px;
 `;
 
-const MUTATION_SEND_EMAIL = gql`
-  mutation($email: String!) {
-    forgotPassword(email: $email) {
+const MUTATION_RESET_PASSWORD = gql`
+  mutation($token: String!, $newPassword: String!) {
+    changePassword(token: $token, newPassword: $newPassword) {
       message
       success
       errorCode
+      data
     }
   }
 `;
 
-function ResetPassword({ theme, navigation }) {
+function ChangePassword({ theme, navigation }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [send_email] = useMutation(MUTATION_SEND_EMAIL);
+  const [reset_password] = useMutation(MUTATION_RESET_PASSWORD);
 
   async function handleAuthForm(values) {
     setIsLoading(true);
 
-    try {
-      const { data } = await send_email({
-        variables: {
-          email: values.email
-        }
-      });
+    const password_match = values.password === values.confirm_password;
+    !password_match && alert("Passwords don't match");
 
-      if (data.forgotPassword.success) {
-        alert("Please check your email");
-        navigation.navigate("Login");
-      } else {
-        alert(ERROR[data.forgotPassword.errorCode]);
+    if (password_match) {
+      try {
+        const { data } = await reset_password({
+          variables: {
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjazFzb2VoNm4wMDBhMDc0OXFkNWJwbHB2IiwidmFsaWRVbnRpbCI6MjYsImlhdCI6MTU3MjE4ODc5MH0.1DuNmqxCbdco-3LAv29wHpr5JJJHYtJAP1cdgLuqk4g",
+            newPassword: values.password
+          }
+        });
+
+        if (data.changePassword.success) {
+          alert("Password Changed succefully");
+          navigation.navigate("Login");
+        } else {
+          alert(ERROR[data.forgotPassword.errorCode]);
+        }
+      } catch (error) {
+        // Sentry Catch
       }
-    } catch (error) {
-      // Sentry Catch
     }
+
     setIsLoading(false);
   }
 
@@ -69,7 +78,7 @@ function ResetPassword({ theme, navigation }) {
 
         <FormContainer>
           <Formik
-            initialValues={{ email: "" }}
+            initialValues={{ password: "", confirm_password: "" }}
             onSubmit={values => handleAuthForm(values)}
             validationSchema={SIGNUP_SCHEMA}
           >
@@ -77,27 +86,34 @@ function ResetPassword({ theme, navigation }) {
               <View>
                 <View>
                   <Input
-                    onChangeText={handleChange("email")}
-                    label="Email"
-                    autoCapitalize="none"
-                    ref={input => {
-                      this.email = input;
-                    }}
-                    onSubmitEditing={() => {
-                      Keyboard.dismiss();
-                    }}
+                    onChangeText={handleChange("password")}
+                    label="New password"
+                    secureTextEntry={true}
                     returnKeyType="next"
-                    spellCheck={false}
                   />
 
                   <InputValidation style={{ marginBottom: 22 }} top={10}>
-                    {errors.email}
+                    {errors.password}
                   </InputValidation>
+
+                  <Input
+                    onChangeText={handleChange("confirm_password")}
+                    label="Confirm password"
+                    secureTextEntry={true}
+                    onSubmitEditing={() => {
+                      Keyboard.dismiss();
+                    }}
+                    returnKeyType="done"
+                  />
                 </View>
 
                 <Button
                   isLoading={isLoading}
-                  disabled={values.email === "" || isLoading}
+                  disabled={
+                    values.password === "" ||
+                    values.confirm_password === "" ||
+                    isLoading
+                  }
                   action={handleSubmit}
                   text="RESET PASSWORD"
                   color={[theme.colors.PRIMARY, theme.colors.PRIMARY]}
@@ -133,5 +149,5 @@ function ResetPassword({ theme, navigation }) {
   );
 }
 
-ResetPassword.navigationOptions = { header: null, headerMode: "none" };
-export default withTheme(ResetPassword);
+ChangePassword.navigationOptions = { header: null, headerMode: "none" };
+export default withTheme(ChangePassword);

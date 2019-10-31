@@ -17,6 +17,7 @@ import Icon from "./components/Icon";
 import Login from "./views/Auth/Login";
 import Signup from "./views/Auth/Signup";
 import ResetPassword from "./views/Auth/ResetPassword";
+import ChangePassword from "./views/Auth/ChangePassword";
 
 // App Views
 import Feed from "./views/Feed";
@@ -169,9 +170,12 @@ const Root = createStackNavigator(
 
 export const NotAuthenticatedRoot = createStackNavigator(
   {
+    // Redirect: { screen: Redirect },
     Login: { screen: Login },
     ResetPassword: { screen: ResetPassword },
+    ChangePassword: { screen: ChangePassword },
     Signup: { screen: Signup }
+
     // SearchProfile: { screen: Profile }
   },
   {
@@ -180,7 +184,7 @@ export const NotAuthenticatedRoot = createStackNavigator(
   }
 );
 
-export const AppContainer = (authenticated = false) =>
+export const AppContainer = (authenticated = true) =>
   createAppContainer(
     createSwitchNavigator(
       {
