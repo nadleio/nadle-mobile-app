@@ -8,6 +8,7 @@ const ModalContainer = styled.View`
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 `;
 
 const Box = styled.View`

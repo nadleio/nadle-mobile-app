@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView } from "react-native";
 import styled from "styled-components";
 import _ from "lodash";
@@ -9,6 +9,7 @@ import Members from "../../components/Profile/Members";
 import Organizations from "../../components/Profile/Organizations";
 import Posts from "../../components/Profile/Posts";
 import Buckets from "../../components/Profile/Buckets";
+import EditProfile from "../../components/EditProfile/EditProfile";
 
 const Container = styled.View`
   flex: 1;
@@ -19,12 +20,14 @@ function Profile({ self, navigation }) {
   const account = _.get(navigation, "state.params.account", null) || self;
   const showBack = navigation.state.routeName !== "Profile";
 
+  const [editProfile, setEditProfile] = useState(false);
+
   return (
     <Container>
       <ScrollView>
         <Header
           account={account}
-          goToEditProfile={() => navigation.navigate("EditProfile")}
+          goToEditProfile={() => setEditProfile(true)}
           {...(showBack && { back: () => navigation.goBack() })}
         />
 
@@ -35,6 +38,10 @@ function Profile({ self, navigation }) {
         <Posts />
 
         <Buckets />
+
+        {editProfile && (
+          <EditProfile self={self} close={() => setEditProfile(false)} />
+        )}
       </ScrollView>
     </Container>
   );

@@ -4,7 +4,6 @@ import styled, { css, withTheme } from "styled-components";
 import {
   createBottomTabNavigator,
   createStackNavigator,
-  createSwitchNavigator,
   createAppContainer,
   BottomTabBar
 } from "react-navigation";
@@ -34,7 +33,7 @@ import Saved from "./views/Saved";
 import MarkdownForm from "./views/markdownForm";
 // import Comments from "./views/Comments";
 // import Configuration from "./views/Configuration";
-import EditProfile from "./views/EditProfile";
+// import EditProfile from "./components/EditProfile";
 // import ChangePassword from "./views/ChangePassword";
 // import MyOrganizations from "./views/myOrganizations";
 // import ShareNadle from "./views/shareNadle";
@@ -164,8 +163,8 @@ const Root = createStackNavigator(
     // UserPosts: { screen: UserPosts },
     // CollectionPosts: { screen: CollectionPosts },
     // Notifications: { screen: Notifications },
-    MarkdownForm: { screen: compose(withSelf)(MarkdownForm) },
-    EditProfile: { screen: compose(withSelf)(EditProfile) }
+    MarkdownForm: { screen: compose(withSelf)(MarkdownForm) }
+    // EditProfile: { screen: compose(withSelf)(EditProfile) }
     // Comments: { screen: Comments },
     // Configuration: { screen: Configuration },
     // EditProfile: { screen: EditProfile },
@@ -180,7 +179,7 @@ const Root = createStackNavigator(
   }
 );
 
-export const NotAuthenticatedRoot = createStackNavigator(
+const NotAuthenticatedRoot = createStackNavigator(
   {
     // Redirect: { screen: Redirect },
     Login: { screen: Login },
@@ -196,33 +195,17 @@ export const NotAuthenticatedRoot = createStackNavigator(
   }
 );
 
-// const SwichAnimatedNavigation = createAnimatedSwitchNavigator({
-//   NotAuthenticatedRoot: { screen: NotAuthenticatedRoot },
-//   Root: { screen: Root }
-// });
+// export const AppContainer = (authenticated = true) =>
+//   createAppContainer(
+//     createSwitchNavigator(
+//       {
+//         NotAuthenticatedRoot: { screen: NotAuthenticatedRoot },
+//         Root: { screen: Root }
+//       },
 
-export const AppContainer = (authenticated = true) =>
-  createAppContainer(
-    createSwitchNavigator(
-      {
-        NotAuthenticatedRoot: { screen: NotAuthenticatedRoot },
-        Root: { screen: Root }
-      },
-      // {
-      //   // The previous screen will slide to the bottom while the next screen will fade in
+//       { initialRouteName: authenticated ? "Root" : "NotAuthenticatedRoot" }
+//     )
+//   );
 
-      //   transition: (
-      //     <Transition.Together>
-      //       <Transition.Out
-      //         type="slide-bottom"
-      //         durationMs={400}
-      //         interpolation="easeIn"
-      //       />
-      //       <Transition.In type="fade" durationMs={500} />
-      //     </Transition.Together>
-      //   )
-      // },
-
-      { initialRouteName: authenticated ? "Root" : "NotAuthenticatedRoot" }
-    )
-  );
+export const AppContainer = createAppContainer(Root);
+export const AppContainerNot = createAppContainer(NotAuthenticatedRoot);

@@ -6,7 +6,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
-import { AppContainer } from "./Router";
+import { AppContainer, AppContainerNot } from "./Router";
 
 import ContextTheme from "./lib/ContextTheme";
 import ContextAuth from "./lib/ContextAuth";
@@ -47,7 +47,23 @@ function App() {
   const [loadingModal, setLoadingModal] = useState(false);
   const [self, setSelf] = useState({});
 
+  const persistenceKey = "persistenceKey";
+
+  const persistNavigationState = async navState => {
+    try {
+      await AsyncStorage.setItem(persistenceKey, JSON.stringify(navState));
+    } catch (err) {
+      // handle the error according to your needs
+    }
+  };
+
+  const loadNavigationState = async () => {
+    const jsonString = await AsyncStorage.getItem(persistenceKey);
+    return JSON.parse(jsonString);
+  };
+
   // AsyncStorage.removeItem("authToken");
+  // AsyncStorage.removeItem("persistenceKey");
 
   const { loading, data } = useQuery(CURRENT_USER);
 
@@ -83,8 +99,6 @@ function App() {
     isLogged();
   }, [data, loading]);
 
-  const Layout = AppContainer(logged);
-
   return (
     <ContextAuth.Provider value={{ logged, setLogged }}>
       <ContextSelf.Provider value={{ ...self, updateSelf: setSelf }}>
@@ -94,7 +108,18 @@ function App() {
               <Container backgroundColor={theme.styled.BACKGROUND}>
                 {loaded ? (
                   <FadeInView>
-                    <Layout />
+                    {logged ? (
+                      <AppContainer
+                        persistNavigationState={persistNavigationState}
+                        loadNavigationState={loadNavigationState}
+                      />
+                    ) : (
+                      <AppContainerNot
+                        persistNavigationState={persistNavigationState}
+                        loadNavigationState={loadNavigationState}
+                      />
+                    )}
+                    {loadingModal && <Loading />}
                   </FadeInView>
                 ) : (
                   <Spinner
@@ -103,8 +128,6 @@ function App() {
                     color={theme.colors.PRIMARY}
                   />
                 )}
-
-                {loadingModal && <Loading />}
               </Container>
             </ThemeProvider>
           </ContextLoading.Provider>

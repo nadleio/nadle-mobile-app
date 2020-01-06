@@ -1,10 +1,9 @@
 import React from "react";
-import { StatusBar, View, TouchableOpacity } from "react-native";
+import { StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import styled, { withTheme } from "styled-components";
 
 import { Title, Label } from "../Text";
-import Icon from "../Icon";
 
 const Container = styled.View`
   padding: 15px 5% 15px 5%;
@@ -23,9 +22,9 @@ function Header({ back, theme, saveInfo }) {
       <StatusBar barStyle={theme.styled.STATUS_BAR} />
 
       <Container>
-        <TouchableOpacity onPress={() => back()} style={{ width: 50 }}>
-          <Icon name="outline-angle-left" color={theme.styled.ICON} size={28} />
-        </TouchableOpacity>
+        <Label onPress={back} weight={600} color={theme.styled.TITLE}>
+          CLOSE
+        </Label>
 
         <Title>Edit Profile</Title>
 
