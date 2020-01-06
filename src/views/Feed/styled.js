@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const Container = styled.View`
+  flex: 1;
+  background-color: ${props => props.theme.styled.BACKGROUND};
+`;
+
 export const ActivityBox = styled.View`
   border-top-width: 1px;
   border-color: #f4f4f4;

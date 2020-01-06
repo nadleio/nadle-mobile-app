@@ -1,11 +1,14 @@
 import React from "react";
 
 const ContextSelf = React.createContext({
-  uid: "b1b758d8-0d57-42c9-b086-4576bd1951ed",
-  type: "USER",
-  picture: "https://avatars1.githubusercontent.com/u/14861369?s=460&v=4",
-  username: "carlosvq",
-  name: "Carlos Valdez"
+  uid: "",
+  type: "",
+  picture: "",
+  username: "",
+  email: "",
+  fistName: "",
+  lastName: "",
+  updateSelf: null
 });
 
 export function withSelf(Component) {

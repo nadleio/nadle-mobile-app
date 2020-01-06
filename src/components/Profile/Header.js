@@ -9,9 +9,7 @@ import Icon from "../Icon";
 import { withNadleTheme } from "../../lib/ContextTheme";
 import { withSelf } from "../../lib/ContextSelf";
 
-const Container = styled.View`
-  flex: 1;
-`;
+import DEFAULT_PROFILE from "../../assets/images/defaultProfile.png";
 
 const Actions = styled.View`
   width: 320px;
@@ -69,6 +67,7 @@ const ProfilePicture = styled.Image`
   width: 64px;
   border-radius: 32px;
   margin-bottom: 8px;
+  background-color: #fff;
 `;
 
 const DisplayName = styled.Text`
@@ -76,6 +75,7 @@ const DisplayName = styled.Text`
   font-size: ${props => props.theme.fontSize.TITLE};
   font-weight: 600;
   margin-bottom: 4px;
+  margin-top: 8px;
 `;
 
 const Username = styled.Text`
@@ -85,9 +85,12 @@ const Username = styled.Text`
 
 function Header({ account = {}, self, theme, appTheme, ...props }) {
   const screenWidth = Math.round(Dimensions.get("window").width);
+  const name = account.firstName + " " + account.lastName;
+
+  console.log(account.name);
 
   return (
-    <Container>
+    <View style={{ flex: 1 }}>
       <HeaderBackground
         source={{ uri: "https://source.unsplash.com/random" }}
       />
@@ -141,8 +144,17 @@ function Header({ account = {}, self, theme, appTheme, ...props }) {
 
         <ProfileBox themeName={appTheme.themeMode} width={screenWidth}>
           <View style={{ alignItems: "center" }}>
-            <ProfilePicture source={{ uri: account.picture }} />
-            <DisplayName>{account.name}</DisplayName>
+            <ProfilePicture
+              source={
+                account.picture ? { uri: account.picture } : DEFAULT_PROFILE
+              }
+            />
+
+            <DisplayName
+              onPress={() => !account.firstName && props.goToEditProfile()}
+            >
+              {account.firstName ? name : "Enter your name here"}
+            </DisplayName>
             <Username>{account.username}</Username>
           </View>
 
@@ -153,7 +165,7 @@ function Header({ account = {}, self, theme, appTheme, ...props }) {
           )}
         </ProfileBox>
       </SafeAreaView>
-    </Container>
+    </View>
   );
 }
 

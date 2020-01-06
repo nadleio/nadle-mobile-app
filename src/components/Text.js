@@ -1,12 +1,13 @@
 import styled from "styled-components";
+import theme from "../theme";
 
-export const Title = styled.Text`
-  font-family: "System";
-  font-size: 20;
-  color: black;
-  font-weight: bold;
-  margin-top: ${props => props.top || 0};
-`;
+// export const Title = styled.Text`
+//   font-family: "System";
+//   font-size: 20;
+//   color: black;
+//   font-weight: bold;
+//   margin-top: ${props => props.top || 0};
+// `;
 
 export const ActionLink = styled.Text`
   font-family: "System";
@@ -33,5 +34,20 @@ export const Information = styled.Text`
   margin-left: ${props => props.left || 0};
   margin-right: ${props => props.right || 0};
   margin-bottom: ${props => props.bottom || 0};
-  max-width: 100%;
+`;
+
+export const Label = styled.Text`
+  color: ${props => props.color || props.theme.styled.CONTENT};
+  font-family: "System";
+  font-size: ${props => props.size || theme.fontSize.BODY};
+  font-weight: ${props => props.weight || "normal"};
+  text-align: ${props => props.align || "left"};
+`;
+
+export const Title = styled.Text`
+  color: ${props => props.color || props.theme.styled.TITLE};
+  font-size: ${props => props.size || theme.fontSize.TITLE};
+  font-weight: 600;
+  font-family: "System";
+  text-align: ${props => props.align || "left"};
 `;

@@ -1,199 +1,218 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useContext } from "react";
 import { View } from "react-native";
-
-import { SafeAreaView } from "react-navigation";
-import { Formik } from "formik";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import styled from "styled-components";
+import styled, { withTheme } from "styled-components";
+import { Formik } from "formik";
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
-import { ViewFlex, PaddingHorizontal } from "../assets/styles/styles";
-import { TextInput } from "../components/Form/Input";
-import { Header } from "../components/Header";
-import { Information, InputValidation } from "../components/Text";
-import { ImageProfile } from "../assets/styles/Image";
-import { Photo } from "../components/Photo";
-import { Button } from "../components/Button";
-import { SignupSchema } from "../components/form/Validations";
+import Header from "../components/EditProfile/Header";
+import Input from "../components/Form/Input";
+import { Label } from "../components/Text";
 
-const ImageProfileContainer = styled.TouchableOpacity`
-  margin-top: 20px;
+import ChangeUsername from "../components/EditProfile/ChangeUsername";
+import ChangeEmail from "../components/EditProfile/ChangeEmail";
+// import { Photo } from "../components/Photo";
+
+import ContextSelf from "../lib/ContextSelf";
+import ContextLoading from "../lib/ContextLoading";
+
+import { userInformation } from "../Fragments/userInfo";
+
+const Container = styled.View`
+  flex: 1;
+  background-color: ${props => props.theme.styled.BACKGROUND};
 `;
 
-const InputContainer = styled.View`
-  width: 100%;
-  margin-left: 5%;
-`;
-
-const Row = styled.View`
+const EditContainer = styled.TouchableOpacity`
   flex-direction: row;
-  width: 100%;
+  justify-content: space-between;
   align-items: center;
+  margin-bottom: 32px;
+  padding: 0 16px 0 16px;
 `;
 
-function EditProfile(props) {
-  const type = "company";
-  const [imageProfile, setImage] = useState("");
+const UPDATE_INFO = gql`
+  mutation(
+    $firstName: String
+    $lastName: String
+    $biography: String
+    $link: String
+    $latitude: Float
+    $longitude: Float
+  ) {
+    updateInfo(
+      firstName: $firstName
+      lastName: $lastName
+      biography: $biography
+      link: $link
+      latitude: $latitude
+      longitude: $longitude
+    ) {
+      message
+      success
+      errorCode
+      data {
+        ...UserInformation
+      }
+    }
+  }
+  ${userInformation}
+`;
 
-  function pickPhoto() {
-    Photo().then(image => {
-      image != "error" && setImage(`data:${image.mime};base64,${image.data}`);
-    });
+function EditProfile({ self, navigation, theme }) {
+  const { updateSelf } = useContext(ContextSelf);
+  const { setLoadingModal } = useContext(ContextLoading);
+
+  const [update] = useMutation(UPDATE_INFO);
+
+  const [changeUsername, setChangeUsername] = useState(false);
+  const [changeEmail, setChangeEmail] = useState(false);
+
+  async function updateInfo(values) {
+    console.log(values);
+    setLoadingModal(true);
+
+    try {
+      const { data } = await update({
+        variables: {
+          firstName: values.firstName || null,
+          lastName: values.lastName || null,
+          biography: values.biography || null,
+          link: values.link || null,
+          latitude: 0.0,
+          longitude: 0.0
+        }
+      });
+
+      // updateSelf(values);
+
+      // updateSelf({
+      //   uid: user.id,
+      //   type: "USER",
+      //   picture: user.avatar,
+      //   username: user.username,
+      //   email: user.email,
+      //   firstName: user.firstName,
+      //   lastName: user.lastName,
+      //   followers: user.followers.count,
+      //   following: user.following.count,
+      //   biography: user.biography,
+      //   link: user.link
+      // });
+
+      console.log(data.updateInfo.success);
+      setLoadingModal(false);
+
+      // if (data.signup.success) {
+      //   alert("Please check your email to confirm your account");
+      //   navigation.navigate("Login");
+      // } else {
+      //   alert(ERROR[data.signup.errorCode]);
+      // }
+    } catch (error) {
+      console.log(error);
+      setLoadingModal(false);
+      // Sentry Catch
+    }
   }
 
-  useEffect(() => {
-    setImage("https://nadle-assets.nyc3.digitaloceanspaces.com/pp.jpg");
-  }, []);
-
   return (
-    <ViewFlex>
-      <SafeAreaView backgroundColor="white" />
-      <Header
-        back={() => props.navigation.goBack()}
-        backBool={true}
-        text="Modifed your profile"
-      />
+    <Container>
+      <Formik
+        initialValues={self}
+        onSubmit={values => updateInfo(values)}
+        enableReinitialize
+      >
+        {({ handleChange, handleSubmit, values }) => (
+          <Container>
+            <Header saveInfo={handleSubmit} back={() => navigation.goBack()} />
 
-      <KeyboardAwareScrollView>
-        <PaddingHorizontal>
-          <Formik
-            initialValues={{
-              complete_name: "Ricardo Malagon",
-              username: "ricardomalagon",
-              email: "ricardo@ricardomalagon.com",
-              bio: "klk wawawa",
-              url: "ricardomalagon.com",
-              location: "San Jua, PR"
-            }}
-            onSubmit={values => save(values)}
-            validationSchema={SignupSchema}
-          >
-            {props => (
-              <View>
-                <Row>
-                  <ImageProfileContainer onPress={() => pickPhoto()}>
-                    <ImageProfile source={{ uri: imageProfile }} />
-                  </ImageProfileContainer>
-
-                  <InputContainer>
-                    <Information size={16} top={20}>
-                      Complete name
-                    </Information>
-
-                    <TextInput
-                      top={5}
-                      onChangeText={props.handleChange("complete_name")}
-                      placeholder="Your complete name"
-                      value="Ricardo Malagon"
-                      returnKeyType="done"
-                      width="70%"
-                      value={props.values.complete_name}
-                    />
-                  </InputContainer>
-                </Row>
-
-                <Information size={16} top={20}>
-                  username
-                </Information>
-
-                <TextInput
-                  top={5}
-                  onChangeText={props.handleChange("username")}
-                  placeholder="Your username"
-                  value="ricardo"
-                  returnKeyType="done"
-                  value={props.values.username}
+            <KeyboardAwareScrollView>
+              <View style={{ marginTop: 16, marginHorizontal: 16 }}>
+                <Input
+                  onChangeText={handleChange("firstName")}
+                  label="First Name"
+                  returnKeyType="next"
+                  spellCheck={false}
+                  value={values.firstName}
+                  placeholder="Insert your first name"
+                  style={{ marginBottom: 32 }}
                 />
 
-                {props.errors.username == "Minimum 3 characters" && (
-                  <InputValidation top={10}>
-                    {props.errors.username}
-                  </InputValidation>
-                )}
-
-                <Information size={16} top={20}>
-                  Email
-                </Information>
-
-                <TextInput
-                  top={5}
-                  onChangeText={props.handleChange("email")}
-                  placeholder="Your email"
-                  value="ricardo@ricardomalagon.com"
-                  returnKeyType="done"
-                  value={props.values.email}
+                <Input
+                  onChangeText={handleChange("lastName")}
+                  label="Last Name"
+                  returnKeyType="next"
+                  spellCheck={false}
+                  value={values.lastName}
+                  placeholder="Insert your last name"
+                  style={{ marginBottom: 32 }}
                 />
 
-                {props.errors.email == "Invalid email" && (
-                  <InputValidation top={10}>
-                    {props.errors.email}
-                  </InputValidation>
-                )}
-
-                <Information size={16} top={20}>
-                  Bio
-                </Information>
-
-                <TextInput
-                  top={5}
-                  onChangeText={props.handleChange("bio")}
-                  placeholder="Your bio"
-                  value="klk wawawa"
-                  returnKeyType="done"
-                  multiline={true}
-                  value={props.values.bio}
+                <Input
+                  onChangeText={handleChange("biography")}
+                  label="Biography"
+                  returnKeyType="next"
+                  spellCheck={false}
+                  value={values.biography}
+                  style={{ marginBottom: 32 }}
+                  multiline
+                  placeholder="Insert your biography"
                 />
 
-                {type === "company" && (
-                  <View>
-                    <Information size={16} top={20}>
-                      URL
-                    </Information>
-
-                    <TextInput
-                      top={5}
-                      onChangeText={props.handleChange("url")}
-                      placeholder="Your url"
-                      value="ricardomalagon.com"
-                      returnKeyType="done"
-                      value={props.values.url}
-                    />
-
-                    <Information size={16} top={20}>
-                      Location
-                    </Information>
-
-                    <TextInput
-                      top={5}
-                      onChangeText={props.handleChange("location")}
-                      placeholder="Your location"
-                      value="San Juan, PR"
-                      returnKeyType="done"
-                      value={props.values.location}
-                    />
-                  </View>
-                )}
-
-                <Button
-                  action={props.handleSubmit}
-                  text="UPDATE PROFILE"
-                  top={40}
-                  disabled={
-                    props.values.complete_name == "" ||
-                    props.values.username.length < 3 ||
-                    props.errors.email == "Invalid email" ||
-                    props.values.email.length == 0
-                  }
-                  TextColor="white"
-                  color={["#2f5de9", "#2f5de9"]}
+                <Input
+                  onChangeText={handleChange("link")}
+                  label="Link"
+                  autoCapitalize="none"
+                  returnKeyType="next"
+                  spellCheck={false}
+                  value={values.link}
+                  style={{ marginBottom: 32 }}
+                  placeholder="Insert your link"
                 />
               </View>
-            )}
-          </Formik>
-        </PaddingHorizontal>
-      </KeyboardAwareScrollView>
-    </ViewFlex>
+
+              <EditContainer onPress={() => setChangeUsername(true)}>
+                <View style={{ width: "80%" }}>
+                  <Input
+                    label="Username"
+                    editable={false}
+                    value={values.username}
+                    placeholder="Insert your username"
+                    pointerEvents="none"
+                  />
+                </View>
+
+                <Label color={theme.colors.PRIMARY}>EDIT</Label>
+              </EditContainer>
+
+              <EditContainer onPress={() => setChangeEmail(true)}>
+                <View style={{ width: "80%" }}>
+                  <Input
+                    label="Email"
+                    value={values.email}
+                    editable={false}
+                    pointerEvents="none"
+                  />
+                </View>
+
+                <Label color={theme.colors.PRIMARY}>EDIT</Label>
+              </EditContainer>
+            </KeyboardAwareScrollView>
+          </Container>
+        )}
+      </Formik>
+
+      {changeUsername && (
+        <ChangeUsername close={() => setChangeUsername(false)} self={self} />
+      )}
+
+      {changeEmail && (
+        <ChangeEmail close={() => setChangeEmail(false)} self={self} />
+      )}
+    </Container>
   );
 }
 
-export default EditProfile;
+export default withTheme(EditProfile);

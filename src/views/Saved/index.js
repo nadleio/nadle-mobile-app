@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { ScrollView, StatusBar } from "react-native";
+import { ScrollView, StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
 import Collapsible from "react-native-collapsible";
 
-import { PreviewPost } from "../../components/ShortPost";
+import PreviewPost from "../../components/ShortPost";
 import ShortBucket from "../../components/ShortBucket";
-import { ViewFlex } from "../../assets/styles/styles";
 import { Header } from "../../components/Header";
 import { BucketList } from "../../components/BucketList";
 import Icon from "../../components/Icon";
@@ -14,12 +13,12 @@ import { Information, Title } from "../../components/Text";
 import { CreateBucket } from "../../components/CreateBucket";
 
 import {
-  Margintop,
   Padding,
   HeaderIconsTouchable,
   HeaderIcons,
   Contrary,
-  Lines
+  Lines,
+  Container
 } from "./styled";
 
 function UserPosts(props) {
@@ -33,9 +32,10 @@ function UserPosts(props) {
   }
 
   return (
-    <ViewFlex paddingBottom="0%">
+    <Container background={props => props.theme.styled.BACKGROUND}>
       <SafeAreaView backgroundColor="white" />
       <StatusBar barStyle="dark-content" />
+
       <Header
         backBool={false}
         text="Saved posts"
@@ -49,17 +49,17 @@ function UserPosts(props) {
       />
       <ScrollView>
         <Padding>
-          <Margintop margintop={20}>
+          <View style={{ marginTop: 20 }}>
             <Collapsible collapsed={collapsed} align="center">
               <Title>My buckets</Title>
 
-              <Margintop margintop={15}>
+              <View style={{ marginTop: 15 }}>
                 <BucketList
                   createNew={() => setCreateBucket(true)}
                   action={() => null}
                   title="React Native"
                 />
-              </Margintop>
+              </View>
 
               <Contrary>
                 <Lines />
@@ -72,8 +72,8 @@ function UserPosts(props) {
               <Title>General</Title>
             </Collapsible>
 
-            <Margintop margintop={15}>
-              <PreviewPost
+            <View style={{ marginTop: 15 }}>
+              {/* <PreviewPost
                 title="How to get better in your React Native code"
                 name="Ricardo Malagon"
                 date="10 of march"
@@ -83,21 +83,20 @@ function UserPosts(props) {
                     id: 1
                   })
                 }
-              />
-            </Margintop>
-          </Margintop>
+              /> */}
+              <PreviewPost />
+            </View>
+          </View>
 
-          <Margintop>
-            <ShortBucket
-              title="Introduction to React"
-              name="Ricardo Malagon"
-              posts={() =>
-                props.navigation.push("CollectionPosts", {
-                  title: "Introduction to React"
-                })
-              }
-            />
-          </Margintop>
+          <ShortBucket
+            title="Introduction to React"
+            name="Ricardo Malagon"
+            posts={() =>
+              props.navigation.push("CollectionPosts", {
+                title: "Introduction to React"
+              })
+            }
+          />
         </Padding>
       </ScrollView>
 
@@ -105,7 +104,7 @@ function UserPosts(props) {
         visible={createBucket}
         close={() => setCreateBucket(false)}
       />
-    </ViewFlex>
+    </Container>
   );
 }
 

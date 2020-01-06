@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const Container = styled.View`
+  /* background-color: ${props => props.background}; */
+  background-color: white;
+  flex: 1;
+`;
+
 export const Margintop = styled.View`
   margin-top: ${props => props.margintop || 0};
 `;

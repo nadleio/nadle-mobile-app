@@ -24,6 +24,7 @@ function Profile({ self, navigation }) {
       <ScrollView>
         <Header
           account={account}
+          goToEditProfile={() => navigation.navigate("EditProfile")}
           {...(showBack && { back: () => navigation.goBack() })}
         />
 

@@ -1,12 +1,10 @@
 import React from "react";
-import { ScrollView, StatusBar } from "react-native";
+import { ScrollView, StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 
 import { PreviewPost } from "../../components/ShortPost";
 import { ViewFlex } from "../../assets/styles/styles";
 import { Header } from "../../components/Header";
-
-import { Margintop, Padding } from "./styled";
 
 function CollectionPosts(props) {
   return (
@@ -21,8 +19,8 @@ function CollectionPosts(props) {
       />
 
       <ScrollView>
-        <Padding>
-          <Margintop>
+        <View style={{ padding: "0 0 5% 5%" }}>
+          <View style={{ marginTop: 20 }}>
             <PreviewPost
               title="How to get better in your React Native code"
               name="Ricardo Malagon"
@@ -34,8 +32,8 @@ function CollectionPosts(props) {
                 })
               }
             />
-          </Margintop>
-        </Padding>
+          </View>
+        </View>
       </ScrollView>
     </ViewFlex>
   );

@@ -26,7 +26,9 @@ const theme = {
     CONTENT: "#5c5c5c",
     FEED_SWIPPER: "#f4f4f4",
     COUNTER_SWIPPER: "#000000",
-    HASHTAG_FEED: "#f4f4f4"
+    HASHTAG_FEED: "#f4f4f4",
+    DIVIDER: "#f4f4f4",
+    STATUS_BAR: "dark-content"
   },
   dark: {
     BACKGROUND: "#1f1f1f",
@@ -39,7 +41,9 @@ const theme = {
     CONTENT: "#b2b2b2",
     FEED_SWIPPER: "#333333",
     COUNTER_SWIPPER: "#ffffff",
-    HASHTAG_FEED: "#ffffff"
+    HASHTAG_FEED: "#ffffff",
+    DIVIDER: "#0d0d0d",
+    STATUS_BAR: "light-content"
   },
   blue: {
     BACKGROUND: "#17202a",

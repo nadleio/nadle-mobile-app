@@ -1,6 +1,5 @@
 import React from "react";
 import styled, { withTheme } from "styled-components";
-import { View } from "react-native";
 
 import IconComponent from "../Icon";
 
@@ -41,33 +40,32 @@ const Label = styled.Text`
   text-align: left;
 `;
 
-const Biography = props => {
+function Biography({ account, ...props }) {
   return (
     <Container>
       <Title>Bio</Title>
+
       <Content>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-        ultrices tristique egestas. Praesent sed sollicitudin tortor. Vivamus
-        turpis risus, gravida id est vitae, interdum ultrices arcu.
+        {account.biography ? account.biography : "Nothing here yet."}
       </Content>
 
-      <View>
-        <OtherInfo>
-          <Icon
-            color={props.theme.styled.ICON}
-            size={16}
-            name="outline-map-marker-alt"
-          />
-          <Label>San Francisco, CA</Label>
-        </OtherInfo>
+      <OtherInfo>
+        <Icon
+          color={props.theme.styled.ICON}
+          size={16}
+          name="outline-map-marker-alt"
+        />
+        <Label>San Francisco, CA</Label>
+      </OtherInfo>
 
+      {account.link !== null && (
         <OtherInfo>
           <Icon color={props.theme.styled.ICON} size={16} name="outline-link" />
-          <Label>https://carlosvq.com</Label>
+          <Label>{account.link}</Label>
         </OtherInfo>
-      </View>
+      )}
     </Container>
   );
-};
+}
 
 export default withTheme(Biography);

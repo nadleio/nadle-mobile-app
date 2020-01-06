@@ -9,13 +9,12 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { SRV_GRAPHQL_URL } from "../config";
 
 const authLink = setContext(async (_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  const token = await AsyncStorage.getItem("AuthToken");
-  // return the headers to the context so httpLink can read them
+  const token = await AsyncStorage.getItem("authToken");
+
   return {
     headers: {
       ...headers,
-      authorization: token ? `Token ${token}` : ""
+      authorization: token ? `Bearer ${token}` : ""
     }
   };
 });

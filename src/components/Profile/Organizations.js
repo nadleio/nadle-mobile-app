@@ -1,6 +1,8 @@
 import React from "react";
 import styled, { withTheme } from "styled-components";
 
+import { Thumbnail } from "../Image";
+
 const Container = styled.View`
   margin: 16px 16px 0 16px;
 `;
@@ -26,11 +28,6 @@ const ThumbnailsContainer = styled.View`
 const ThumbnailAction = styled.TouchableOpacity`
   margin-right: 16px;
   margin-bottom: 16px;
-`;
-
-const Thumbnail = styled.Image`
-  height: 40px;
-  width: 40px;
 `;
 
 const Organizations = () => {

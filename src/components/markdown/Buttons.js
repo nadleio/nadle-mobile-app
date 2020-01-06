@@ -1,125 +1,122 @@
 import React from "react";
 import { ScrollView } from "react-native";
+import styled, { withTheme } from "styled-components";
 
-import DOWN from "../../assets/img/angle-down.png";
-
-import styled from "styled-components";
 import Icon from "../Icon";
 
-import { Images } from "../../assets/styles/Image";
-
-export const Scroll = styled.View`
+const Container = styled.View`
   flex-direction: row;
-  background-color: #fafbfb;
-  padding-top: 10;
+  background-color: ${props => props.theme.styled.BOX_BACKGROUND};
+  padding-top: 10px;
   padding-bottom: 12px;
-  border-top-color: #f4f4f4;
-  border-top-width: 2;
+  border-top-color: ${props => props.theme.styled.DIVIDER};
+  border-top-width: 1px;
 `;
 
-export const TouchableOpacity = styled.TouchableOpacity`
+const TouchableOpacity = styled.TouchableOpacity`
   margin-left: ${props => props.left || 20};
   margin-right: ${props => props.right || 0};
 `;
 
-export function Buttons(props) {
+function Buttons({ theme, ...props }) {
   return (
-    <Scroll>
+    <Container>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        keyboardShouldPersistTaps={"handled"}
+        keyboardShouldPersistTaps="handled"
       >
         <TouchableOpacity onPress={() => props.dimiss()}>
-          <Images height={20} width={20} source={DOWN} />
+          <Icon name="replace" color={theme.styled.ICON} size={20} />
         </TouchableOpacity>
 
         <TouchableOpacity left={35} onPress={() => props.header()}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.bold()}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.line()}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.italic()}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.link()} left={35}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.gif()}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.image()}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.table()} left={35}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.centerLine()}>
-          <Icon color="black" size={18}>
+          <Icon color={theme.styled.ICON} size={18}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.blocks()}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.pointList()}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.gist()} left={35}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={() => props.codeLine()}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
 
         <TouchableOpacity right={20} onPress={() => props.code()}>
-          <Icon color="black" size={20}>
+          <Icon color={theme.styled.ICON} size={20}>
             
           </Icon>
         </TouchableOpacity>
       </ScrollView>
-    </Scroll>
+    </Container>
   );
 }
 
+export default withTheme(Buttons);
 Buttons.navigationOptions = { header: null };

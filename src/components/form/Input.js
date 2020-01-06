@@ -42,7 +42,7 @@ const RenderInput = ({ appTheme, label, ...props }) => {
   const [isFocus, setIsFocus] = useState(false);
   return (
     <React.Fragment>
-      <Label>{label}</Label>
+      {label && <Label>{label}</Label>}
       <Input
         appTheme={appTheme}
         isFocus={isFocus}

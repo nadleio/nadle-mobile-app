@@ -1,45 +1,54 @@
 import React from "react";
-
-import styled, { withTheme } from "styled-components";
+import styled from "styled-components";
 
 import Icon from "../Icon";
 
-import NadleColorLogo from "../../assets/images/editable-main-nadle.svg";
+import useTheme from "../../lib/utils/useTheme";
 
-const ContentTag = styled.TouchableOpacity`
+import NadleColorLogo from "../../assets/images/editable-main-nadle.svg";
+import NadleWhiteLogo from "../../assets/images/main-nadle-white.svg";
+
+const ContainerTag = styled.TouchableOpacity`
   width: 32px;
   height: 32px;
 `;
 
-const SpaceTag = styled.View`
+const Container = styled.View`
   padding: 16px;
   padding-bottom: 10px;
   justify-content: space-between;
   flex-direction: row;
+  align-items: center;
   background-color: ${props => props.theme.styled.BACKGROUND};
 `;
 
 const IconContainer = styled.View`
-  height: 32px;
-  width: 32px;
-  border-radius: 16px;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
   background-color: ${props => props.theme.styled.HASHTAG_FEED};
   justify-content: center;
   align-items: center;
 `;
 
-function Header({ isOpen, theme }) {
-  return (
-    <SpaceTag>
-      <NadleColorLogo height={40} width={133} />
+function Header({ isOpen }) {
+  const { themeMode } = useTheme();
 
-      <ContentTag onPress={() => isOpen()}>
+  return (
+    <Container>
+      {themeMode === "DARK_MODE" ? (
+        <NadleWhiteLogo height={40} width={133} />
+      ) : (
+        <NadleColorLogo height={40} width={133} />
+      )}
+
+      <ContainerTag onPress={() => isOpen()}>
         <IconContainer>
-          <Icon name="outline-hashtag" color={theme.styled.ICON} size={16} />
+          <Icon name="outline-hashtag" color="black" size={16} />
         </IconContainer>
-      </ContentTag>
-    </SpaceTag>
+      </ContainerTag>
+    </Container>
   );
 }
 
-export default withTheme(Header);
+export default Header;

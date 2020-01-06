@@ -84,22 +84,16 @@ PODS:
     - React-Core (= 0.60.5)
   - React-RCTWebSocket (0.60.5):
     - React-Core (= 0.60.5)
-<<<<<<< HEAD
-  - RNGestureHandler (1.4.1):
-=======
   - RNCAsyncStorage (1.6.1):
->>>>>>> f01d886abdccb1bb9f773240d9d928dc48413f58
     - React
   - RNGestureHandler (1.4.1):
     - React
-  - RNImageCropPicker (0.25.2):
+  - RNImageCropPicker (0.25.3):
     - QBImagePickerController
     - React-Core
     - React-RCTImage
     - RSKImageCropper
-  - RNReanimated (1.2.0):
-    - React
-  - RNSVG (9.9.4):
+  - RNSVG (10.0.0):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -132,7 +126,6 @@ DEPENDENCIES:
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
-  - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -194,8 +187,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
-  RNReanimated:
-    :path: "../node_modules/react-native-reanimated"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
@@ -230,13 +221,12 @@ SPEC CHECKSUMS:
   React-RCTWebSocket: cd932a16b7214898b6b7f788c8bddb3637246ac4
   RNCAsyncStorage: 2e2e3feb9bdadc752a026703d8c4065ca912e75a
   RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
-  RNImageCropPicker: f675353bbe18f66113a39b319c0aeb36655a6e4c
-  RNReanimated: 1b52415c4302f198cb581282a0166690bad62c43
-  RNSVG: 435cda60cd9e1ea6188eb0e21c12fc0f85def8e8
+  RNImageCropPicker: bfb3ea9c8622f290532e2fe63f369e0d5a52f597
+  RNSVG: 9d45f03136ecc9b5497e12f6f20838b568acb9f4
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   RSKImageCropper: a446db0e8444a036b34f3c43db01b2373baa4b2a
   yoga: 312528f5bbbba37b4dcea5ef00e8b4033fdd9411
 
-PODFILE CHECKSUM: a4d9eb1240622603c87cdc96e5545b24fc6515fe
+PODFILE CHECKSUM: f29db9e4254328d8d4dadd4914cf5a605a44c0d9
 
 COCOAPODS: 1.7.5

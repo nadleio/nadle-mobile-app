@@ -1,71 +1,96 @@
 import React, { useState } from "react";
+import { Keyboard, View } from "react-native";
+import styled, { withTheme } from "styled-components";
+import { Formik } from "formik";
 
-import styled from "styled-components";
-import { ViewFlex } from "../../assets/styles/styles";
+import Input from "../../components/Form/Input";
+import { Label } from "../Text";
+import Dialog from "../Modal/Dialog";
+import Button from "../../components/Button";
 
-import { TextInput } from "../Form/Input";
-import { Information } from "../Text";
-import { ModalOptions } from "../ModalOptions";
-
-export const Space = styled.View`
+const Container = styled.View`
   justify-content: space-between;
   flex-direction: row;
   align-items: center;
-  padding-left: 35%;
-  padding-right: 35%;
+  width: 100%;
+  padding: 0 22% 0 22%;
 `;
 
-export function SetTable(props) {
-  const [row, setRow] = useState("");
-  const [column, setColumn] = useState("");
+function SetTable({ close, theme, action }) {
+  const [animation, setAnimation] = useState("fadeInUpBig");
+
+  function closeModal() {
+    setAnimation("fadeOutDownBig");
+    setTimeout(function() {
+      close();
+    }, 350);
+  }
+
+  function insertValue(values) {
+    setAnimation("fadeOutDownBig");
+    setTimeout(function() {
+      action(values.row, values.coloumn);
+      close();
+    }, 350);
+  }
 
   return (
-    <ViewFlex>
-      <ModalOptions
-        alert={props.alert}
-        text="table"
-        messagge="Column must be less or equal than 3"
-        close={() => props.close()}
-        align="flex-end"
-        content={
-          <Space>
-            <TextInput
-              onChangeText={text => {
-                setRow(text);
-                text != "" && this.secondTextInput.focus();
-              }}
-              width="20%"
-              maxLength={1}
-              align="center"
-              keyboardType="numeric"
-              returnKeyType="next"
-            />
+    <Dialog
+      animation={animation}
+      text="insert your table size"
+      close={() => closeModal()}
+    >
+      <Formik
+        initialValues={{ row: "", coloumn: "" }}
+        onSubmit={values => insertValue(values)}
+      >
+        {({ handleChange, handleSubmit, values }) => (
+          <View>
+            <Container>
+              <View style={{ width: "15%" }}>
+                <Input
+                  onChangeText={handleChange("row")}
+                  placeholder="R"
+                  onSubmitEditing={() => this.column.focus()}
+                  maxLength={2}
+                  keyboardType="numeric"
+                  style={{ textAlign: "center" }}
+                />
+              </View>
 
-            <Information size={20}>x</Information>
+              <Label color={props => props.theme.styled.TITLE} size={20}>
+                x
+              </Label>
 
-            <TextInput
-              onChangeText={text => {
-                setColumn(text);
-              }}
-              width="20%"
-              maxLength={1}
-              align="center"
-              keyboardType="numeric"
-              returnKeyType={
-                column != "" && row != "" && Number(column) < 4
-                  ? "done"
-                  : "next"
-              }
-              ref={input => {
-                this.secondTextInput = input;
-              }}
-              onEndEditing={() => props.action(row, column)}
+              <View style={{ width: "15%" }}>
+                <Input
+                  onChangeText={handleChange("coloumn")}
+                  placeholder="C"
+                  onSubmitEditing={() => Keyboard.dismiss()}
+                  maxLength={2}
+                  keyboardType="numeric"
+                  ref={input => {
+                    this.column = input;
+                  }}
+                  style={{ textAlign: "center" }}
+                />
+              </View>
+            </Container>
+
+            <Button
+              disabled={values.row === "" || values.coloumn === ""}
+              action={handleSubmit}
+              text="INSERT"
+              color={[theme.colors.PRIMARY, theme.colors.PRIMARY]}
+              style={{ marginTop: 20 }}
+              textColor="#fff"
             />
-          </Space>
-        }
-      />
-    </ViewFlex>
+          </View>
+        )}
+      </Formik>
+    </Dialog>
   );
 }
 
+export default withTheme(SetTable);
 SetTable.navigationOptions = { header: null };

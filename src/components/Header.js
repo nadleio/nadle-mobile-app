@@ -1,47 +1,38 @@
-import React from "React";
+import React from "react";
+import { StatusBar, View, TouchableOpacity } from "react-native";
+import { SafeAreaView } from "react-navigation";
+import styled, { withTheme } from "styled-components";
 
-import styled from "styled-components";
-
+import { Title } from "./Text";
 import Icon from "./Icon";
-import { Information } from "./Text";
 
-export const HeaderContent = styled.View`
-  padding-left: 12px;
-  padding-right: 12px;
-  padding-top: 15px;
-  padding-bottom: 10px;
-  border-bottom-color: #f4f4f4;
-  border-bottom-width: 2;
+const Container = styled.View`
+  padding: 15px 5% 15px 5%;
+  border-bottom-color: ${props => props.theme.styled.DIVIDER};
+  border-bottom-width: 1px;
   flex-direction: row;
-  justify-content: ${props => props.justify};
   align-items: center;
+  justify-content: space-between;
+  background-color: ${props => props.theme.styled.BOX_BACKGROUND};
 `;
 
-export const TouchableOpacity = styled.TouchableOpacity`
-  height: 32px;
-  width: 32px;
-  margin-left: 2%;
-  margin-right: -10px;
-`;
-
-export function Header(props) {
+function Header({ title, back, theme }) {
   return (
-    <HeaderContent justify={props.text ? "flex-start" : "space-between"}>
-      {props.backBool && (
-        <TouchableOpacity onPress={() => props.back()}>
-          <Icon color="black" size={32}>
-            
-          </Icon>
+    <View>
+      <SafeAreaView backgroundColor={theme.styled.BOX_BACKGROUND} />
+      <StatusBar barStyle={theme.styled.STATUS_BAR} />
+
+      <Container>
+        <TouchableOpacity onPress={() => back()} style={{ width: 50 }}>
+          <Icon name="outline-angle-left" color={theme.styled.ICON} size={28} />
         </TouchableOpacity>
-      )}
 
-      {props.text && (
-        <Information size={20} weight="bold" left={10}>
-          {props.text}
-        </Information>
-      )}
+        <Title>{title}</Title>
 
-      {props.buttons}
-    </HeaderContent>
+        <View style={{ width: 50 }} />
+      </Container>
+    </View>
   );
 }
+
+export default withTheme(Header);

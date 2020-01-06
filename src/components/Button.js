@@ -23,14 +23,13 @@ const IconContainer = styled.View`
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     borderRadius: 8,
     justifyContent: "center",
-    padding: 16
+    padding: 14
   }
 });
 
-function Button({ style, containerStyle, ...props }) {
+function Button({ text, style, containerStyle, ...props }) {
   return (
     <View style={style}>
       <Container
@@ -49,7 +48,7 @@ function Button({ style, containerStyle, ...props }) {
           ) : (
             <React.Fragment>
               {props.icon && <IconContainer>{props.icon}</IconContainer>}
-              <ActionLink color={props.textColor}>{props.text}</ActionLink>
+              <ActionLink color={props.textColor}>{text}</ActionLink>
             </React.Fragment>
           )}
         </LinearGradient>

@@ -1,123 +1,81 @@
 import React, { useState } from "react";
 import styled, { withTheme } from "styled-components";
-import { Keyboard, ScrollView, Text, View } from "react-native";
+import { Keyboard, ScrollView, View } from "react-native";
 import { Formik } from "formik";
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
+
+import ERROR from "../../nadle-i18/errors";
 
 import AuthHeader from "../../components/Auth/Header";
 
-import { LOGIN_SCHEMA } from "../../lib/form/authValidations";
-import useTimer from "../../lib/utils/useTimer";
+import { SIGNUP_SCHEMA } from "../../lib/form/authValidations";
 
 import Separator from "../../components/Separator";
 import Button from "../../components/Button";
 import Input from "../../components/Form/Input";
 import ActionLink from "../../components/ActionLink";
+import { InputValidation } from "../../components/Text";
 
 const Container = styled.View`
   flex: 1;
   background-color: ${props => props.theme.styled.BACKGROUND};
 `;
 
-const Title = styled.Text`
-  color: ${props => props.theme.styled.TITLE};
-  font-size: ${props => props.theme.fontSize.TITLE};
-  font-weight: 600;
-  text-align: left;
-  margin-bottom: 8px;
-`;
-
-const Message = styled.Text`
-  color: ${props => props.theme.styled.CONTENT};
-  font-size: ${props => props.theme.fontSize.SMALL};
-  margin-top: 8px;
-`;
-
-const Expiration = styled.View`
-  margin-top: 32px;
-`;
-
-const TimerLabel = styled.Text`
-  font-size: ${props => props.theme.fontSize.TITLE};
-  font-weight: 600;
-  width: 48px;
-`;
-
-const Layout = styled.View`
-  margin: 32px 16px;
-`;
-
 const FormContainer = styled.View`
-  margin: 0 16px 16px 16px;
+  margin: 32px 16px 16px 16px;
+`;
+
+const MUTATION_SEND_EMAIL = gql`
+  mutation($email: String!) {
+    forgotPassword(email: $email) {
+      message
+      success
+      errorCode
+    }
+  }
 `;
 
 function ResetPassword({ theme, navigation }) {
-  const [tokenSent, setTokenSent] = useState(false);
-  const [verifiedToken, setVerifiedToken] = useState(false);
-  const timer = useTimer(120);
+  const [isLoading, setIsLoading] = useState(false);
+  const [send_email] = useMutation(MUTATION_SEND_EMAIL);
 
-  const timerAction = timer.completed
-    ? { label: "GENERATE NEW CODE", action: () => timer.restart() }
-    : { label: "DIDN'T RECEIVE THE CODE?", action: () => timer.restart() };
+  async function handleAuthForm(values) {
+    setIsLoading(true);
 
-  const sendToken = () => {
-    if (!tokenSent) setTokenSent(true);
-    timer.restart();
-  };
+    try {
+      const { data } = await send_email({
+        variables: {
+          email: values.email
+        }
+      });
 
-  const verifyToken = () => {
-    setVerifiedToken(true);
-  };
-
-  const handleAuthForm = () => {
-    // Something here...
-  };
+      if (data.forgotPassword.success) {
+        alert("Please check your email");
+        navigation.navigate("Login");
+      } else {
+        alert(ERROR[data.forgotPassword.errorCode]);
+      }
+    } catch (error) {
+      // Sentry Catch
+    }
+    setIsLoading(false);
+  }
 
   return (
     <Container>
       <ScrollView>
         <AuthHeader />
 
-        <Layout>
-          <Title>Reset password</Title>
-          {tokenSent && !verifiedToken && (
-            <React.Fragment>
-              <Message>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </Message>
-
-              <Expiration>
-                <Text
-                  style={{
-                    color: theme.styled.CONTENT,
-                    fontSize: theme.fontSize.BODY,
-                    fontWeight: 600,
-                    marginBottom: 8
-                  }}
-                >
-                  Code expires in:
-                </Text>
-                <View style={{ flexDirection: "row", alignItems: "flex-end" }}>
-                  <TimerLabel>{timer.timeLeft}</TimerLabel>
-                  <ActionLink
-                    text={timerAction.label}
-                    to={timerAction.action}
-                  />
-                </View>
-              </Expiration>
-            </React.Fragment>
-          )}
-        </Layout>
-
         <FormContainer>
           <Formik
-            initialValues={{ authName: "", password: "" }}
+            initialValues={{ email: "" }}
             onSubmit={values => handleAuthForm(values)}
-            validationSchema={LOGIN_SCHEMA}
+            validationSchema={SIGNUP_SCHEMA}
           >
-            {({ handleChange, handleSubmit }) => (
+            {({ handleChange, handleSubmit, values, errors }) => (
               <View>
-                {!tokenSent && (
+                <View>
                   <Input
                     onChangeText={handleChange("email")}
                     label="Email"
@@ -130,62 +88,16 @@ function ResetPassword({ theme, navigation }) {
                     }}
                     returnKeyType="next"
                     spellCheck={false}
-                    style={{ marginBottom: 32 }}
                   />
-                )}
 
-                {tokenSent && !verifiedToken && (
-                  <Input
-                    onChangeText={handleChange("token")}
-                    label="Enter the code"
-                    autoCapitalize="none"
-                    maxLength={6}
-                    ref={input => {
-                      this.token = input;
-                    }}
-                    onSubmitEditing={() => {
-                      Keyboard.dismiss();
-                    }}
-                    returnKeyType="next"
-                    spellCheck={false}
-                    style={{ marginBottom: 32, letterSpacing: 8 }}
-                  />
-                )}
-
-                {tokenSent && verifiedToken && (
-                  <React.Fragment>
-                    <Input
-                      onChangeText={handleChange("password")}
-                      label="Password"
-                      autoCapitalize="none"
-                      secureTextEntry={true}
-                      ref={input => {
-                        this.password = input;
-                      }}
-                      onSubmitEditing={() => {
-                        this.confirmPassword.focus();
-                      }}
-                      returnKeyType="next"
-                      spellCheck={false}
-                      style={{ marginBottom: 32 }}
-                    />
-                    <Input
-                      onChangeText={handleChange("confirmPassword")}
-                      label="Confirm password"
-                      secureTextEntry={true}
-                      ref={input => {
-                        this.confirmPassword = input;
-                      }}
-                      onSubmitEditing={() => {
-                        Keyboard.dismiss();
-                      }}
-                      returnKeyType="next"
-                      style={{ marginBottom: 32 }}
-                    />
-                  </React.Fragment>
-                )}
+                  <InputValidation style={{ marginBottom: 22 }} top={10}>
+                    {errors.email}
+                  </InputValidation>
+                </View>
 
                 <Button
+                  isLoading={isLoading}
+                  disabled={values.email === "" || isLoading}
                   action={handleSubmit}
                   text="RESET PASSWORD"
                   color={[theme.colors.PRIMARY, theme.colors.PRIMARY]}
@@ -200,7 +112,10 @@ function ResetPassword({ theme, navigation }) {
                     width: "100%"
                   }}
                 >
-                  <ActionLink text="SIGN IN" to={() => {}} />
+                  <ActionLink
+                    text="SIGN IN"
+                    to={() => navigation.navigate("Login")}
+                  />
 
                   <Separator text="OR" />
 

@@ -1,7 +1,7 @@
 import "../functions/Slice_splice";
 import { RemoveMore } from "./RemoveMore";
 
-export const OneSign = (start, end, text, sign) => {
+const OneSign = (start, end, text, sign) => {
   return new Promise(resolve => {
     var toSelected = text.substring(start - 1, end + 1);
 
@@ -23,3 +23,5 @@ export const OneSign = (start, end, text, sign) => {
     }
   });
 };
+
+export default OneSign;

@@ -1,119 +1,132 @@
 import React, { useState, useEffect } from "react";
-import { TouchableOpacity, ActivityIndicator } from "react-native";
-
-import styled from "styled-components";
+import { TouchableOpacity, Modal, ScrollView, View } from "react-native";
+import styled, { withTheme } from "styled-components";
 import axios from "axios";
+import { MaterialIndicator as Spinner } from "react-native-indicators";
 
-import { Button } from "../components/Button";
-import { ModalView } from "../components/ModalView";
+import Input from "./Form/Input";
+import Header from "./Modal/Header";
+import SearchButton from "./Buttons/Search";
 
-import { ViewFlex, Margin } from "../assets/styles/styles";
-import { Images, ImageContent } from "../assets/styles/Image";
+import { Images } from "../assets/styles/Image";
 
-const Content = styled.View`
+const Container = styled.View`
+  flex: 1;
+  background-color: ${props => props.theme.styled.BACKGROUND};
+`;
+
+const ImageRowContainer = styled.View`
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-between;
 `;
 
-const Padding = styled.View`
+const ImageContainer = styled.View`
   padding: 5%;
   padding-bottom: 10%;
 `;
 
-export function Gif(props) {
+const SearchContainer = styled.View`
+  width: 100%;
+  height: 50px;
+  margin: 10px 0 10px 0;
+  padding: 0 5% 0 3%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+function Gif({ theme, close, ...props }) {
   const [gifs, setGif] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [text, setText] = useState("");
-  const [load, setLoad] = useState({ start: 0, end: 15 });
-  const [loadMore, setLoadMore] = useState(false);
+  const [isLoadingSearch, setIsLoadingSearch] = useState(false);
 
   useEffect(() => {
-    gifs.length == 0 &&
-      axios
-        .get(
-          `https://api.tenor.com/v1/trending?&key=QABAGB4SKW7Z&limit=15&anon_id=3a76e56901d740da9e59ffb22b988242`
-        )
-        .then(request => {
-          setGif(request.data.results);
-        });
-  });
+    async function fetchGif() {
+      const route =
+        "https://api.tenor.com/v1/trending?&key=QABAGB4SKW7Z&limit=15&anon_id=3a76e56901d740da9e59ffb22b988242";
 
-  function search() {
-    setLoadMore(true);
-    setLoading(true);
-    axios
-      .get(
-        `https://api.tenor.com/v1/search?q=${text}?&key=QABAGB4SKW7Z&limit=50&anon_id=3a76e56901d740da9e59ffb22b988242`
-      )
-      .then(request => {
-        setLoad({ start: 0, end: 27 });
-        setGif(request.data.results);
-        setLoading(false);
-      });
+      const { data } = await axios.get(route);
+      setGif(data.results);
+    }
+
+    fetchGif();
+  }, []);
+
+  async function searchGif() {
+    setIsLoadingSearch(true);
+
+    const route = `https://api.tenor.com/v1/search?q=${text}?&key=QABAGB4SKW7Z&limit=50&anon_id=3a76e56901d740da9e59ffb22b988242`;
+    const { data } = await axios.get(route);
+
+    setGif(data.results);
+    setIsLoadingSearch(false);
   }
 
   return (
-    <ViewFlex>
-      <ModalView
-        search={true}
-        activity={true}
-        loading={loading}
-        changeText={text => setText(text)}
-        show={props.show}
-        hide={() => props.set(false)}
-        search={() => search()}
-        content={
-          gifs.length == 0 ? (
-            <Margin top={5}>
-              <ActivityIndicator />
-            </Margin>
-          ) : (
-            <Padding>
-              <Content>
-                {gifs.length > 0 &&
-                  gifs.slice(load.start, load.end).map((data, i) => {
-                    return (
-                      <TouchableOpacity
-                        key={i}
-                        onPress={() => props.gif(data.media[0].tinygif.url)}
-                      >
-                        <Margin bottom={5}>
-                          <ImageContent radius={8} height={108} width={108}>
-                            <Images
-                              radius={8}
-                              height={108}
-                              width={108}
-                              source={{
-                                uri: data.media[0].nanogif.url
-                              }}
-                              style={{ overlayColor: "white" }}
-                            />
-                          </ImageContent>
-                        </Margin>
-                      </TouchableOpacity>
-                    );
-                  })}
-              </Content>
+    <Modal animationType="slide" visible={true}>
+      <Container>
+        <Header title="Gif" close={() => close()} />
 
-              {loadMore && (
-                <Button
-                  haveIcon={false}
-                  disabled={false}
-                  text="Load more"
-                  top={20}
-                  color={["white", "white"]}
-                  borderColor="#f4f4f4"
-                  TextColor="black"
-                  action={() => setLoad({ start: 0, end: 50 })}
-                />
-              )}
-            </Padding>
-          )
-        }
-      />
-    </ViewFlex>
+        <SearchContainer>
+          <Input
+            onChangeText={text => setText(text)}
+            placeholder="Search Tenor"
+            returnKeyType="search"
+            onSubmitEditing={() => searchGif()}
+            style={{ width: "85%" }}
+          />
+
+          <SearchButton
+            isLoading={isLoadingSearch}
+            action={() => searchGif()}
+          />
+        </SearchContainer>
+
+        {gifs.length == 0 ? (
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            <Spinner
+              size={32}
+              animationDuration={1400}
+              color={theme.colors.PRIMARY}
+            />
+          </View>
+        ) : (
+          <ScrollView>
+            <ImageContainer>
+              <ImageRowContainer>
+                {gifs.map((data, i) => {
+                  return (
+                    <TouchableOpacity
+                      key={i}
+                      onPress={() => props.gif(data.media[0].tinygif.url)}
+                    >
+                      <Images
+                        radius={8}
+                        height={108}
+                        width={108}
+                        source={{
+                          uri: data.media[0].nanogif.url
+                        }}
+                        style={{ overlayColor: "white", marginBottom: 5 }}
+                      />
+                    </TouchableOpacity>
+                  );
+                })}
+              </ImageRowContainer>
+            </ImageContainer>
+          </ScrollView>
+        )}
+      </Container>
+    </Modal>
   );
 }
 
+export default withTheme(Gif);
 Gif.navigationOptions = { header: null };

@@ -1,5 +1,4 @@
 import React from "react";
-
 import styled, { withTheme } from "styled-components";
 
 const HashtagContainer = styled.View`
@@ -12,11 +11,9 @@ const HashtagContainer = styled.View`
   padding-bottom: 12px;
 `;
 
-const MenuContainer = styled.View`
+const Container = styled.View`
   flex: 1;
-  padding-top: 80px;
-  padding-left: 16px;
-  padding-right: 16px;
+  padding: 80px 16px 0 16px;
 `;
 
 const Title = styled.Text`
@@ -39,7 +36,7 @@ const HashtagLogo = styled.Image`
 `;
 
 const Menu = () => (
-  <MenuContainer>
+  <Container>
     <Title>My hashtags</Title>
 
     <HashtagContainer>
@@ -51,7 +48,7 @@ const Menu = () => (
 
       <Content>React</Content>
     </HashtagContainer>
-  </MenuContainer>
+  </Container>
 );
 
 export default withTheme(Menu);

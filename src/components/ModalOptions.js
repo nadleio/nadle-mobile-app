@@ -7,7 +7,7 @@ import { Images } from "../assets/styles/Image";
 
 import CLOSE from "../assets/img/cancel.png";
 
-export const ModalContent = styled.View`
+const ModalContent = styled.View`
   flex: 1;
   background-color: rgba(0, 0, 0, 0.3);
   justify-content: ${props => props.align || "center"};
@@ -16,22 +16,22 @@ export const ModalContent = styled.View`
   padding-bottom: 5%;
 `;
 
-export const AlertBox = styled.View`
+const AlertBox = styled.View`
   padding: 5%;
   background-color: white;
   border-radius: 8;
   width: 100%;
 `;
 
-export const CenterContent = styled.View`
+const CenterContent = styled.View`
   align-items: center;
 `;
 
-export const Row = styled.View`
+const Row = styled.View`
   flex-direction: row;
 `;
 
-export const IconContent = styled.TouchableOpacity`
+const IconContent = styled.TouchableOpacity`
   margin-top: 6;
   margin-left: 65%;
   position: absolute;

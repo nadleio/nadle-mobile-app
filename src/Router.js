@@ -17,6 +17,7 @@ import Icon from "./components/Icon";
 import Login from "./views/Auth/Login";
 import Signup from "./views/Auth/Signup";
 import ResetPassword from "./views/Auth/ResetPassword";
+import ChangePassword from "./views/Auth/ChangePassword";
 
 // App Views
 import Feed from "./views/Feed";
@@ -30,19 +31,22 @@ import Search from "./views/Search";
 // import UserPosts from "./views/UserPosts";
 // import CollectionPosts from "./views/CollectionPosts";
 import Saved from "./views/Saved";
-// import MarkdownForm from "./views/MarkdownForm";
+import MarkdownForm from "./views/markdownForm";
 // import Comments from "./views/Comments";
 // import Configuration from "./views/Configuration";
-// import EditProfile from "./views/EditProfile";
+import EditProfile from "./views/EditProfile";
 // import ChangePassword from "./views/ChangePassword";
 // import MyOrganizations from "./views/myOrganizations";
 // import ShareNadle from "./views/shareNadle";
 // import Suggestions from "./views/suggestions";
 
+import DEFAULT_PROFILE from "./assets/images/defaultProfile.png";
+
 const Picture = styled.Image`
   border-radius: 12;
   height: 24px;
   width: 24px;
+  background-color: #fff;
 
   ${props =>
     props.focused &&
@@ -52,7 +56,12 @@ const Picture = styled.Image`
 `;
 
 const ProfileTab = compose(withSelf)(({ focused, self }) => {
-  return <Picture focused={focused} source={{ uri: self.picture }} />;
+  return (
+    <Picture
+      focused={focused}
+      source={self.picture ? { uri: self.picture } : DEFAULT_PROFILE}
+    />
+  );
 });
 
 const IconTab = compose(withTheme)(({ focused, theme, icon }) => {
@@ -113,7 +122,10 @@ const TabNavigator = createBottomTabNavigator(
       screen: compose(withSelf)(Profile),
       navigationOptions: () => ({
         tabBarIcon: ProfileTab
-      })
+      }),
+
+      header: null,
+      headerMode: "none"
     }
   },
 
@@ -139,20 +151,21 @@ const TabNavigator = createBottomTabNavigator(
 
 const Root = createStackNavigator(
   {
-    TabNavigator
+    TabNavigator,
     // Login: { screen: Login },
     // Signup: { screen: Signup },
     // InputEmail: { screen: InputEmail },
     // SendCode: { screen: SendCode },
     // ResetPassword: { screen: ResetPassword },
-    // SearchProfile: { screen: Profile }
+    SearchProfile: { screen: Profile },
     // Post: { screen: Post },
     // YoutubeForAndroid: { screen: YoutubeForAndroid },
     // Subscriptions: { screen: Subscriptions },
     // UserPosts: { screen: UserPosts },
     // CollectionPosts: { screen: CollectionPosts },
     // Notifications: { screen: Notifications },
-    // MarkdownForm: { screen: MarkdownForm },
+    MarkdownForm: { screen: compose(withSelf)(MarkdownForm) },
+    EditProfile: { screen: compose(withSelf)(EditProfile) }
     // Comments: { screen: Comments },
     // Configuration: { screen: Configuration },
     // EditProfile: { screen: EditProfile },
@@ -169,9 +182,12 @@ const Root = createStackNavigator(
 
 export const NotAuthenticatedRoot = createStackNavigator(
   {
+    // Redirect: { screen: Redirect },
     Login: { screen: Login },
     ResetPassword: { screen: ResetPassword },
+    ChangePassword: { screen: ChangePassword },
     Signup: { screen: Signup }
+
     // SearchProfile: { screen: Profile }
   },
   {
@@ -180,6 +196,11 @@ export const NotAuthenticatedRoot = createStackNavigator(
   }
 );
 
+// const SwichAnimatedNavigation = createAnimatedSwitchNavigator({
+//   NotAuthenticatedRoot: { screen: NotAuthenticatedRoot },
+//   Root: { screen: Root }
+// });
+
 export const AppContainer = (authenticated = true) =>
   createAppContainer(
     createSwitchNavigator(
@@ -187,6 +208,20 @@ export const AppContainer = (authenticated = true) =>
         NotAuthenticatedRoot: { screen: NotAuthenticatedRoot },
         Root: { screen: Root }
       },
+      // {
+      //   // The previous screen will slide to the bottom while the next screen will fade in
+
+      //   transition: (
+      //     <Transition.Together>
+      //       <Transition.Out
+      //         type="slide-bottom"
+      //         durationMs={400}
+      //         interpolation="easeIn"
+      //       />
+      //       <Transition.In type="fade" durationMs={500} />
+      //     </Transition.Together>
+      //   )
+      // },
 
       { initialRouteName: authenticated ? "Root" : "NotAuthenticatedRoot" }
     )

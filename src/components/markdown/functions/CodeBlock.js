@@ -1,7 +1,7 @@
 import "../functions/Slice_splice";
 import { RemoveMore } from "./RemoveMore";
 
-export const CodeBlock = (start, end, text, sign) => {
+const CodeBlock = (start, end, text, sign) => {
   return new Promise(resolve => {
     var toSelected = text.substring(start - 4, end + 4);
 
@@ -47,3 +47,5 @@ export const CodeBlock = (start, end, text, sign) => {
     }
   });
 };
+
+export default CodeBlock;

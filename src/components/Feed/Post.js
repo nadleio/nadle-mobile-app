@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
-
 import ActionSheet from "react-native-actionsheet";
 import styled, { withTheme } from "styled-components";
 
 import { ModalBucket } from "../../components/ModalBucket";
 import Icon from "../../components/Icon";
+
 import { ImageBackground, SmallImageProfile } from "../../assets/styles/Image";
 
 import { ShareIt } from "../../lib/utils/Share";

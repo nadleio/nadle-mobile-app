@@ -2,7 +2,7 @@ import "../functions/Slice_splice";
 import { RemoveFirst } from "./RemoveFirst";
 import { RemoveMore } from "./RemoveMore";
 
-export const TwoSigns = (start, end, text, sign) => {
+const TwoSigns = (start, end, text, sign) => {
   return new Promise(resolve => {
     var toSelected = text.substring(start - 2, end + 2);
 
@@ -33,3 +33,5 @@ export const TwoSigns = (start, end, text, sign) => {
     }
   });
 };
+
+export default TwoSigns;

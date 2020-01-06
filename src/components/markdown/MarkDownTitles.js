@@ -1,51 +1,69 @@
-import React from "react";
-import { View } from "react-native";
-
+import React, { useState } from "react";
 import styled from "styled-components";
-import { ViewFlex } from "../../assets/styles/styles";
 
-import { Information } from "../Text";
-import { ModalOptions } from "../ModalOptions";
+import { Label } from "../Text";
+import Dialog from "../Modal/Dialog";
+import { TouchableOpacity } from "react-native";
 
-export const ButtonContent = styled.TouchableOpacity`
-  border-top-width: 1;
-  border-top-color: #f4f4f4;
+const ButtonContent = styled.TouchableOpacity`
   padding-top: 10;
   padding-bottom: 10;
 `;
 
-export function MarkDownTitles(props) {
+const Border = styled.View`
+  border-top-width: 1;
+  border-bottom-width: 1;
+  border-color: #f4f4f4;
+  padding-top: 10;
+  padding-bottom: 10;
+`;
+
+function MarkDownTitles({ close, action }) {
+  const [animation, setAnimation] = useState("fadeInUpBig");
+
+  function closeModal() {
+    setAnimation("fadeOutDownBig");
+    setTimeout(function() {
+      close();
+    }, 350);
+  }
+
+  function insertValue(sign) {
+    setAnimation("fadeOutDownBig");
+    setTimeout(function() {
+      action(sign);
+      close();
+    }, 350);
+  }
+
   return (
-    <ViewFlex>
-      <ModalOptions
-        alert={props.alert}
-        text="title"
-        close={() => props.close()}
-        align="center"
-        content={
-          <View>
-            <ButtonContent onPress={() => props.action("H1")}>
-              <Information align="center" size={16}>
-                H1
-              </Information>
-            </ButtonContent>
+    <Dialog
+      animation={animation}
+      text="Select title size"
+      close={() => closeModal()}
+    >
+      <ButtonContent onPress={() => insertValue("#")}>
+        <Label color={props => props.theme.styled.TITLE} align="center">
+          H1
+        </Label>
+      </ButtonContent>
 
-            <ButtonContent onPress={() => props.action("H2")}>
-              <Information align="center" size={16}>
-                H2
-              </Information>
-            </ButtonContent>
+      <Border>
+        <TouchableOpacity onPress={() => insertValue("##")}>
+          <Label color={props => props.theme.styled.TITLE} align="center">
+            H2
+          </Label>
+        </TouchableOpacity>
+      </Border>
 
-            <ButtonContent onPress={() => props.action("H3")}>
-              <Information align="center" size={16}>
-                H3
-              </Information>
-            </ButtonContent>
-          </View>
-        }
-      />
-    </ViewFlex>
+      <ButtonContent onPress={() => insertValue("###")}>
+        <Label color={props => props.theme.styled.TITLE} align="center">
+          H3
+        </Label>
+      </ButtonContent>
+    </Dialog>
   );
 }
 
+export default MarkDownTitles;
 MarkDownTitles.navigationOptions = { header: null };

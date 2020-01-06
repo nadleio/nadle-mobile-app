@@ -1,17 +1,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import { StatusBar, ScrollView } from "react-native";
 import { SafeAreaView } from "react-navigation";
+import { withTheme } from "styled-components";
 
 import SideMenu from "react-native-side-menu";
 
-import { ViewFlex } from "../../assets/styles/styles";
+import { Container } from "./styled";
 
 import Header from "../../components/Feed/Header";
 import SwipperContent from "../../components/Feed/SwiperContent";
 import Menu from "../../components/Feed/SideMenu";
 import Post from "../../components/Feed/Post";
 
-function Feed({ navigation }) {
+function Feed({ navigation, theme }) {
   const inputRef = useRef("refComponent");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -44,9 +45,9 @@ function Feed({ navigation }) {
       isOpen={isOpen}
       menu={<Menu />}
     >
-      <ViewFlex paddingBottom="0">
-        <SafeAreaView backgroundColor="white" />
-        <StatusBar barStyle="dark-content" />
+      <Container>
+        <SafeAreaView backgroundColor={theme.styled.BACKGROUND} />
+        <StatusBar barStyle={theme.styled.STATUS_BAR} />
 
         <ScrollView ref={inputRef}>
           <Header isOpen={() => setIsOpen(!isOpen)} />
@@ -59,9 +60,9 @@ function Feed({ navigation }) {
             profile={account => goToProfile(account)}
           />
         </ScrollView>
-      </ViewFlex>
+      </Container>
     </SideMenu>
   );
 }
 
-export default Feed;
+export default withTheme(Feed);
