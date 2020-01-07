@@ -8,10 +8,11 @@ import gql from "graphql-tag";
 
 import Header from "./Header";
 import Input from "../Form/Input";
-import { Label } from "../Text";
+// import { Label } from "../Text";
 
 import ChangeUsername from "./ChangeUsername";
 import ChangeEmail from "./ChangeEmail";
+import ImageHeader from "./ImageHeader";
 // import { Photo } from "../components/Photo";
 
 import ContextSelf from "../../lib/ContextSelf";
@@ -24,13 +25,13 @@ const Container = styled.View`
   background-color: ${props => props.theme.styled.BACKGROUND};
 `;
 
-const EditContainer = styled.TouchableOpacity`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 32px;
-  padding: 0 16px 0 16px;
-`;
+// const EditContainer = styled.TouchableOpacity`
+//   flex-direction: row;
+//   justify-content: space-between;
+//   align-items: center;
+//   margin-bottom: 32px;
+//   padding: 0 16px 0 16px;
+// `;
 
 const UPDATE_INFO = gql`
   mutation(
@@ -60,7 +61,7 @@ const UPDATE_INFO = gql`
   ${userInformation}
 `;
 
-function EditProfile({ self, close, theme }) {
+function EditProfile({ self, close }) {
   const { updateSelf } = useContext(ContextSelf);
 
   const [update] = useMutation(UPDATE_INFO);
@@ -70,43 +71,44 @@ function EditProfile({ self, close, theme }) {
   const [loading, setLoading] = useState(false);
 
   async function updateInfo(values) {
-    setLoading(true);
+    console.log(values);
+    // setLoading(true);
 
-    try {
-      const { data } = await update({
-        variables: {
-          firstName: values.firstName || null,
-          lastName: values.lastName || null,
-          biography: values.biography || null,
-          link: values.link || null,
-          latitude: 0.0,
-          longitude: 0.0
-        }
-      });
+    // try {
+    //   const { data } = await update({
+    //     variables: {
+    //       firstName: values.firstName || null,
+    //       lastName: values.lastName || null,
+    //       biography: values.biography || null,
+    //       link: values.link || null,
+    //       latitude: 0.0,
+    //       longitude: 0.0
+    //     }
+    //   });
 
-      const response = data.updateInfo;
+    //   const response = data.updateInfo;
 
-      if (response.success) {
-        updateSelf({
-          uid: response.data.id,
-          type: "USER",
-          picture: response.data.avatar,
-          username: response.data.username,
-          email: response.data.email,
-          firstName: response.data.firstName,
-          lastName: response.data.lastName,
-          followers: response.data.followers.count,
-          following: response.data.following.count,
-          biography: response.data.biography,
-          link: response.data.link
-        });
+    //   if (response.success) {
+    //     updateSelf({
+    //       uid: response.data.id,
+    //       type: "USER",
+    //       picture: response.data.avatar,
+    //       username: response.data.username,
+    //       email: response.data.email,
+    //       firstName: response.data.firstName,
+    //       lastName: response.data.lastName,
+    //       followers: response.data.followers.count,
+    //       following: response.data.following.count,
+    //       biography: response.data.biography,
+    //       link: response.data.link
+    //     });
 
-        setLoading(false);
-        close();
-      }
-    } catch (error) {
-      setLoading(false);
-    }
+    //     setLoading(false);
+    //     close();
+    //   }
+    // } catch (error) {
+    //   setLoading(false);
+    // }
   }
 
   return (
@@ -117,11 +119,16 @@ function EditProfile({ self, close, theme }) {
           onSubmit={values => updateInfo(values)}
           enableReinitialize
         >
-          {({ handleChange, handleSubmit, values }) => (
+          {({ handleChange, handleSubmit, values, setFieldValue }) => (
             <Container>
               <Header saveInfo={handleSubmit} back={close} />
 
               <KeyboardAwareScrollView>
+                <ImageHeader
+                  onPressProfile={link => setFieldValue("picture", link)}
+                  picture={self.picture}
+                />
+
                 <View style={{ marginTop: 16, marginHorizontal: 16 }}>
                   <Input
                     onChangeText={handleChange("firstName")}
@@ -166,7 +173,7 @@ function EditProfile({ self, close, theme }) {
                   />
                 </View>
 
-                <EditContainer onPress={() => setChangeUsername(true)}>
+                {/* <EditContainer onPress={() => setChangeUsername(true)}>
                   <View style={{ width: "80%" }}>
                     <Input
                       label="Username"
@@ -191,7 +198,7 @@ function EditProfile({ self, close, theme }) {
                   </View>
 
                   <Label color={theme.colors.PRIMARY}>EDIT</Label>
-                </EditContainer>
+                </EditContainer> */}
               </KeyboardAwareScrollView>
             </Container>
           )}

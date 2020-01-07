@@ -5,6 +5,7 @@ import styled, { css, withTheme } from "styled-components";
 
 import HeaderSubscribe from "./HeaderSubscribe";
 import Icon from "../Icon";
+import { HeaderBackground, ProfilePicture } from "../Image";
 
 import { withNadleTheme } from "../../lib/ContextTheme";
 import { withSelf } from "../../lib/ContextSelf";
@@ -35,12 +36,6 @@ const IconContainer = styled.View`
   align-items: center;
 `;
 
-const HeaderBackground = styled.ImageBackground`
-  height: 210px;
-  width: 100%;
-  position: absolute;
-`;
-
 const ProfileBox = styled.View`
   background-color: ${props => props.theme.styled.BOX_BACKGROUND};
   border-radius: 8;
@@ -60,14 +55,6 @@ const ProfileBox = styled.View`
       width: auto;
       margin: 0 16px;
     `}
-`;
-
-const ProfilePicture = styled.Image`
-  height: 64px;
-  width: 64px;
-  border-radius: 32px;
-  margin-bottom: 8px;
-  background-color: #fff;
 `;
 
 const DisplayName = styled.Text`
