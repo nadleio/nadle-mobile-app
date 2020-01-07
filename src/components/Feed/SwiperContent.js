@@ -128,7 +128,7 @@ function SwipperContent({ goToProfile, theme, setModal }) {
                   <BoldContent
                     onPress={() =>
                       goToProfile({
-                        uid: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
+                        id: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
                         type: "USER",
                         picture: "https://i.pravatar.cc/500",
                         username: "ricardo",
@@ -147,7 +147,7 @@ function SwipperContent({ goToProfile, theme, setModal }) {
                   <BoldContent
                     onPress={() =>
                       goToProfile({
-                        uid: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
+                        id: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
                         type: "USER",
                         picture: "https://i.pravatar.cc/500",
                         username: "ricardo",

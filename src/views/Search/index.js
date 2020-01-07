@@ -52,11 +52,11 @@ function Search(props) {
           <Wrap>
             <Tags
               tags={[
-                { text: "React Native", uid: "12" },
-                { text: "React", uid: "123" },
-                { text: "GraphQl", uid: "1234" },
-                { text: "NodeJs", uid: "1235" },
-                { text: "Apollo", uid: "123456" }
+                { text: "React Native", id: "12" },
+                { text: "React", id: "123" },
+                { text: "GraphQl", id: "1234" },
+                { text: "NodeJs", id: "1235" },
+                { text: "Apollo", id: "123456" }
               ]}
             />
           </Wrap>

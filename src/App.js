@@ -50,11 +50,7 @@ function App() {
   const persistenceKey = "persistenceKey";
 
   const persistNavigationState = async navState => {
-    try {
-      await AsyncStorage.setItem(persistenceKey, JSON.stringify(navState));
-    } catch (err) {
-      // handle the error according to your needs
-    }
+    await AsyncStorage.setItem(persistenceKey, JSON.stringify(navState));
   };
 
   const loadNavigationState = async () => {
@@ -72,22 +68,9 @@ function App() {
       AsyncStorage.getItem("authToken").then(authToken => {
         if (!loading && Boolean(authToken)) {
           const user = data.getSelf.data;
-
           console.log(user);
 
-          setSelf({
-            uid: user.id,
-            type: "USER",
-            picture: user.avatar,
-            username: user.username,
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            followers: user.followers.count,
-            following: user.following.count,
-            biography: user.biography,
-            link: user.link
-          });
+          setSelf(user);
         }
         setLogged(Boolean(authToken));
 

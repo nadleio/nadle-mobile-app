@@ -98,7 +98,7 @@ function Header({ account = {}, self, theme, appTheme, ...props }) {
             <View />
           )}
 
-          {account.uid === self.uid ? (
+          {account.id === self.id ? (
             <View style={{ flexDirection: "row" }}>
               <TouchableOpacity onPress={() => {}} style={{ marginRight: 8 }}>
                 <IconContainer>
@@ -133,23 +133,26 @@ function Header({ account = {}, self, theme, appTheme, ...props }) {
           <View style={{ alignItems: "center" }}>
             <ProfilePicture
               source={
-                account.picture ? { uri: account.picture } : DEFAULT_PROFILE
+                account.avatar ? { uri: account.avatar } : DEFAULT_PROFILE
               }
             />
 
             <DisplayName
-              onPress={() => !account.firstName && props.goToEditProfile()}
+              // onPress={() => !account.firstName && props.goToEditProfile()}
+              onPress={() => props.goToEditProfile()}
             >
               {account.firstName ? name : "Enter your name here"}
             </DisplayName>
             <Username>{account.username}</Username>
           </View>
 
-          {account.type === "USER" ? (
+          {/* {account.type === "USER" ? (
             <HeaderSubscribe.User account={account} />
           ) : (
             <HeaderSubscribe.Organization account={account} />
-          )}
+          )} */}
+
+          <HeaderSubscribe.User account={account} />
         </ProfileBox>
       </SafeAreaView>
     </View>

@@ -58,7 +58,7 @@ const ProfileTab = compose(withSelf)(({ focused, self }) => {
   return (
     <Picture
       focused={focused}
-      source={self.picture ? { uri: self.picture } : DEFAULT_PROFILE}
+      source={self.avatar ? { uri: self.avatar } : DEFAULT_PROFILE}
     />
   );
 });

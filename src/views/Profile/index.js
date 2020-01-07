@@ -33,7 +33,8 @@ function Profile({ self, navigation }) {
 
         <Biography account={account} />
 
-        {account.type === "USER" ? <Organizations /> : <Members />}
+        {/* {account.type === "USER" ? <Organizations /> : <Members />} */}
+        {account.type !== "USER" ? <Organizations /> : <Members />}
 
         <Posts />
 

@@ -57,20 +57,21 @@ const SubscribeButtonAction = styled.TouchableOpacity`
  */
 
 function User({ self, account, ...props }) {
-  const selfAccount = self.uid === account.uid;
+  const selfAccount = self.id === account.id;
+
   return (
     <Container>
       <View style={{ flexDirection: "row" }}>
         <View style={{ marginHorizontal: selfAccount ? 16 : 8 }}>
           <TouchableOpacity onPress={() => {}}>
-            <Count>{account.followers}</Count>
+            <Count>{account.followers.count}</Count>
             <Label>subscribers</Label>
           </TouchableOpacity>
         </View>
 
         <View style={{ marginHorizontal: selfAccount ? 16 : 8 }}>
           <TouchableOpacity onPress={() => {}}>
-            <Count>{account.following}</Count>
+            <Count>{account.following.count}</Count>
             <Label>subscriptions</Label>
           </TouchableOpacity>
         </View>

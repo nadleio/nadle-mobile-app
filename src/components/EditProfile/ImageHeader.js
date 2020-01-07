@@ -1,26 +1,13 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import styled from "styled-components";
-import { useMutation } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 
 import Photo from "../Photo";
 import Icon from "../Icon";
 
 import DEFAULT_PROFILE from "../../assets/images/defaultProfile.png";
 
-const UPDATE_AVATAR = gql`
-  mutation($file: Upload!) {
-    changeAvatar(file: $file) {
-      message
-      success
-      errorCode
-      data {
-        avatar
-      }
-    }
-  }
-`;
+const { ReactNativeFile } = require("apollo-upload-client");
 
 const ImageContainer = styled.View`
   height: 76px;
@@ -51,37 +38,24 @@ const AddCover = styled.View`
   align-items: center;
 `;
 
-function ImageHeader({ picture }) {
+function ImageHeader({ picture, onPressProfile }) {
   const [profilePhoto, setProfilePhoto] = useState(picture);
 
-  const [update] = useMutation(UPDATE_AVATAR);
+  // const [update] = useMutation(UPDATE_AVATAR);
 
   async function changeAvatar() {
-    const file = new FormData();
     const image = await Photo();
 
     if (image !== "error") {
       setProfilePhoto(image.path);
 
-      console.log(image);
-
-      file.append("file", {
-        name: image.filename,
-        type: "image/jpg",
-        uri: image.path
+      const file = new ReactNativeFile({
+        uri: image.path,
+        name: "hello.jpg",
+        type: "image/jpeg"
       });
 
-      try {
-        const { data } = await update({
-          variables: {
-            file: file
-          }
-        });
-
-        console.log(data);
-      } catch (error) {
-        console.log(error);
-      }
+      onPressProfile(file);
     }
   }
 

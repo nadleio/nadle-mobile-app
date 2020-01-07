@@ -8,12 +8,10 @@ import gql from "graphql-tag";
 
 import Header from "./Header";
 import Input from "../Form/Input";
-// import { Label } from "../Text";
 
 import ChangeUsername from "./ChangeUsername";
 import ChangeEmail from "./ChangeEmail";
 import ImageHeader from "./ImageHeader";
-// import { Photo } from "../components/Photo";
 
 import ContextSelf from "../../lib/ContextSelf";
 
@@ -24,14 +22,6 @@ const Container = styled.View`
   flex: 1;
   background-color: ${props => props.theme.styled.BACKGROUND};
 `;
-
-// const EditContainer = styled.TouchableOpacity`
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-items: center;
-//   margin-bottom: 32px;
-//   padding: 0 16px 0 16px;
-// `;
 
 const UPDATE_INFO = gql`
   mutation(
@@ -61,54 +51,82 @@ const UPDATE_INFO = gql`
   ${userInformation}
 `;
 
+const UPDATE_AVATAR = gql`
+  mutation($file: Upload!) {
+    changeAvatar(file: $file) {
+      message
+      success
+      errorCode
+      data {
+        ...UserInformation
+      }
+    }
+  }
+  ${userInformation}
+`;
+
 function EditProfile({ self, close }) {
   const { updateSelf } = useContext(ContextSelf);
 
   const [update] = useMutation(UPDATE_INFO);
+  const [updateAvatar] = useMutation(UPDATE_AVATAR);
 
   const [changeUsername, setChangeUsername] = useState(false);
   const [changeEmail, setChangeEmail] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [changePhoto, setChangePhoto] = useState(false);
 
   async function updateInfo(values) {
-    console.log(values);
-    // setLoading(true);
+    setLoading(true);
 
-    // try {
-    //   const { data } = await update({
-    //     variables: {
-    //       firstName: values.firstName || null,
-    //       lastName: values.lastName || null,
-    //       biography: values.biography || null,
-    //       link: values.link || null,
-    //       latitude: 0.0,
-    //       longitude: 0.0
-    //     }
-    //   });
+    try {
+      const { data } = await update({
+        variables: {
+          firstName: values.firstName || null,
+          lastName: values.lastName || null,
+          biography: values.biography || null,
+          link: values.link || null,
+          latitude: 0.0,
+          longitude: 0.0
+        }
+      });
 
-    //   const response = data.updateInfo;
+      const response = data.updateInfo;
 
-    //   if (response.success) {
-    //     updateSelf({
-    //       uid: response.data.id,
-    //       type: "USER",
-    //       picture: response.data.avatar,
-    //       username: response.data.username,
-    //       email: response.data.email,
-    //       firstName: response.data.firstName,
-    //       lastName: response.data.lastName,
-    //       followers: response.data.followers.count,
-    //       following: response.data.following.count,
-    //       biography: response.data.biography,
-    //       link: response.data.link
-    //     });
+      if (response.success) {
+        updateSelf(response.data);
 
-    //     setLoading(false);
-    //     close();
-    //   }
-    // } catch (error) {
-    //   setLoading(false);
-    // }
+        if (changePhoto) {
+          changeAvatar(values.picture);
+        } else {
+          setLoading(false);
+          close();
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+    }
+  }
+
+  async function changeAvatar(file) {
+    try {
+      const { data } = await updateAvatar({
+        variables: { file }
+      });
+
+      if (data.changeAvatar.success) {
+        updateSelf(data.changeAvatar.data);
+
+        setLoading(false);
+        close();
+      } else {
+        setLoading(false);
+        close();
+      }
+    } catch (error) {
+      setLoading(false);
+      alert("Something happend, please try again.");
+    }
   }
 
   return (
@@ -125,8 +143,11 @@ function EditProfile({ self, close }) {
 
               <KeyboardAwareScrollView>
                 <ImageHeader
-                  onPressProfile={link => setFieldValue("picture", link)}
-                  picture={self.picture}
+                  onPressProfile={form => {
+                    setChangePhoto(true);
+                    setFieldValue("picture", form);
+                  }}
+                  picture={self.avatar}
                 />
 
                 <View style={{ marginTop: 16, marginHorizontal: 16 }}>
@@ -172,33 +193,6 @@ function EditProfile({ self, close }) {
                     placeholder="Insert your link"
                   />
                 </View>
-
-                {/* <EditContainer onPress={() => setChangeUsername(true)}>
-                  <View style={{ width: "80%" }}>
-                    <Input
-                      label="Username"
-                      editable={false}
-                      value={values.username}
-                      placeholder="Insert your username"
-                      pointerEvents="none"
-                    />
-                  </View>
-
-                  <Label color={theme.colors.PRIMARY}>EDIT</Label>
-                </EditContainer>
-
-                <EditContainer onPress={() => setChangeEmail(true)}>
-                  <View style={{ width: "80%" }}>
-                    <Input
-                      label="Email"
-                      value={values.email}
-                      editable={false}
-                      pointerEvents="none"
-                    />
-                  </View>
-
-                  <Label color={theme.colors.PRIMARY}>EDIT</Label>
-                </EditContainer> */}
               </KeyboardAwareScrollView>
             </Container>
           )}

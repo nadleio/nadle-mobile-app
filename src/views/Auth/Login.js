@@ -105,22 +105,10 @@ function Login({ theme, navigation }) {
       });
 
       const user = data.login.data.user;
-      // console.log(user);
 
       if (data.login.success) {
-        updateSelf({
-          uid: user.id,
-          type: "USER",
-          picture: user.avatar,
-          username: user.username,
-          email: user.email,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          followers: user.followers.count,
-          following: user.following.count,
-          biography: user.biography,
-          link: user.link
-        });
+        console.log(user);
+        updateSelf(user);
 
         await AsyncStorage.setItem("authToken", data.login.data.token);
         setLogged(true);

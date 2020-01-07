@@ -14,7 +14,7 @@ const Container = styled.TouchableOpacity`
 
 function Tags({ tags, ...props }) {
   return tags.map(tag => (
-    <Container key={tag.uid}>
+    <Container key={tag.id}>
       <Text
         style={{
           color: props.theme.colors.PRIMARY,

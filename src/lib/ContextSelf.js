@@ -1,7 +1,7 @@
 import React from "react";
 
 const ContextSelf = React.createContext({
-  uid: "",
+  id: "",
   type: "",
   picture: "",
   username: "",

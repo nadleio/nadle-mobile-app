@@ -115,11 +115,13 @@ function Post({ theme, profile, post, comments }) {
                     <TouchableOpacity
                       onPress={() =>
                         profile({
-                          uid: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
+                          id: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
                           type: "ORGANIZATION",
                           picture: "https://i.pravatar.cc/500",
                           username: "ricardo",
-                          name: "Ricardo Malagón"
+                          name: "Ricardo Malagón",
+                          followers: { count: 0 },
+                          following: { count: 0 }
                         })
                       }
                     >
@@ -218,11 +220,13 @@ function Post({ theme, profile, post, comments }) {
                   <TouchableOpacity
                     onPress={() =>
                       profile({
-                        uid: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
+                        id: "b1b758d8-0d57-42c9-b086-4576bd1951e2",
                         type: "ORGANIZATION",
                         picture: "https://i.pravatar.cc/500",
                         username: "ricardo",
-                        name: "Ricardo Malagón"
+                        name: "Ricardo Malagón",
+                        followers: { count: 0 },
+                        following: { count: 0 }
                       })
                     }
                   >
