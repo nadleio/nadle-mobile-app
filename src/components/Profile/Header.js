@@ -11,7 +11,6 @@ import { withNadleTheme } from "../../lib/ContextTheme";
 import { withSelf } from "../../lib/ContextSelf";
 
 import DEFAULT_PROFILE from "../../assets/images/defaultProfile.png";
-import { Label } from "../Text";
 
 const Actions = styled.View`
   width: 320px;
