@@ -64,14 +64,14 @@ function User({ self, account, ...props }) {
       <View style={{ flexDirection: "row" }}>
         <View style={{ marginHorizontal: selfAccount ? 16 : 8 }}>
           <TouchableOpacity onPress={() => {}}>
-            <Count>{account.followers.count}</Count>
+            <Count>{account.followers ? account.followers.count : 0}</Count>
             <Label>subscribers</Label>
           </TouchableOpacity>
         </View>
 
         <View style={{ marginHorizontal: selfAccount ? 16 : 8 }}>
           <TouchableOpacity onPress={() => {}}>
-            <Count>{account.following.count}</Count>
+            <Count>{account.following ? account.following.count : 0}</Count>
             <Label>subscriptions</Label>
           </TouchableOpacity>
         </View>

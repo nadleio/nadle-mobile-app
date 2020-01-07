@@ -8,6 +8,8 @@ const ContextSelf = React.createContext({
   email: "",
   fistName: "",
   lastName: "",
+  following: { count: 0 },
+  followers: { count: 0 },
   updateSelf: null
 });
 

@@ -11,6 +11,7 @@ import { withNadleTheme } from "../../lib/ContextTheme";
 import { withSelf } from "../../lib/ContextSelf";
 
 import DEFAULT_PROFILE from "../../assets/images/defaultProfile.png";
+import { Label } from "../Text";
 
 const Actions = styled.View`
   width: 320px;
@@ -34,6 +35,17 @@ const IconContainer = styled.View`
   width: 32px;
   justify-content: center;
   align-items: center;
+`;
+
+const EditContainer = styled.TouchableOpacity`
+  background-color: ${props => props.theme.colors.PRIMARY};
+  height: 28px;
+  width: 28px;
+  border-radius: 14px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-left: -18px;
 `;
 
 const ProfileBox = styled.View`
@@ -131,11 +143,18 @@ function Header({ account = {}, self, theme, appTheme, ...props }) {
 
         <ProfileBox themeName={appTheme.themeMode} width={screenWidth}>
           <View style={{ alignItems: "center" }}>
-            <ProfilePicture
-              source={
-                account.avatar ? { uri: account.avatar } : DEFAULT_PROFILE
-              }
-            />
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <ProfilePicture
+                source={
+                  account.avatar ? { uri: account.avatar } : DEFAULT_PROFILE
+                }
+              />
+              <View>
+                <EditContainer onPress={() => props.goToEditProfile()}>
+                  <Icon size={20} color={theme.styled.ICON} name="replace" />
+                </EditContainer>
+              </View>
+            </View>
 
             <DisplayName
               // onPress={() => !account.firstName && props.goToEditProfile()}

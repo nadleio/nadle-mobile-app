@@ -21,6 +21,7 @@ const ImageContainer = styled.View`
 const Cover = styled.ImageBackground`
   height: 210px;
   width: 100%;
+  background-color: #fff;
 `;
 
 const ProfilePicture = styled.ImageBackground`
@@ -40,8 +41,7 @@ const AddCover = styled.View`
 
 function ImageHeader({ picture, onPressProfile }) {
   const [profilePhoto, setProfilePhoto] = useState(picture);
-
-  // const [update] = useMutation(UPDATE_AVATAR);
+  const [coverPhoto, setCoverPhoto] = useState(picture);
 
   async function changeAvatar() {
     const image = await Photo();
@@ -51,7 +51,7 @@ function ImageHeader({ picture, onPressProfile }) {
 
       const file = new ReactNativeFile({
         uri: image.path,
-        name: "hello.jpg",
+        name: image.filename,
         type: "image/jpeg"
       });
 
@@ -59,11 +59,32 @@ function ImageHeader({ picture, onPressProfile }) {
     }
   }
 
+  async function changeCover() {
+    const image = await Photo();
+
+    if (image !== "error") {
+      setCoverPhoto(image.path);
+
+      // const file = new ReactNativeFile({
+      //   uri: image.path,
+      //   name: image.filename,
+      //   type: "image/jpeg"
+      // });
+
+      // onPressProfile(file);
+    }
+  }
+
   return (
     <View>
-      <Cover source={{ uri: "https://source.unsplash.com/random" }}>
+      <Cover source={coverPhoto ? { uri: coverPhoto } : DEFAULT_PROFILE}>
         <AddCover>
-          <Icon name="outline-plus-circle" color="white" size={26} />
+          <Icon
+            onPress={() => changeCover()}
+            name="outline-plus-circle"
+            color="white"
+            size={26}
+          />
         </AddCover>
       </Cover>
 
