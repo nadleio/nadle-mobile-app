@@ -6,7 +6,7 @@ import Collapsible from "react-native-collapsible";
 
 import PreviewPost from "../../components/ShortPost";
 import ShortBucket from "../../components/ShortBucket";
-import { Header } from "../../components/Header";
+// import { Header } from "../../components/Header";
 import { BucketList } from "../../components/BucketList";
 import Icon from "../../components/Icon";
 import { Information, Title } from "../../components/Text";
@@ -36,7 +36,7 @@ function UserPosts(props) {
       <SafeAreaView backgroundColor="white" />
       <StatusBar barStyle="dark-content" />
 
-      <Header
+      {/* <Header
         backBool={false}
         text="Saved posts"
         buttons={
@@ -46,7 +46,7 @@ function UserPosts(props) {
             </HeaderIconsTouchable>
           </HeaderIcons>
         }
-      />
+      /> */}
       <ScrollView>
         <Padding>
           <View style={{ marginTop: 20 }}>

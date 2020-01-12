@@ -84,8 +84,7 @@ const Username = styled.Text`
 function Header({ account = {}, self, theme, appTheme, ...props }) {
   const screenWidth = Math.round(Dimensions.get("window").width);
   const name = account.firstName + " " + account.lastName;
-
-  console.log(account.name);
+  const selfProfile = account.id === self.id;
 
   return (
     <View style={{ flex: 1 }}>
@@ -109,7 +108,7 @@ function Header({ account = {}, self, theme, appTheme, ...props }) {
             <View />
           )}
 
-          {account.id === self.id ? (
+          {selfProfile ? (
             <View style={{ flexDirection: "row" }}>
               <TouchableOpacity onPress={() => {}} style={{ marginRight: 8 }}>
                 <IconContainer>
@@ -148,19 +147,19 @@ function Header({ account = {}, self, theme, appTheme, ...props }) {
                   account.avatar ? { uri: account.avatar } : DEFAULT_PROFILE
                 }
               />
-              <View>
-                <EditContainer onPress={() => props.goToEditProfile()}>
-                  <Icon size={20} color={theme.styled.ICON} name="replace" />
-                </EditContainer>
-              </View>
+              {selfProfile && (
+                <View>
+                  <EditContainer onPress={() => props.goToEditProfile()}>
+                    <Icon size={20} color={theme.styled.ICON} name="replace" />
+                  </EditContainer>
+                </View>
+              )}
             </View>
 
-            <DisplayName
-              // onPress={() => !account.firstName && props.goToEditProfile()}
-              onPress={() => props.goToEditProfile()}
-            >
+            <DisplayName>
               {account.firstName ? name : "Enter your name here"}
             </DisplayName>
+
             <Username>{account.username}</Username>
           </View>
 
