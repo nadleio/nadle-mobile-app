@@ -5,7 +5,7 @@ import styled, { withTheme } from "styled-components";
 import { SafeAreaView } from "react-navigation";
 
 import { Label } from "../Text";
-import SearchButton from "./SearchButton";
+import SearchInput from "./SearchInput";
 
 const Container = styled.View`
   flex: 1;
@@ -18,7 +18,7 @@ const SearchContainer = styled.View`
   align-items: center;
 `;
 
-function SearchResults({ theme, close }) {
+function SearchResults({ theme, close, navigate }) {
   const [text, setText] = useState("");
 
   return (
@@ -30,11 +30,11 @@ function SearchResults({ theme, close }) {
         <View style={{ padding: 16, flex: 1 }}>
           <ScrollView keyboardShouldPersistTaps="handled">
             <SearchContainer>
-              <SearchButton
+              <SearchInput
                 onChangeText={text => setText(text)}
                 placeholder="Search"
                 returnKeyType="search"
-                onSubmitEditing={() => {}}
+                onSubmitEditing={() => navigate(text)}
                 autoFocus
                 clear={() => setText("")}
                 style={{ width: "88%" }}

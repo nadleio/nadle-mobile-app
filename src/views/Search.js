@@ -3,13 +3,10 @@ import { ScrollView, StatusBar, View } from "react-native";
 import styled, { withTheme } from "styled-components";
 import { SafeAreaView } from "react-navigation";
 
-// import { Header } from "../../components/Header";
-// // import { TextInputSearch } from "../../components/Form/Input";
-
 import ShortPost from "../components/ShortPost";
 import { Title, Label } from "../components/Text";
 import SearchResults from "../components/Search/SearchResults";
-import SearchButton from "../components/Search/SearchButton";
+import SearchInput from "../components/Search/SearchInput";
 
 const Container = styled.View`
   flex: 1;
@@ -18,12 +15,11 @@ const Container = styled.View`
 
 const Question = styled(Title)`
   font-size: 26px;
-  /* margin-top: 30px; */
   font-weight: bold;
   text-align: center;
 `;
 
-function Search({ theme }) {
+function Search({ theme, navigation }) {
   const [modal, setModal] = useState(false);
 
   return (
@@ -32,7 +28,7 @@ function Search({ theme }) {
       <StatusBar barStyle={theme.styled.STATUS_BAR} />
 
       <View style={{ padding: 16, flex: 1 }}>
-        <SearchButton
+        <SearchInput
           placeholder="Search"
           style={{ width: "100%" }}
           onFocus={() => setModal(true)}
@@ -61,7 +57,15 @@ function Search({ theme }) {
         </ScrollView>
       </View>
 
-      {modal && <SearchResults close={() => setModal(false)} />}
+      {modal && (
+        <SearchResults
+          navigate={value => {
+            setModal(false);
+            navigation.navigate("SearchResults", { value: value });
+          }}
+          close={() => setModal(false)}
+        />
+      )}
     </Container>
   );
 }

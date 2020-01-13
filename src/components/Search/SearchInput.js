@@ -40,7 +40,7 @@ const Container = styled.View`
   align-items: center;
 `;
 
-const RenderInput = ({ appTheme, ...props }) => {
+const SearchInput = ({ appTheme, ...props }) => {
   return (
     <Container isFullWidth={props.isFullWidth}>
       <Icon
@@ -69,4 +69,4 @@ const RenderInput = ({ appTheme, ...props }) => {
   );
 };
 
-export default withNadleTheme(RenderInput);
+export default withNadleTheme(SearchInput);
