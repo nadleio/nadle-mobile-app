@@ -1,3 +1,4 @@
+/* eslint-disable import/default */
 // eslint-disable-next-line import/default
 
 import React, { useState } from "react";
@@ -7,7 +8,6 @@ import styled, { withTheme } from "styled-components";
 var moment = require("moment");
 
 import json from "../../json/feed";
-import { TouchableOpacity } from "react-native";
 
 const Container = styled.View`
   background-color: ${props => props.theme.styled.BACKGROUND};
@@ -87,7 +87,7 @@ const CounterSwipper = styled.Text`
   text-align: center;
 `;
 
-function SwipperContent({ goToProfile, theme, setModal }) {
+function SwipperContent({ goToProfile, theme }) {
   const [currentSwipe, setCurrentSwipe] = useState(0);
 
   return (
