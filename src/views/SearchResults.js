@@ -1,6 +1,6 @@
 /* eslint-disable import/default */
 import React, { useState, useRef } from "react";
-import { ScrollView, View, TouchableOpacity, StatusBar } from "react-native";
+import { View, TouchableOpacity, StatusBar } from "react-native";
 import styled, { withTheme } from "styled-components";
 import { SafeAreaView } from "react-navigation";
 import Swiper from "react-native-swiper";
@@ -109,7 +109,6 @@ function SearchResults({ navigation, theme }) {
           ))}
         </OptionsContainer>
 
-        {/* <ScrollView> */}
         <Swiper
           ref={ref}
           onIndexChanged={index => setActive(index)}
@@ -132,7 +131,6 @@ function SearchResults({ navigation, theme }) {
             <ShortPost />
           </View>
         </Swiper>
-        {/* </ScrollView> */}
       </View>
     </Container>
   );

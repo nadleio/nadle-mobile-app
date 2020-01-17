@@ -22,11 +22,11 @@ const Text = styled.Text`
   max-width: 100%;
 `;
 
-const Posts = props => {
+function Posts(props) {
   return (
     <Container>
       <Title>
-        <Text>Pinned Posts (49)</Text>
+        <Text>Posts ({props.account.posts.length})</Text>
         <Icon
           style={{ marginLeft: 4 }}
           color={props.theme.styled.ICON}
@@ -34,10 +34,15 @@ const Posts = props => {
         />
       </Title>
 
-      <ShortPost />
-      <ShortPost />
+      {props.account.posts.slice(5, 7).map(data => (
+        <ShortPost
+          key={data.id}
+          title={data.title}
+          coverUrl={data.coverPostUrl}
+        />
+      ))}
     </Container>
   );
-};
+}
 
 export default withTheme(Posts);

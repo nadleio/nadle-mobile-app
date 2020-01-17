@@ -36,7 +36,7 @@ function Profile({ self, navigation }) {
         {/* {account.type === "USER" ? <Organizations /> : <Members />} */}
         {account.type !== "USER" ? <Organizations /> : <Members />}
 
-        <Posts />
+        <Posts account={account} />
 
         <Buckets />
 

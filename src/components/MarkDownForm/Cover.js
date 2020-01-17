@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { View } from "react-native";
 import styled, { withTheme } from "styled-components";
 
 import Photo from "../Photo";
 import { Title, Label } from "../Text";
 import Icon from "../Icon";
+
+const { ReactNativeFile } = require("apollo-upload-client");
 
 const Container = styled.TouchableOpacity`
   height: 200px;
@@ -36,10 +38,23 @@ const IconContainer = styled.TouchableOpacity`
   align-items: center;
 `;
 
-function Cover({ theme, cover, setCover }) {
+function Cover({ theme, setCover }) {
+  const [cover, setCoverState] = useState("");
+
   async function setPhoto() {
     const image = await Photo();
-    image !== "error" && setCover(image.path);
+
+    if (image !== "error") {
+      setCoverState(image.path);
+
+      const file = new ReactNativeFile({
+        uri: image.path,
+        name: image.filename,
+        type: "image/jpeg"
+      });
+
+      setCover(file);
+    }
   }
 
   return (

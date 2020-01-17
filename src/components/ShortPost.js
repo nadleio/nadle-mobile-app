@@ -1,11 +1,11 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Text } from "react-native";
 import styled, { withTheme } from "styled-components";
 
 import ActionLink from "./ActionLink";
 import Tags from "./Tags";
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   flex-direction: row;
   margin-bottom: 16px;
 `;
@@ -15,6 +15,7 @@ const Thumbnail = styled.Image`
   margin-right: 8px;
   height: 64px;
   width: 64px;
+  background-color: #f4f4f4;
 `;
 
 const Content = styled.View`
@@ -40,33 +41,25 @@ const TagsContainer = styled.View`
   margin-top: 8px;
 `;
 
-const ShortPost = ({ theme }) => {
+const ShortPost = ({ theme, ...props }) => {
   return (
     <Container>
-      <TouchableOpacity onPress={() => console.log("ACTION")}>
-        <Thumbnail
-          source={{ uri: "https://source.unsplash.com/user/anckor" }}
-        />
-      </TouchableOpacity>
+      <Thumbnail source={{ uri: props.coverUrl }} />
 
       <Content>
         <ActionLink to={() => console.log("ACTION")} text="@python" />
 
-        <TouchableOpacity onPress={() => console.log("ACTION")}>
-          <Text
-            style={{
-              marginTop: 4,
-              lineHeight: 20,
-              fontSize: theme.fontSize.BODY
-            }}
-          >
-            <DateText>May 16, 2018</DateText>
-            <Separator>{" • "}</Separator>
-            <PostTitle>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            </PostTitle>
-          </Text>
-        </TouchableOpacity>
+        <Text
+          style={{
+            marginTop: 4,
+            lineHeight: 20,
+            fontSize: theme.fontSize.BODY
+          }}
+        >
+          <DateText>May 16, 2018</DateText>
+          <Separator>{" • "}</Separator>
+          <PostTitle>{props.title}</PostTitle>
+        </Text>
 
         <TagsContainer>
           <Tags
