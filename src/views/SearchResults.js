@@ -42,6 +42,7 @@ const options = [
 function SearchResults({ navigation, theme }) {
   const [text, setText] = useState(navigation.state.params.value);
   const [active, setActive] = useState(0);
+
   const ref = useRef(null);
 
   function swipe(index) {

@@ -3,7 +3,6 @@ import { View, TouchableOpacity } from "react-native";
 import ActionSheet from "react-native-actionsheet";
 import styled, { withTheme } from "styled-components";
 
-import { ModalBucket } from "../../components/ModalBucket";
 import Icon from "../../components/Icon";
 
 import { ImageBackground, SmallImageProfile } from "../../assets/styles/Image";
@@ -121,7 +120,8 @@ function Post({ theme, profile, post, comments }) {
                           username: "ricardo",
                           name: "Ricardo Malagón",
                           followers: { count: 0 },
-                          following: { count: 0 }
+                          following: { count: 0 },
+                          posts: []
                         })
                       }
                     >
@@ -226,7 +226,8 @@ function Post({ theme, profile, post, comments }) {
                         username: "ricardo",
                         name: "Ricardo Malagón",
                         followers: { count: 0 },
-                        following: { count: 0 }
+                        following: { count: 0 },
+                        posts: []
                       })
                     }
                   >
@@ -257,8 +258,6 @@ function Post({ theme, profile, post, comments }) {
           report(index);
         }}
       />
-
-      {modalbucket && <ModalBucket close={() => setModalbucket(false)} />}
     </View>
   );
 }

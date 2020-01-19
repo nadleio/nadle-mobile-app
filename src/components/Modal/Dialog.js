@@ -10,8 +10,8 @@ const ModalContainer = styled.View`
   flex: 1;
   background-color: rgba(0, 0, 0, 0.3);
   justify-content: center;
-  padding-left: 5%;
-  padding-right: 5%;
+  padding-left: 16px;
+  padding-right: 16px;
 `;
 
 const Container = styled.View`
@@ -70,5 +70,4 @@ function Dialog({ close, text, children, animation, theme }) {
   );
 }
 
-Modal.navigationOptions = { header: null };
 export default withTheme(Dialog);

@@ -23,9 +23,17 @@ function Header({ title, back, theme }) {
       <StatusBar barStyle={theme.styled.STATUS_BAR} />
 
       <Container>
-        <TouchableOpacity onPress={() => back()} style={{ width: 50 }}>
-          <Icon name="outline-angle-left" color={theme.styled.ICON} size={28} />
-        </TouchableOpacity>
+        {back ? (
+          <TouchableOpacity onPress={back} style={{ width: 50 }}>
+            <Icon
+              name="outline-angle-left"
+              color={theme.styled.ICON}
+              size={28}
+            />
+          </TouchableOpacity>
+        ) : (
+          <View style={{ width: 50 }} />
+        )}
 
         <Title>{title}</Title>
 

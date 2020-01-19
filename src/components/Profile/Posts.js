@@ -22,19 +22,21 @@ const Text = styled.Text`
   max-width: 100%;
 `;
 
-function Posts(props) {
+function Posts({ account, theme, goToPosts }) {
+  const posts = account.posts || [];
+
   return (
     <Container>
-      <Title>
-        <Text>Posts ({props.account.posts.length})</Text>
+      <Title onPress={goToPosts}>
+        <Text>Posts ({posts.length || 0})</Text>
         <Icon
           style={{ marginLeft: 4 }}
-          color={props.theme.styled.ICON}
+          color={theme.styled.ICON}
           name="outline-chevron-double-right"
         />
       </Title>
 
-      {props.account.posts.slice(5, 7).map(data => (
+      {posts.slice(5, 7).map(data => (
         <ShortPost
           key={data.id}
           title={data.title}

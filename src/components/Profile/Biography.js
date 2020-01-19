@@ -1,4 +1,5 @@
 import React from "react";
+import { Linking, TouchableOpacity } from "react-native";
 import styled, { withTheme } from "styled-components";
 
 import IconComponent from "../Icon";
@@ -40,7 +41,7 @@ const Label = styled.Text`
   text-align: left;
 `;
 
-function Biography({ account, ...props }) {
+function Biography({ account, theme }) {
   return (
     <Container>
       <Title>Bio</Title>
@@ -51,17 +52,20 @@ function Biography({ account, ...props }) {
 
       <OtherInfo>
         <Icon
-          color={props.theme.styled.ICON}
+          color={theme.styled.ICON}
           size={16}
           name="outline-map-marker-alt"
         />
         <Label>San Francisco, CA</Label>
       </OtherInfo>
 
-      {account.link !== null && (
+      {account.link && (
         <OtherInfo>
-          <Icon color={props.theme.styled.ICON} size={16} name="outline-link" />
-          <Label>{account.link}</Label>
+          <Icon color={theme.styled.ICON} size={16} name="outline-link" />
+
+          <TouchableOpacity onPress={() => Linking.openURL(account.link)}>
+            <Label>{account.link}</Label>
+          </TouchableOpacity>
         </OtherInfo>
       )}
     </Container>

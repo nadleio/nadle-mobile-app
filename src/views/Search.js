@@ -49,7 +49,7 @@ function Search({ theme, navigation }) {
           </View>
 
           <Title style={{ marginTop: 60, marginBottom: 16 }}>
-            Recently viewed posts
+            Recomended blog posts
           </Title>
 
           <ShortPost />

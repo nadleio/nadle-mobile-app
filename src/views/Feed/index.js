@@ -17,15 +17,11 @@ function Feed({ navigation, theme }) {
   const [isOpen, setIsOpen] = useState(false);
 
   function goToProfile(account) {
-    navigation.navigate("SearchProfile", {
-      account
-    });
+    navigation.navigate("SearchProfile", { account });
   }
 
   function navigate(route, id) {
-    navigation.navigate(route, {
-      id
-    });
+    navigation.navigate(route, { id });
   }
 
   useEffect(() => {

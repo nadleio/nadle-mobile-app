@@ -148,12 +148,7 @@ function Signup({ theme, navigation }) {
                   textColor="#fff"
                 />
 
-                <View
-                  style={{
-                    alignItems: "center",
-                    width: "100%"
-                  }}
-                >
+                <View style={{ alignItems: "center", width: "100%" }}>
                   <Separator text="OR" />
 
                   <ActionLink

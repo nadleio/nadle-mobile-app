@@ -1,8 +1,7 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
 import styled, { withTheme } from "styled-components";
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   flex-direction: row;
   margin-right: 16px;
   margin-bottom: 16px;
@@ -14,6 +13,7 @@ const Thumbnail = styled.Image`
   margin-right: 8px;
   height: 24px;
   width: 24px;
+  background-color: #f4f4f4;
 `;
 
 const Title = styled.Text`
@@ -24,12 +24,10 @@ const Title = styled.Text`
 
 const ShortBucket = () => {
   return (
-    <TouchableOpacity onPress={() => {}}>
-      <Container>
-        <Thumbnail source={{ uri: "https://source.unsplash.com/random" }} />
-        <Title>Lorem ipsum</Title>
-      </Container>
-    </TouchableOpacity>
+    <Container>
+      <Thumbnail source={{ uri: "https://source.unsplash.com/random" }} />
+      <Title>Lorem ipsum</Title>
+    </Container>
   );
 };
 
