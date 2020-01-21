@@ -23,7 +23,7 @@ import Feed from "./views/Feed";
 import MarkdownView from "./views/markdown";
 import Profile from "./views/Profile";
 // import Notifications from "./views/Notifications";
-// import Post from "./views/Post";
+import Post from "./views/Post";
 import Search from "./views/Search";
 // import YoutubeForAndroid from "./views/Post/youtubeForAndroid";
 // import Subscriptions from "./views/Subscriptions";
@@ -159,7 +159,7 @@ const Root = createStackNavigator(
     // SendCode: { screen: SendCode },
     // ResetPassword: { screen: ResetPassword },
     SearchProfile: { screen: Profile },
-    // Post: { screen: Post },
+    Post: { screen: Post },
     // YoutubeForAndroid: { screen: YoutubeForAndroid },
     // Subscriptions: { screen: Subscriptions },
     // UserPosts: { screen: UserPosts },

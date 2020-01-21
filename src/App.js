@@ -47,6 +47,8 @@ function App() {
   const [loadingModal, setLoadingModal] = useState(false);
   const [self, setSelf] = useState({});
 
+  const { loading, data } = useQuery(CURRENT_USER);
+
   const persistenceKey = "persistenceKey";
 
   const persistNavigationState = async navState => {
@@ -60,8 +62,6 @@ function App() {
 
   // AsyncStorage.removeItem("authToken");
   // AsyncStorage.removeItem("persistenceKey");
-
-  const { loading, data } = useQuery(CURRENT_USER);
 
   useEffect(() => {
     function isLogged() {

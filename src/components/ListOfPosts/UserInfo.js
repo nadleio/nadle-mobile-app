@@ -2,6 +2,9 @@ import React from "react";
 import { View } from "react-native";
 import styled, { withTheme } from "styled-components";
 
+import { SmallImageProfile } from "../../assets/styles/Image";
+import { Label } from "../Text";
+
 const Container = styled.View`
   flex-direction: row;
   padding-bottom: 16px;
@@ -14,9 +17,6 @@ const Divider = styled.View`
   margin-bottom: 16px;
   opacity: 0.2;
 `;
-
-import { SmallImageProfile } from "../../assets/styles/Image";
-import { Label } from "../Text";
 
 function UserInfo({ account, theme }) {
   return (

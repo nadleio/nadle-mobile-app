@@ -22,7 +22,7 @@ const Text = styled.Text`
   max-width: 100%;
 `;
 
-function Posts({ account, theme, goToPosts }) {
+function Posts({ account, theme, goToPosts, goToPostDetails }) {
   const posts = account.posts || [];
 
   return (
@@ -41,6 +41,7 @@ function Posts({ account, theme, goToPosts }) {
           key={data.id}
           title={data.title}
           coverUrl={data.coverPostUrl}
+          goToPostDetails={goToPostDetails}
         />
       ))}
     </Container>

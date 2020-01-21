@@ -1,7 +1,6 @@
 import React from "react";
 import { ScrollView, View } from "react-native";
 import styled from "styled-components";
-import _ from "lodash";
 
 import Header from "../components/Header";
 import ShortPost from "../components/ShortPost";

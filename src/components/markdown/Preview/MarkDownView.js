@@ -1,20 +1,12 @@
 /* eslint-disable react/display-name */
 import React from "react";
-import { StyleSheet, Modal } from "react-native";
+import { StyleSheet } from "react-native";
 import Markdown from "react-native-markdown-renderer";
-import styled, { withTheme } from "styled-components";
-
-import Header from "../../Modal/Header";
+import { withTheme } from "styled-components";
 
 import rules from "./rules";
 
-const Container = styled.ScrollView`
-  flex: 1;
-  padding: 5%;
-  background-color: ${props => props.theme.styled.BACKGROUND};
-`;
-
-function Preview({ content, close, theme }) {
+function MarkDownView({ content, theme }) {
   const styles = StyleSheet.create({
     heading: {
       borderBottomWidth: 1,
@@ -47,16 +39,10 @@ function Preview({ content, close, theme }) {
   });
 
   return (
-    <Modal animationType="slide" visible={true}>
-      <Header title="Preview" close={() => close()} />
-
-      <Container>
-        <Markdown rules={rules} style={styles}>
-          {content}
-        </Markdown>
-      </Container>
-    </Modal>
+    <Markdown rules={rules} style={styles}>
+      {content}
+    </Markdown>
   );
 }
 
-export default withTheme(Preview);
+export default withTheme(MarkDownView);

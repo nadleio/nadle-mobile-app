@@ -41,9 +41,9 @@ const TagsContainer = styled.View`
   margin-top: 8px;
 `;
 
-const ShortPost = ({ theme, ...props }) => {
+const ShortPost = ({ goToPostDetails, theme, ...props }) => {
   return (
-    <Container>
+    <Container onPress={goToPostDetails}>
       <Thumbnail source={{ uri: props.coverUrl }} />
 
       <Content>

@@ -39,6 +39,7 @@ function Profile({ self, navigation }) {
         <Posts
           goToPosts={() => navigation.navigate("ListOfPosts", { account })}
           account={account}
+          goToPostDetails={() => navigation.navigate("Post")}
         />
 
         <Buckets />
