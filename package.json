@@ -58,7 +58,7 @@
     "react-redux": "^7.1.0",
     "redux": "^4.0.4",
     "styled-components": "^4.2.0",
-    "yarn": "^1.19.2",
+    "yarn": "^1.22.0",
     "yup": "^0.27.0"
   },
   "devDependencies": {
