@@ -1,6 +1,7 @@
-import React from "react";
-import { ScrollView, View } from "react-native";
-import styled from "styled-components";
+import React, { Fragment } from "react";
+import { View, FlatList } from "react-native";
+import styled, { withTheme } from "styled-components";
+import { SafeAreaView } from "react-navigation";
 
 import Header from "../components/Header";
 import ShortPost from "../components/ShortPost";
@@ -12,32 +13,42 @@ const Container = styled.View`
   background-color: ${props => props.theme.styled.BACKGROUND};
 `;
 
-function ListOfPost({ navigation }) {
+function ListOfPost({ navigation, theme }) {
   const posts = navigation.state.params.account || { posts: [] };
 
+  function Item({ item }) {
+    return (
+      <ShortPost
+        key={item.id}
+        title={item.title}
+        coverUrl={item.coverPostUrl}
+      />
+    );
+  }
+
   return (
-    <Container>
-      <Header back={() => navigation.goBack()} title="Posts" />
+    <Fragment>
+      <SafeAreaView backgroundColor={theme.styled.BOX_BACKGROUND} />
+      <SafeAreaView
+        style={{ flex: 1 }}
+        backgroundColor={theme.styled.BACKGROUND}
+      >
+        <Container>
+          <Header back={() => navigation.goBack()} title="Posts" />
 
-      <ScrollView>
-        <View style={{ margin: 16 }}>
-          <UserInfo account={posts} />
-
-          {posts.posts.length > 0 ? (
-            posts.posts.map(data => (
-              <ShortPost
-                key={data.id}
-                title={data.title}
-                coverUrl={data.coverPostUrl}
-              />
-            ))
-          ) : (
-            <Label>Not post here yet</Label>
-          )}
-        </View>
-      </ScrollView>
-    </Container>
+          <View style={{ margin: 16, flex: 1 }}>
+            <FlatList
+              data={posts.posts}
+              renderItem={({ item }) => <Item item={item} />}
+              ListEmptyComponent={() => <Label>Empty List</Label>}
+              ListHeaderComponent={() => <UserInfo account={posts} />}
+              scrollToIndex={{ params: { index: 7 } }}
+            />
+          </View>
+        </Container>
+      </SafeAreaView>
+    </Fragment>
   );
 }
 
-export default ListOfPost;
+export default withTheme(ListOfPost);

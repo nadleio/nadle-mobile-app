@@ -1,24 +1,27 @@
-import React, { useState } from "react";
-
+import React, { useState, Fragment } from "react";
 import {
-  StatusBar,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
   View,
   ActivityIndicator
 } from "react-native";
-
+import styled, { withTheme } from "styled-components";
 import { SafeAreaView } from "react-navigation";
-import { PaddingBox, Container, TextContent, UserMentions } from "./styled";
 
-import { Information } from "../../components/Text";
+import { UserMentions } from "./styled";
+
+import { Information, Label } from "../../components/Text";
 import { SmallImageProfile } from "../../assets/styles/Image";
-import { ViewFlex } from "../../assets/styles/styles";
-import { Header } from "../../components/Header";
 import { Mention } from "../../components/Mention";
+import Header from "../../components/Header";
 
 import json from "../../json/comments";
+
+const Container = styled.View`
+  flex: 1;
+  background-color: ${props => props.theme.styled.BACKGROUND};
+`;
 
 const users = [
   {
@@ -35,7 +38,7 @@ const users = [
   }
 ];
 
-function Comments(props) {
+function Comments({ theme, navigation }) {
   const [mention, setMention] = useState("");
   const [keyword, setKeyboard] = useState("");
 
@@ -62,90 +65,80 @@ function Comments(props) {
   }
 
   return (
-    <ViewFlex paddingBottom="0">
-      <SafeAreaView backgroundColor="white" />
-      <StatusBar barStyle="dark-content" />
-
-      <Header
-        backBool={true}
-        back={() => props.navigation.goBack()}
-        text="Comments"
-      />
-
-      <KeyboardAvoidingView
+    <Fragment>
+      <SafeAreaView backgroundColor={theme.styled.BOX_BACKGROUND} />
+      <SafeAreaView
         style={{ flex: 1 }}
-        behavior="padding"
-        keyboardVerticalOffset={Platform.OS === "android" ? 25 : 0}
+        backgroundColor={theme.styled.BACKGROUND}
       >
-        <ScrollView>
-          <PaddingBox>
-            {json.map(data => (
-              <Container>
-                <SmallImageProfile source={{ uri: data.image }} />
+        <Container>
+          <Header title="Comments" back={() => navigation.goBack()} />
 
-                <TextContent>
-                  <Information
-                    onPress={() =>
-                      props.navigation.navigate("SearchProfile", {
-                        id: 2
-                      })
-                    }
-                    size={16}
-                    weight="600"
-                    left={5}
-                  >
-                    {data.username}
-                  </Information>
+          <KeyboardAvoidingView
+            style={{ flex: 1 }}
+            behavior="padding"
+            keyboardVerticalOffset={Platform.OS === "android" ? 25 : 0}
+          >
+            <ScrollView>
+              {json.map((data, index) => (
+                <View style={{ padding: 16 }} key={index}>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <SmallImageProfile source={{ uri: data.image }} />
 
-                  <Information size={16} left={5} top={4}>
-                    {data.comment}
-                  </Information>
+                    <Label
+                      onPress={() =>
+                        navigation.navigate("SearchProfile", {
+                          id: 2
+                        })
+                      }
+                      weight={600}
+                      style={{ marginLeft: 8 }}
+                    >
+                      {data.username}
+                    </Label>
 
-                  <Information
-                    weight="600"
-                    color="#bdbdbd"
-                    size={12}
-                    left={5}
-                    top={4}
-                  >
-                    4H ago
-                  </Information>
-                </TextContent>
-              </Container>
-            ))}
-          </PaddingBox>
-        </ScrollView>
+                    <Label style={{ marginLeft: 4 }} weight="600" size={14}>
+                      • 4H ago
+                    </Label>
+                  </View>
 
-        <Mention
-          textInputMinHeight={40}
-          textInputMaxHeight={100}
-          trigger={"@"}
-          triggerLocation={"new-word-only"}
-          value={mention}
-          onChangeText={text => setMention(text)}
-          triggerCallback={callback}
-          renderSuggestionsRow={renderSuggestionsRow}
-          suggestionsData={users}
-          keyExtractor={(item, index) => item.username}
-          suggestionRowHeight={60}
-          horizontal={false}
-          MaxVisibleRowCount={3}
-          loadingComponent={() => (
-            <View
-              style={{
-                flex: 1,
-                width: "85%",
-                justifyContent: "center",
-                alignItems: "center"
-              }}
-            >
-              <ActivityIndicator />
-            </View>
-          )}
-        />
-      </KeyboardAvoidingView>
-    </ViewFlex>
+                  <Label style={{ marginTop: 8 }}>{data.comment}</Label>
+                </View>
+              ))}
+            </ScrollView>
+
+            <Mention
+              textInputMinHeight={40}
+              textInputMaxHeight={100}
+              trigger={"@"}
+              triggerLocation={"new-word-only"}
+              value={mention}
+              onChangeText={text => setMention(text)}
+              triggerCallback={callback}
+              renderSuggestionsRow={renderSuggestionsRow}
+              suggestionsData={users}
+              keyExtractor={(item, index) => item.username}
+              suggestionRowHeight={60}
+              horizontal={false}
+              MaxVisibleRowCount={3}
+              loadingComponent={() => (
+                <View
+                  style={{
+                    flex: 1,
+                    width: "85%",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                >
+                  <ActivityIndicator />
+                </View>
+              )}
+            />
+          </KeyboardAvoidingView>
+        </Container>
+      </SafeAreaView>
+    </Fragment>
   );
 }
 
-export default Comments;
+export default withTheme(Comments);

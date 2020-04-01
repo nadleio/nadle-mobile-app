@@ -3,7 +3,7 @@ import React from "react";
 import ApolloProvider from "./lib/ApolloProvider";
 import App from "./App";
 
-function Index() {
+function Nadle() {
   return (
     <ApolloProvider>
       <App />
@@ -11,4 +11,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default Nadle;

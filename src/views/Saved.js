@@ -3,6 +3,7 @@ import React, { useState, useRef } from "react";
 import { ScrollView, View, TouchableOpacity } from "react-native";
 import styled, { withTheme } from "styled-components";
 import Swiper from "react-native-swiper";
+import { SafeAreaView } from "react-navigation";
 
 import { Label } from "../components/Text";
 
@@ -31,48 +32,53 @@ function UserPosts({ theme }) {
   }
 
   return (
-    <Container>
-      <Header title="Saved Posts" />
+    <SafeAreaView
+      style={{ flex: 1 }}
+      backgroundColor={theme.styled.BOX_BACKGROUND}
+    >
+      <Container>
+        <Header title="Saved Posts" />
 
-      <View style={{ margin: 16, flex: 1 }}>
-        <Picker index={active} swipe={index => swipe(index)} />
+        <View style={{ margin: 16, flex: 1 }}>
+          <Picker index={active} swipe={index => swipe(index)} />
 
-        <ScrollView>
-          <View style={{ marginTop: 24 }}>
-            <Swiper
-              ref={ref}
-              onIndexChanged={index => setActive(index)}
-              loop={false}
-              showsPagination={false}
-              index={0}
-            >
-              <View style={{ flex: 1 }}>
-                <ShortPost />
-                <ShortPost />
-                <ShortPost />
-              </View>
+          <ScrollView>
+            <View style={{ marginTop: 24 }}>
+              <Swiper
+                ref={ref}
+                onIndexChanged={index => setActive(index)}
+                loop={false}
+                showsPagination={false}
+                index={0}
+              >
+                <View style={{ flex: 1 }}>
+                  <ShortPost />
+                  <ShortPost />
+                  <ShortPost />
+                </View>
 
-              <View style={{ flex: 1 }}>
-                <TouchableOpacity onPress={() => setAddBucket(true)}>
-                  <Label
-                    style={{ marginBottom: 16 }}
-                    weight={600}
-                    color={theme.styled.TITLE}
-                  >
-                    Add new bucket
-                  </Label>
-                </TouchableOpacity>
+                <View style={{ flex: 1 }}>
+                  <TouchableOpacity onPress={() => setAddBucket(true)}>
+                    <Label
+                      style={{ marginBottom: 16 }}
+                      weight={600}
+                      color={theme.styled.TITLE}
+                    >
+                      Add new bucket
+                    </Label>
+                  </TouchableOpacity>
 
-                <ShortBucket />
-                <ShortBucket />
-              </View>
-            </Swiper>
-          </View>
-        </ScrollView>
-      </View>
+                  <ShortBucket />
+                  <ShortBucket />
+                </View>
+              </Swiper>
+            </View>
+          </ScrollView>
+        </View>
 
-      {addBucket && <AddNewBucket close={() => setAddBucket(false)} />}
-    </Container>
+        {addBucket && <AddNewBucket close={() => setAddBucket(false)} />}
+      </Container>
+    </SafeAreaView>
   );
 }
 

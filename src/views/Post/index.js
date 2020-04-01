@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import styled, { withTheme } from "styled-components";
 import { SafeAreaView } from "react-navigation";
@@ -71,7 +71,7 @@ function Post({ navigation, theme }) {
       backgroundColor={theme.styled.BOX_BACKGROUND}
     >
       <Container>
-        <Header back={() => navigation.goBack()} />
+        <Header isVisible={true} back={() => navigation.goBack()} />
 
         <FadeInView>
           <ScrollView contentOffset={{ x: 0, y: 110 }}>

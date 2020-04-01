@@ -13,7 +13,7 @@ const Container = styled.View`
   align-items: center;
   justify-content: space-between;
   background-color: ${props => props.theme.styled.BOX_BACKGROUND};
-  display: ${props => (props.isVisible ? "none" : "flex")};
+  display: ${props => (props.isVisible ? "flex" : "none")};
 `;
 
 function Header({ back, theme, isVisible }) {

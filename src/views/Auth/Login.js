@@ -96,6 +96,7 @@ function Login({ theme, navigation }) {
 
   async function handleAuthForm(values) {
     setIsLoading(true);
+
     try {
       const { data } = await signin({
         variables: {
@@ -116,6 +117,7 @@ function Login({ theme, navigation }) {
         setAuthSucess(true);
       }
     } catch (error) {
+      console.log(error);
       // Sentry Catch
     }
     setIsLoading(false);

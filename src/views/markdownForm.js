@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, Fragment } from "react";
 import { ScrollView, View } from "react-native";
 import styled, { withTheme } from "styled-components";
 import { Formik } from "formik";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { SafeAreaView } from "react-navigation";
 
 import Header from "../components/Header";
 import Input from "../components/Form/Input";
@@ -112,57 +113,71 @@ function MarkdownForm({ theme, navigation }) {
   }
 
   return (
-    <Container>
-      <Header title="Details" back={() => navigation.goBack()} />
+    <Fragment>
+      <SafeAreaView backgroundColor={theme.styled.BOX_BACKGROUND} />
+      <SafeAreaView
+        style={{ flex: 1 }}
+        backgroundColor={theme.styled.BACKGROUND}
+      >
+        <Container>
+          <Header title="Details" back={() => navigation.goBack()} />
 
-      <ScrollView>
-        <Formik
-          enableReinitialize
-          initialValues={{
-            body: navigation.state.params.text,
-            title: "",
-            coverPostUrl: "",
-            organization: {}
-          }}
-          onSubmit={values => uploadCover(values)}
-        >
-          {({ handleChange, handleSubmit, values, setFieldValue }) => (
-            <View style={{ padding: 16 }}>
-              <Input
-                onChangeText={handleChange("title")}
-                label="Title"
-                onSubmitEditing={() => {
-                  this.description.focus();
-                }}
-                style={{ marginBottom: 32 }}
-                multiline={true}
-                value={values.title}
-              />
+          <ScrollView>
+            <Formik
+              enableReinitialize
+              initialValues={{
+                body: navigation.state.params.text,
+                title: "",
+                coverPostUrl: "",
+                organization: {}
+              }}
+              onSubmit={values => uploadCover(values)}
+            >
+              {({ handleChange, handleSubmit, values, setFieldValue }) => (
+                <View style={{ padding: 16 }}>
+                  <Input
+                    onChangeText={handleChange("title")}
+                    label="Title"
+                    onSubmitEditing={() => {
+                      this.description.focus();
+                    }}
+                    style={{ marginBottom: 32 }}
+                    multiline={true}
+                    value={values.title}
+                  />
 
-              <Cover setCover={file => setFieldValue("coverPostUrl", file)} />
+                  <Cover
+                    setCover={file => setFieldValue("coverPostUrl", file)}
+                  />
 
-              <Organization
-                organization={values.organization}
-                setOrganization={data => setFieldValue("organization", data)}
-              />
+                  <Organization
+                    organization={values.organization}
+                    setOrganization={data =>
+                      setFieldValue("organization", data)
+                    }
+                  />
 
-              <Button
-                disabled={
-                  values.title === "" || values.coverPostUrl === "" || isLoading
-                }
-                action={handleSubmit}
-                text="POST"
-                color={[theme.colors.PRIMARY, theme.colors.PRIMARY]}
-                textColor="#fff"
-                style={{ marginTop: 32 }}
-              />
-            </View>
-          )}
-        </Formik>
-      </ScrollView>
+                  <Button
+                    disabled={
+                      values.title === "" ||
+                      values.coverPostUrl === "" ||
+                      isLoading
+                    }
+                    action={handleSubmit}
+                    text="POST"
+                    color={[theme.colors.PRIMARY, theme.colors.PRIMARY]}
+                    textColor="#fff"
+                    style={{ marginTop: 32 }}
+                  />
+                </View>
+              )}
+            </Formik>
+          </ScrollView>
 
-      {isLoading && <Loading />}
-    </Container>
+          {isLoading && <Loading />}
+        </Container>
+      </SafeAreaView>
+    </Fragment>
   );
 }
 

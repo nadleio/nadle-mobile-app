@@ -33,7 +33,7 @@ import Saved from "./views/Saved";
 import MarkdownForm from "./views/markdownForm";
 import SearchResults from "./views/SearchResults";
 import ListOfPosts from "./views/ListOfPosts";
-// import Comments from "./views/Comments";
+import Comments from "./views/Comments";
 // import Configuration from "./views/Configuration";
 // import EditProfile from "./components/EditProfile";
 // import ChangePassword from "./views/ChangePassword";
@@ -167,9 +167,9 @@ const Root = createStackNavigator(
     // Notifications: { screen: Notifications },
     MarkdownForm: { screen: compose(withSelf)(MarkdownForm) },
     SearchResults: { screen: SearchResults },
-    ListOfPosts: { screen: ListOfPosts }
+    ListOfPosts: { screen: ListOfPosts },
     // EditProfile: { screen: compose(withSelf)(EditProfile) }
-    // Comments: { screen: Comments },
+    Comments: { screen: Comments }
     // Configuration: { screen: Configuration },
     // EditProfile: { screen: EditProfile },
     // ChangePassword: { screen: ChangePassword },

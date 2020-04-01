@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* nadleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* nadleTests.m */; };
 		070406B4E30B40C4BC7D98DF /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0EA69E5D61784B95885A07B4 /* AntDesign.ttf */; };

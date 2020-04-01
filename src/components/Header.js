@@ -1,6 +1,6 @@
 import React from "react";
 import { StatusBar, View, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-navigation";
+// import { SafeAreaView } from "react-navigation";
 import styled, { withTheme } from "styled-components";
 
 import { Title } from "./Text";
@@ -19,7 +19,7 @@ const Container = styled.View`
 function Header({ title, back, theme }) {
   return (
     <View>
-      <SafeAreaView backgroundColor={theme.styled.BOX_BACKGROUND} />
+      {/* <SafeAreaView backgroundColor={theme.styled.BOX_BACKGROUND} /> */}
       <StatusBar barStyle={theme.styled.STATUS_BAR} />
 
       <Container>

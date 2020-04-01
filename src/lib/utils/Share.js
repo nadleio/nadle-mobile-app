@@ -1,6 +1,6 @@
 import { Share } from "react-native";
 
-export const ShareIt = async url => {
+async function ShareIt(url) {
   try {
     await Share.share({
       message: url
@@ -8,4 +8,6 @@ export const ShareIt = async url => {
   } catch (error) {
     alert(error.message);
   }
-};
+}
+
+export default ShareIt;
