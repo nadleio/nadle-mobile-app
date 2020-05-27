@@ -105,6 +105,7 @@ function Login({ theme, navigation }) {
         }
       });
 
+      console.log(data);
       const user = data.login.data.user;
 
       if (data.login.success) {
