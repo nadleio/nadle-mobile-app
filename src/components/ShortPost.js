@@ -2,7 +2,6 @@ import React from "react";
 import { Text } from "react-native";
 import styled, { withTheme } from "styled-components";
 
-import ActionLink from "./ActionLink";
 import Tags from "./Tags";
 
 const Container = styled.TouchableOpacity`
@@ -47,8 +46,6 @@ const ShortPost = ({ goToPostDetails, theme, ...props }) => {
       <Thumbnail source={{ uri: props.coverUrl }} />
 
       <Content>
-        <ActionLink to={() => console.log("ACTION")} text="@python" />
-
         <Text
           style={{
             marginTop: 4,

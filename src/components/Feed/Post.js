@@ -7,7 +7,7 @@ import Icon from "../../components/Icon";
 
 import { ImageBackground, SmallImageProfile } from "../../assets/styles/Image";
 
-import { ShareIt } from "../../lib/utils/Share";
+import Share from "../../lib/utils/Share";
 import json from "../../json/feed";
 
 var moment = require("moment");
@@ -65,6 +65,7 @@ const BoldContent = styled.Text`
   line-height: 21;
   font-weight: bold;
   margin-left: 8px;
+  margin-top: 4px;
 `;
 
 const SmallContent = styled.Text`
@@ -85,7 +86,6 @@ const HeightToBottomLine = styled.View`
 `;
 
 function Post({ theme, profile, post, comments }) {
-  const [modalbucket, setModalbucket] = useState(false);
   const [id, setId] = useState();
 
   function showActionSheet(id) {
@@ -129,7 +129,6 @@ function Post({ theme, profile, post, comments }) {
                     </TouchableOpacity>
 
                     <SmallContent>
-                      {" "}
                       • {moment(data.postHour).fromNow()}
                     </SmallContent>
                   </CenterItems>
@@ -142,8 +141,6 @@ function Post({ theme, profile, post, comments }) {
                     />
                   </TouchableOpacity>
                 </Space>
-
-                <Content style={{ color: "#0091ff" }}> @{data.from}</Content>
 
                 <BoldContent numberOfLines={2}>{data.title}</BoldContent>
 
@@ -201,7 +198,7 @@ function Post({ theme, profile, post, comments }) {
                     />
                   </TouchableOpacity>
 
-                  <TouchableOpacity onPress={() => ShareIt(data.url)}>
+                  <TouchableOpacity onPress={() => Share(data.url)}>
                     <Icon
                       name="outline-share"
                       color={theme.styled.ICON}
@@ -235,7 +232,6 @@ function Post({ theme, profile, post, comments }) {
                   </TouchableOpacity>
 
                   <SmallContent>
-                    {" "}
                     • {moment(data.postHour).fromNow()}
                   </SmallContent>
                 </Row>

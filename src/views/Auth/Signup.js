@@ -1,11 +1,14 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import styled, { withTheme } from "styled-components";
 import { Keyboard, ScrollView, View } from "react-native";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { Formik } from "formik";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import { SIGNUP_SCHEMA } from "../../lib/form/authValidations";
+import ContextAuth from "../../lib/ContextAuth";
+import ContextSelf from "../../lib/ContextSelf";
 
 import ERROR from "../../nadle-i18/errors";
 
@@ -15,6 +18,8 @@ import Button from "../../components/Button";
 import Input from "../../components/Form/Input";
 import ActionLink from "../../components/ActionLink";
 import { InputValidation } from "../../components/Text";
+
+import { userInformation } from "../../Fragments/userInfo";
 
 const Container = styled.View`
   flex: 1;
@@ -43,12 +48,22 @@ const MUTATION_SIGNUP = gql`
       message
       success
       errorCode
+      data {
+        token
+        user {
+          ...UserInformation
+        }
+      }
     }
   }
+  ${userInformation}
 `;
 
 function Signup({ theme, navigation }) {
   const [signup] = useMutation(MUTATION_SIGNUP);
+
+  const { setLogged } = useContext(ContextAuth);
+  const { updateSelf } = useContext(ContextSelf);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -65,8 +80,11 @@ function Signup({ theme, navigation }) {
         });
 
         if (data.signup.success) {
-          alert("Please check your email to confirm your account");
-          navigation.navigate("Login");
+          updateSelf(data.signup.data.user);
+
+          await AsyncStorage.setItem("authToken", data.signup.data.token);
+          setLogged(true);
+          // navigation.navigate("Login");
         } else {
           alert(ERROR[data.signup.errorCode]);
         }

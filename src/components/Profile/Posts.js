@@ -2,7 +2,6 @@ import React from "react";
 import styled, { withTheme } from "styled-components";
 
 import Icon from "../Icon";
-
 import ShortPost from "../ShortPost";
 
 const Container = styled.View`

@@ -5,10 +5,7 @@ import _ from "lodash";
 
 import Header from "../components/Profile/Header";
 import Biography from "../components/Profile/Biography";
-import Members from "../components/Profile/Members";
-import Organizations from "../components/Profile/Organizations";
 import Posts from "../components/Profile/Posts";
-import Buckets from "../components/Profile/Buckets";
 import EditProfile from "../components/EditProfile/EditProfile";
 
 const Container = styled.View`
@@ -33,16 +30,11 @@ function Profile({ self, navigation }) {
 
         <Biography account={account} />
 
-        {/* {account.type === "USER" ? <Organizations /> : <Members />} */}
-        {account.type !== "USER" ? <Organizations /> : <Members />}
-
         <Posts
           goToPosts={() => navigation.navigate("ListOfPosts", { account })}
           account={account}
           goToPostDetails={() => navigation.navigate("Post")}
         />
-
-        <Buckets />
 
         {editProfile && (
           <EditProfile self={self} close={() => setEditProfile(false)} />

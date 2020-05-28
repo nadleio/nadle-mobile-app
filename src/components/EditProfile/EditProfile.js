@@ -8,15 +8,12 @@ import gql from "graphql-tag";
 
 import Header from "./Header";
 import Input from "../Form/Input";
-
-import ChangeUsername from "./ChangeUsername";
-import ChangeEmail from "./ChangeEmail";
 import ImageHeader from "./ImageHeader";
+import Loading from "../Loading";
 
 import ContextSelf from "../../lib/ContextSelf";
 
 import { userInformation } from "../../Fragments/userInfo";
-import Loading from "../Loading";
 
 const Container = styled.View`
   flex: 1;
@@ -71,8 +68,6 @@ function EditProfile({ self, close }) {
   const [update] = useMutation(UPDATE_INFO);
   const [updateAvatar] = useMutation(UPDATE_AVATAR);
 
-  const [changeUsername, setChangeUsername] = useState(false);
-  const [changeEmail, setChangeEmail] = useState(false);
   const [loading, setLoading] = useState(false);
   const [changePhoto, setChangePhoto] = useState(false);
 
@@ -197,14 +192,6 @@ function EditProfile({ self, close }) {
             </Container>
           )}
         </Formik>
-
-        {changeUsername && (
-          <ChangeUsername close={() => setChangeUsername(false)} self={self} />
-        )}
-
-        {changeEmail && (
-          <ChangeEmail close={() => setChangeEmail(false)} self={self} />
-        )}
 
         {loading && <Loading />}
       </Container>

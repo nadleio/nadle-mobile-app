@@ -10,7 +10,6 @@ import styled, { withTheme } from "styled-components";
 
 import Preview from "../components/markdown/Preview/Preview";
 import Gif from "../components/Gif";
-import Gist from "../components/Gist/Gist";
 import ModalLink from "../components/markdown/ModalLink";
 import Buttons from "../components/markdown/Buttons";
 import SetTable from "../components/markdown/SetTable";
@@ -40,7 +39,6 @@ function MarkdownView({ theme, navigation }) {
   const [selection, setSelection] = useState({ start: 0, end: 0 });
   const [showAlert, setShowAlert] = useState(false);
   const [modalGif, setModalGif] = useState(false);
-  const [modalGist, setModalGist] = useState(false);
   const [first, setFirst] = useState(false);
   const [titleAlert, setTitleAlert] = useState(false);
   const [tableAlert, setTableAlert] = useState(false);
@@ -143,15 +141,6 @@ function MarkdownView({ theme, navigation }) {
     });
   }
 
-  async function gist(content, type) {
-    const response = await JustAddSign(
-      selection.start,
-      "\n" + "```" + type + "\n" + content + "\n" + "```",
-      text
-    );
-    setText(response + "\n");
-  }
-
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
@@ -210,7 +199,6 @@ function MarkdownView({ theme, navigation }) {
         link={() => setShowAlert(true)}
         gif={() => setModalGif(true)}
         table={() => setTableAlert(true)}
-        gist={() => setModalGist(true)}
         blocks={() => startSign(">")}
         pointList={() => startSign("-")}
         line={() => twoSimbols("~~~~")}
@@ -241,17 +229,6 @@ function MarkdownView({ theme, navigation }) {
           show={modalGif}
           close={() => setModalGif(false)}
           gif={value => showGif(value)}
-        />
-      )}
-
-      {modalGist && (
-        <Gist
-          show={modalGist}
-          close={() => setModalGist(false)}
-          gist={(content, type) => {
-            setModalGist(false);
-            gist(content, type);
-          }}
         />
       )}
 

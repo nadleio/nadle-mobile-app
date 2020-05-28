@@ -96,12 +96,6 @@ function Buttons({ theme, ...props }) {
           </Icon>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => props.gist()} left={35}>
-          <Icon color={theme.styled.ICON} size={20}>
-            
-          </Icon>
-        </TouchableOpacity>
-
         <TouchableOpacity onPress={() => props.codeLine()}>
           <Icon color={theme.styled.ICON} size={20}>
             

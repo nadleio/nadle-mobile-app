@@ -3,7 +3,14 @@
 import React, { useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import styled, { withTheme } from "styled-components";
-import { Keyboard, ScrollView, View, Linking, Platform } from "react-native";
+import {
+  Keyboard,
+  ScrollView,
+  View,
+  Linking,
+  Platform,
+  Alert
+} from "react-native";
 import { Formik } from "formik";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -19,7 +26,6 @@ import Separator from "../../components/Separator";
 import Button from "../../components/Button";
 import Input from "../../components/Form/Input";
 import ActionLink from "../../components/ActionLink";
-import { InputValidation } from "../../components/Text";
 
 import { userInformation } from "../../Fragments/userInfo";
 
@@ -66,7 +72,6 @@ function Login({ theme, navigation }) {
   const { updateSelf } = useContext(ContextSelf);
 
   const [isLoading, setIsLoading] = useState(false);
-  const [authSuccess, setAuthSucess] = useState(false);
 
   const [signin] = useMutation(MUTATION_SIGNIN);
 
@@ -105,17 +110,15 @@ function Login({ theme, navigation }) {
         }
       });
 
-      console.log(data);
-      const user = data.login.data.user;
-
       if (data.login.success) {
-        console.log(user);
-        updateSelf(user);
+        updateSelf(data.login.data.user);
 
         await AsyncStorage.setItem("authToken", data.login.data.token);
         setLogged(true);
       } else {
-        setAuthSucess(true);
+        Alert.alert("Error", "Your username/email or password incorrect.", [
+          { text: "OK" }
+        ]);
       }
     } catch (error) {
       console.log(error);
@@ -135,6 +138,7 @@ function Login({ theme, navigation }) {
 
         <FormContainer>
           <Formik
+            enableReinitialize
             initialValues={{ auth: "", password: "" }}
             onSubmit={values => handleAuthForm(values)}
           >
@@ -167,12 +171,6 @@ function Login({ theme, navigation }) {
                   }}
                   returnKeyType="next"
                 />
-
-                {authSuccess && (
-                  <InputValidation style={{ marginBottom: 22 }} top={10}>
-                    Your username/email or password incorrect
-                  </InputValidation>
-                )}
 
                 <Button
                   isLoading={isLoading}

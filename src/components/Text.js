@@ -1,14 +1,6 @@
 import styled from "styled-components";
 import theme from "../theme";
 
-// export const Title = styled.Text`
-//   font-family: "System";
-//   font-size: 20;
-//   color: black;
-//   font-weight: bold;
-//   margin-top: ${props => props.top || 0};
-// `;
-
 export const ActionLink = styled.Text`
   font-family: "System";
   font-size: ${props => props.size || 16};

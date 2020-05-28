@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { ScrollView, View } from "react-native";
 import styled, { withTheme } from "styled-components";
 import { SafeAreaView } from "react-navigation";
