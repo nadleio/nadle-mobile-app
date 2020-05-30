@@ -1,4 +1,4 @@
-import React, { useState, useContext, Fragment } from "react";
+import React, { useState, Fragment } from "react";
 import { ScrollView, View } from "react-native";
 import styled, { withTheme } from "styled-components";
 import { Formik } from "formik";
@@ -10,13 +10,10 @@ import Header from "../components/Header";
 import Input from "../components/Form/Input";
 import Button from "../components/Button";
 
-import Organization from "../components/MarkDownForm/Organization";
 import Cover from "../components/MarkDownForm/Cover";
 import Loading from "../components/Loading";
 
-import { userInformation } from "../Fragments/userInfo";
-
-import ContextSelf from "../lib/ContextSelf";
+import { uploadFile } from "../Fragments/file";
 
 const Container = styled.View`
   flex: 1;
@@ -24,47 +21,36 @@ const Container = styled.View`
 `;
 
 const MUTATION_POST = gql`
-  mutation(
-    $body: String!
-    $title: String!
-    $coverPostUrl: String!
-    $organizationId: Int!
-  ) {
-    createPost(
-      body: $body
-      title: $title
-      coverPostUrl: $coverPostUrl
-      organizationId: $organizationId
-    ) {
+  mutation($body: String!, $title: String!, $coverPostUrl: String!) {
+    createPost(body: $body, title: $title, coverPostUrl: $coverPostUrl) {
       message
       success
       errorCode
       data {
-        ...UserInformation
+        id
+        title
       }
     }
   }
-  ${userInformation}
 `;
 
-const UPLOAD_COVER = gql`
+const UPLOAD_FILE = gql`
   mutation($file: Upload!) {
     uploadFile(file: $file) {
       message
       success
       errorCode
       data {
-        url
+        ...UploadFile
       }
     }
   }
+  ${uploadFile}
 `;
 
 function MarkdownForm({ theme, navigation }) {
   const [createPost] = useMutation(MUTATION_POST);
-  const [uploadFile] = useMutation(UPLOAD_COVER);
-
-  const { updateSelf } = useContext(ContextSelf);
+  const [uploadFile] = useMutation(UPLOAD_FILE);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -82,9 +68,10 @@ function MarkdownForm({ theme, navigation }) {
         uploadPost(values, coverUrl);
       } else {
         alert("Something happend, plase try again");
+        setIsLoading(false);
       }
     } catch (error) {
-      // Sentry Catch
+      setIsLoading(false);
     }
   }
 
@@ -94,15 +81,13 @@ function MarkdownForm({ theme, navigation }) {
         variables: {
           body: values.body,
           title: values.title,
-          coverPostUrl: coverUrl,
-          organizationId: 0
+          coverPostUrl: coverUrl
         }
       });
 
-      if (data.createPost.success) {
-        updateSelf(data.createPost.data);
-        setIsLoading(false);
+      console.log(data);
 
+      if (data.createPost.success) {
         navigation.navigate("Profile");
       } else {
         alert("Something happend, plase try again");
@@ -110,6 +95,8 @@ function MarkdownForm({ theme, navigation }) {
     } catch (error) {
       // Sentry Catch
     }
+
+    setIsLoading(false);
   }
 
   return (
@@ -150,13 +137,6 @@ function MarkdownForm({ theme, navigation }) {
                     setCover={file => setFieldValue("coverPostUrl", file)}
                   />
 
-                  <Organization
-                    organization={values.organization}
-                    setOrganization={data =>
-                      setFieldValue("organization", data)
-                    }
-                  />
-
                   <Button
                     disabled={
                       values.title === "" ||
@@ -167,7 +147,6 @@ function MarkdownForm({ theme, navigation }) {
                     text="POST"
                     color={[theme.colors.PRIMARY, theme.colors.PRIMARY]}
                     textColor="#fff"
-                    style={{ marginTop: 32 }}
                   />
                 </View>
               )}

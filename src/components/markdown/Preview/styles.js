@@ -38,10 +38,7 @@ export const CodeLine = styled.Text`
 `;
 
 export const CodeLineContainer = styled.View`
-  /* border-radius: 8px; */
-  /* background-color: ${props => props.theme.styled.BOX_BACKGROUND}; */
-  background-color:red;
-  /* padding: 3%; */
+  background-color: red;
 `;
 
 export const ListContainer = styled.View`

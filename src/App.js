@@ -42,8 +42,9 @@ console.disableYellowBox = true;
 
 function App() {
   const { themeMode, setThemeMode, theme } = useTheme();
+
   const [loaded, setLoaded] = useState(false);
-  const [logged, setLogged] = useState(false);
+  const [logged, setLogged] = useState(null);
   const [loadingModal, setLoadingModal] = useState(false);
   const [self, setSelf] = useState({});
 
@@ -79,6 +80,7 @@ function App() {
         }, 2000);
       });
     }
+
     isLogged();
   }, [data, loading]);
 

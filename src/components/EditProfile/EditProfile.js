@@ -26,16 +26,14 @@ const UPDATE_INFO = gql`
     $lastName: String
     $biography: String
     $link: String
-    $latitude: Float
-    $longitude: Float
+    $location: String
   ) {
     updateInfo(
       firstName: $firstName
       lastName: $lastName
       biography: $biography
       link: $link
-      latitude: $latitude
-      longitude: $longitude
+      location: $location
     ) {
       message
       success
@@ -62,14 +60,30 @@ const UPDATE_AVATAR = gql`
   ${userInformation}
 `;
 
+const UPDATE_COVER_AVATAR = gql`
+  mutation($file: Upload!) {
+    changeCoverAvatar(file: $file) {
+      message
+      success
+      errorCode
+      data {
+        ...UserInformation
+      }
+    }
+  }
+  ${userInformation}
+`;
+
 function EditProfile({ self, close }) {
   const { updateSelf } = useContext(ContextSelf);
 
   const [update] = useMutation(UPDATE_INFO);
   const [updateAvatar] = useMutation(UPDATE_AVATAR);
+  const [updateCoverAvatar] = useMutation(UPDATE_COVER_AVATAR);
 
   const [loading, setLoading] = useState(false);
   const [changePhoto, setChangePhoto] = useState(false);
+  const [changeCoverAvatar_state, setChangeCoverAvatar] = useState(false);
 
   async function updateInfo(values) {
     setLoading(true);
@@ -81,8 +95,7 @@ function EditProfile({ self, close }) {
           lastName: values.lastName || null,
           biography: values.biography || null,
           link: values.link || null,
-          latitude: 0.0,
-          longitude: 0.0
+          location: values.location || null
         }
       });
 
@@ -91,13 +104,17 @@ function EditProfile({ self, close }) {
       if (response.success) {
         updateSelf(response.data);
 
+        if (changeCoverAvatar_state) {
+          changeCoverAvatar(values.coverAvatar);
+        }
+
         if (changePhoto) {
           changeAvatar(values.picture);
-        } else {
-          setLoading(false);
-          close();
         }
       }
+
+      setLoading(false);
+      close();
     } catch (error) {
       setLoading(false);
     }
@@ -105,22 +122,31 @@ function EditProfile({ self, close }) {
 
   async function changeAvatar(file) {
     try {
-      const { data } = await updateAvatar({
-        variables: { file }
-      });
+      const { data } = await updateAvatar({ variables: { file } });
 
       if (data.changeAvatar.success) {
         updateSelf(data.changeAvatar.data);
-
-        setLoading(false);
-        close();
-      } else {
         setLoading(false);
         close();
       }
     } catch (error) {
-      setLoading(false);
       alert("Something happend, please try again.");
+      setLoading(false);
+    }
+  }
+
+  async function changeCoverAvatar(file) {
+    try {
+      const { data } = await updateCoverAvatar({ variables: { file } });
+
+      if (data.changeCoverAvatar.success) {
+        updateSelf(data.changeCoverAvatar.data);
+        setLoading(false);
+        close();
+      }
+    } catch (error) {
+      alert("Something happend, please try again.");
+      setLoading(false);
     }
   }
 
@@ -142,7 +168,12 @@ function EditProfile({ self, close }) {
                     setChangePhoto(true);
                     setFieldValue("picture", form);
                   }}
+                  setCoverAvatar={form => {
+                    setChangeCoverAvatar(true);
+                    setFieldValue("coverAvatar", form);
+                  }}
                   picture={self.avatar}
+                  coverAvatar={self.coverAvatar}
                 />
 
                 <View style={{ marginTop: 16, marginHorizontal: 16 }}>
@@ -186,6 +217,17 @@ function EditProfile({ self, close }) {
                     value={values.link}
                     style={{ marginBottom: 32 }}
                     placeholder="Insert your link"
+                  />
+
+                  <Input
+                    onChangeText={handleChange("location")}
+                    label="Location"
+                    autoCapitalize="none"
+                    returnKeyType="next"
+                    spellCheck={false}
+                    value={values.location}
+                    style={{ marginBottom: 32 }}
+                    placeholder="Insert your location"
                   />
                 </View>
               </KeyboardAwareScrollView>

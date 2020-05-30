@@ -18,12 +18,6 @@ const ImageContainer = styled.View`
   align-items: center;
 `;
 
-const Cover = styled.ImageBackground`
-  height: 210px;
-  width: 100%;
-  background-color: #fff;
-`;
-
 const ProfilePicture = styled.ImageBackground`
   height: 64px;
   width: 64px;
@@ -39,9 +33,15 @@ const AddCover = styled.View`
   align-items: center;
 `;
 
-function ImageHeader({ picture, onPressProfile }) {
+const Cover = styled.ImageBackground`
+  height: 210px;
+  width: 100%;
+  background-color: #fff;
+`;
+
+function ImageHeader({ picture, coverAvatar, ...props }) {
   const [profilePhoto, setProfilePhoto] = useState(picture);
-  const [coverPhoto, setCoverPhoto] = useState(picture);
+  const [coverPhoto, setCoverPhoto] = useState(coverAvatar);
 
   async function changeAvatar() {
     const image = await Photo();
@@ -55,23 +55,23 @@ function ImageHeader({ picture, onPressProfile }) {
         type: "image/jpeg"
       });
 
-      onPressProfile(file);
+      props.onPressProfile(file);
     }
   }
 
-  async function changeCover() {
+  async function changeCoverAvatar() {
     const image = await Photo();
 
     if (image !== "error") {
       setCoverPhoto(image.path);
 
-      // const file = new ReactNativeFile({
-      //   uri: image.path,
-      //   name: image.filename,
-      //   type: "image/jpeg"
-      // });
+      const file = new ReactNativeFile({
+        uri: image.path,
+        name: image.filename,
+        type: "image/jpeg"
+      });
 
-      // onPressProfile(file);
+      props.setCoverAvatar(file);
     }
   }
 
@@ -80,7 +80,7 @@ function ImageHeader({ picture, onPressProfile }) {
       <Cover source={coverPhoto ? { uri: coverPhoto } : DEFAULT_PROFILE}>
         <AddCover>
           <Icon
-            onPress={() => changeCover()}
+            onPress={() => changeCoverAvatar()}
             name="outline-plus-circle"
             color="white"
             size={26}

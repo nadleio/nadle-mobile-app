@@ -25,7 +25,6 @@ import Profile from "./views/Profile";
 // import Notifications from "./views/Notifications";
 import Post from "./views/Post";
 import Search from "./views/Search";
-// import YoutubeForAndroid from "./views/Post/youtubeForAndroid";
 // import Subscriptions from "./views/Subscriptions";
 // import UserPosts from "./views/UserPosts";
 // import CollectionPosts from "./views/CollectionPosts";
@@ -35,11 +34,6 @@ import SearchResults from "./views/SearchResults";
 import ListOfPosts from "./views/ListOfPosts";
 import Comments from "./views/Comments";
 // import Configuration from "./views/Configuration";
-// import EditProfile from "./components/EditProfile";
-// import ChangePassword from "./views/ChangePassword";
-// import MyOrganizations from "./views/myOrganizations";
-// import ShareNadle from "./views/shareNadle";
-// import Suggestions from "./views/suggestions";
 
 import DEFAULT_PROFILE from "./assets/images/defaultProfile.png";
 
@@ -155,6 +149,7 @@ const Root = createStackNavigator(
     TabNavigator,
     // Login: { screen: Login },
     // Signup: { screen: Signup },
+
     // InputEmail: { screen: InputEmail },
     // SendCode: { screen: SendCode },
     // ResetPassword: { screen: ResetPassword },
@@ -177,26 +172,18 @@ const Root = createStackNavigator(
     // ShareNadle: { screen: ShareNadle },
     // Suggestions: { screen: Suggestions }
   },
-  {
-    header: null,
-    headerMode: "none"
-  }
+  { header: null, headerMode: "none" }
 );
 
 const NotAuthenticatedRoot = createStackNavigator(
   {
-    // Redirect: { screen: Redirect },
     Login: { screen: Login },
+    Signup: { screen: Signup },
     ResetPassword: { screen: ResetPassword },
-    ChangePassword: { screen: ChangePassword },
-    Signup: { screen: Signup }
-
-    // SearchProfile: { screen: Profile }
+    ChangePassword: { screen: ChangePassword }
   },
-  {
-    header: null,
-    headerMode: "none"
-  }
+
+  { header: null, headerMode: "none" }
 );
 
 // export const AppContainer = (authenticated = true) =>

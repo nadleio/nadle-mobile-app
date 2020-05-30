@@ -7,6 +7,8 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import styled, { withTheme } from "styled-components";
+import { useMutation } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
 import Preview from "../components/markdown/Preview/Preview";
 import Gif from "../components/Gif";
@@ -26,6 +28,25 @@ import JustAddSign from "../components/markdown/functions/JustAddSign";
 import CodeBlock from "../components/markdown/functions/CodeBlock";
 import MarkDownTitles from "../components/markdown/MarkDownTitles";
 import Table from "../components/markdown/functions/Table";
+import Loading from "../components/Loading";
+
+import { uploadFile } from "../Fragments/file";
+
+const { ReactNativeFile } = require("apollo-upload-client");
+
+const UPLOAD_FILE = gql`
+  mutation($file: Upload!) {
+    uploadFile(file: $file) {
+      message
+      success
+      errorCode
+      data {
+        ...UploadFile
+      }
+    }
+  }
+  ${uploadFile}
+`;
 
 const InputContainer = styled.View`
   flex: 1;
@@ -34,6 +55,8 @@ const InputContainer = styled.View`
 `;
 
 function MarkdownView({ theme, navigation }) {
+  const [uploadFile] = useMutation(UPLOAD_FILE);
+
   const [modal, setModal] = useState(false);
   const [text, setText] = useState("");
   const [selection, setSelection] = useState({ start: 0, end: 0 });
@@ -44,6 +67,7 @@ function MarkdownView({ theme, navigation }) {
   const [tableAlert, setTableAlert] = useState(false);
   const [editable, setEditable] = useState(false);
   const [modalDraft, setModalDraft] = useState(false);
+  const [isUploadingFile, setIsUploadingFile] = useState(false);
 
   const inputRef = useRef("refComponent");
 
@@ -122,12 +146,30 @@ function MarkdownView({ theme, navigation }) {
     const image = await Photo();
 
     if (image !== "error") {
-      const response = await JustAddSign(
-        selection.start,
-        "\n\n" + `![](data:${image.mime};base64,${image.data})`,
-        text
-      );
-      setText(response + "\n");
+      const file = new ReactNativeFile({
+        uri: image.path,
+        name: image.filename,
+        type: "image/jpeg"
+      });
+
+      try {
+        setIsUploadingFile(true);
+
+        const { data } = await uploadFile({ variables: { file } });
+
+        if (data.uploadFile.success) {
+          const response = await JustAddSign(
+            selection.start,
+            "\n\n" + `![](${data.uploadFile.data.url})`,
+            text
+          );
+          setText(response + "\n");
+        }
+      } catch (error) {
+        alert("Something happend, please try again.");
+      }
+
+      setIsUploadingFile(false);
     }
   }
 
@@ -264,6 +306,8 @@ function MarkdownView({ theme, navigation }) {
           }}
         />
       )}
+
+      {isUploadingFile && <Loading />}
     </KeyboardAvoidingView>
   );
 }

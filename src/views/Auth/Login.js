@@ -1,5 +1,5 @@
-/* eslint-disable no-console */
 /* eslint-disable no-useless-escape */
+/* eslint-disable no-console */
 import React, { useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import styled, { withTheme } from "styled-components";

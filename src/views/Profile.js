@@ -28,12 +28,15 @@ function Profile({ self, navigation }) {
           {...(showBack && { back: () => navigation.goBack() })}
         />
 
-        <Biography account={account} />
+        <Biography
+          setEditProfile={() => setEditProfile(true)}
+          account={account}
+        />
 
         <Posts
-          goToPosts={() => navigation.navigate("ListOfPosts", { account })}
           account={account}
-          goToPostDetails={() => navigation.navigate("Post")}
+          goToPosts={() => navigation.navigate("ListOfPosts", { account })}
+          goToPostDetails={data => navigation.navigate("Post", { data })}
         />
 
         {editProfile && (

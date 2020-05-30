@@ -14,7 +14,7 @@ const Container = styled.View`
 `;
 
 function ListOfPost({ navigation, theme }) {
-  const posts = navigation.state.params.account || { posts: [] };
+  const posts = { posts: [] };
 
   function Item({ item }) {
     return (

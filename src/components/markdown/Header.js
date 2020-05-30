@@ -30,29 +30,31 @@ const Header = styled.View`
   background-color: ${props => props.theme.styled.BOX_BACKGROUND};
 `;
 
-function HeaderFunction({ theme, setModalDraft, setModal, goToForm }) {
+function HeaderFunction({ theme, setModalDraft, setModal, goToForm, text }) {
   return (
     <Header>
       <IconContent>
         <Icon
           name="outline-eye"
-          onPress={() => setModal()}
+          onPress={setModal}
           color={theme.styled.ICON}
           size={22}
         />
 
         <Icon name="outline-info-circle" color={theme.styled.ICON} size={22} />
 
-        <Button
-          onPress={() => setModalDraft()}
-          backgroundColor={theme.styled.ICON}
-        >
+        <Button onPress={setModalDraft} backgroundColor={theme.styled.ICON}>
           <Label color={theme.styled.OPPOSITE_TITLE} size={14}>
             DRAFT
           </Label>
         </Button>
 
-        <Button onPress={() => goToForm()}>
+        <Button
+          backgroundColor={text === "" && "#b2b2b2"}
+          onPress={() =>
+            text === "" ? alert("Please write something first") : goToForm()
+          }
+        >
           <Label color="white" size={14}>
             NEXT
           </Label>

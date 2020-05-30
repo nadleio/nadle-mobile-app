@@ -83,8 +83,9 @@ function Signup({ theme, navigation }) {
           updateSelf(data.signup.data.user);
 
           await AsyncStorage.setItem("authToken", data.signup.data.token);
+          AsyncStorage.removeItem("persistenceKey");
+
           setLogged(true);
-          // navigation.navigate("Login");
         } else {
           alert(ERROR[data.signup.errorCode]);
         }

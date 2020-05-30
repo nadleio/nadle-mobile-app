@@ -9,13 +9,8 @@ export const userInformation = gql`
     firstName
     lastName
     biography
-    posts {
-      id
-      body
-      title
-      coverPostUrl
-      organizationId
-    }
+    location
+    coverAvatar
     link
     followers {
       count

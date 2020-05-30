@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, SafeAreaView, TouchableOpacity, Dimensions } from "react-native";
 import { compose } from "redux";
 import styled, { css, withTheme } from "styled-components";
@@ -86,11 +86,41 @@ function Header({ account = {}, self, theme, appTheme, ...props }) {
   const name = account.firstName + " " + account.lastName;
   const selfProfile = account.id === self.id;
 
+  const [isLoadingAvatar, setIsLoadingAvatar] = useState(true);
+
+  function loadedAvatar() {
+    return (
+      <>
+        <ProfilePicture
+          source={account.avatar ? { uri: account.avatar } : DEFAULT_PROFILE}
+        />
+
+        {selfProfile && (
+          <View>
+            <EditContainer onPress={() => props.goToEditProfile()}>
+              <Icon size={20} color={theme.styled.ICON} name="replace" />
+            </EditContainer>
+          </View>
+        )}
+      </>
+    );
+  }
+
+  function loadingAvatar() {
+    return (
+      <>
+        <ProfilePicture
+          onLoadStart={() => setIsLoadingAvatar(true)}
+          onLoadEnd={() => setIsLoadingAvatar(false)}
+          source={account.avatar ? { uri: account.avatar } : DEFAULT_PROFILE}
+        ></ProfilePicture>
+      </>
+    );
+  }
+
   return (
     <View style={{ flex: 1 }}>
-      <HeaderBackground
-        source={{ uri: "https://source.unsplash.com/random" }}
-      />
+      <HeaderBackground source={{ uri: account.coverAvatar }} />
 
       <SafeAreaView>
         <Actions width={screenWidth}>
@@ -142,32 +172,18 @@ function Header({ account = {}, self, theme, appTheme, ...props }) {
         <ProfileBox themeName={appTheme.themeMode} width={screenWidth}>
           <View style={{ alignItems: "center" }}>
             <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <ProfilePicture
-                source={
-                  account.avatar ? { uri: account.avatar } : DEFAULT_PROFILE
-                }
-              />
-              {selfProfile && (
-                <View>
-                  <EditContainer onPress={() => props.goToEditProfile()}>
-                    <Icon size={20} color={theme.styled.ICON} name="replace" />
-                  </EditContainer>
-                </View>
-              )}
+              {isLoadingAvatar ? loadingAvatar() : loadedAvatar()}
             </View>
 
-            <DisplayName>
-              {account.firstName ? name : "Enter your name here"}
-            </DisplayName>
-
-            <Username>{account.username}</Username>
+            {account.firstName ? (
+              <>
+                <DisplayName>{name}</DisplayName>
+                <Username>@{account.username}</Username>
+              </>
+            ) : (
+              <DisplayName>@{account.username}</DisplayName>
+            )}
           </View>
-
-          {/* {account.type === "USER" ? (
-            <HeaderSubscribe.User account={account} />
-          ) : (
-            <HeaderSubscribe.Organization account={account} />
-          )} */}
 
           <HeaderSubscribe.User account={account} />
         </ProfileBox>

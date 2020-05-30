@@ -1,8 +1,9 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Linking, TouchableOpacity } from "react-native";
 import styled, { withTheme } from "styled-components";
 
 import IconComponent from "../Icon";
+import Button from "../Button";
 
 const Container = styled.View`
   margin: 32px 16px 16px 16px;
@@ -41,32 +42,50 @@ const Label = styled.Text`
   text-align: left;
 `;
 
-function Biography({ account, theme }) {
+function Biography({ account, theme, setEditProfile }) {
+  const isCompleted = Boolean(
+    account.biography || account.location || account.link
+  );
+
   return (
     <Container>
-      <Title>Bio</Title>
-
-      <Content>
-        {account.biography ? account.biography : "Nothing here yet."}
-      </Content>
-
-      <OtherInfo>
-        <Icon
-          color={theme.styled.ICON}
-          size={16}
-          name="outline-map-marker-alt"
+      {!isCompleted ? (
+        <Button
+          action={setEditProfile}
+          text="COMPLETE PROFILE"
+          color={[theme.styled.BOX_BACKGROUND, theme.styled.BOX_BACKGROUND]}
+          textColor="#fff"
         />
-        <Label>San Francisco, CA</Label>
-      </OtherInfo>
+      ) : (
+        <Fragment>
+          {account.biography && (
+            <>
+              <Title>Bio</Title>
+              <Content>{account.biography}</Content>
+            </>
+          )}
 
-      {account.link && (
-        <OtherInfo>
-          <Icon color={theme.styled.ICON} size={16} name="outline-link" />
+          {account.location && (
+            <OtherInfo>
+              <Icon
+                color={theme.styled.ICON}
+                size={16}
+                name="outline-map-marker-alt"
+              />
+              <Label>{account.location}</Label>
+            </OtherInfo>
+          )}
 
-          <TouchableOpacity onPress={() => Linking.openURL(account.link)}>
-            <Label>{account.link}</Label>
-          </TouchableOpacity>
-        </OtherInfo>
+          {account.link && (
+            <OtherInfo>
+              <Icon color={theme.styled.ICON} size={16} name="outline-link" />
+
+              <TouchableOpacity onPress={() => Linking.openURL(account.link)}>
+                <Label>{account.link}</Label>
+              </TouchableOpacity>
+            </OtherInfo>
+          )}
+        </Fragment>
       )}
     </Container>
   );

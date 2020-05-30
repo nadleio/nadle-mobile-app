@@ -1,5 +1,7 @@
 import React from "react";
 import styled, { withTheme } from "styled-components";
+import { useQuery } from "@apollo/react-hooks";
+import gql from "graphql-tag";
 
 import Icon from "../Icon";
 import ShortPost from "../ShortPost";
@@ -21,13 +23,35 @@ const Text = styled.Text`
   max-width: 100%;
 `;
 
-function Posts({ account, theme, goToPosts, goToPostDetails }) {
-  const posts = account.posts || [];
+const FirstPost = styled.Text`
+  color: ${props => props.theme.styled.CONTENT};
+  font-size: ${props => props.theme.fontSize.BODY};
+`;
+
+const POSTS = gql`
+  query($owner_id: ID!, $limit: Int, $offset: Int) {
+    postsByUser(owner_id: $owner_id, limit: $limit, offset: $offset) {
+      count
+      pages
+      results {
+        id
+        title
+        body
+        coverPostUrl
+      }
+    }
+  }
+`;
+
+function Posts({ theme, goToPosts, goToPostDetails, account }) {
+  const { data, loading } = useQuery(POSTS, {
+    variables: { owner_id: account.id, limit: 5, offset: 0 }
+  });
 
   return (
     <Container>
       <Title onPress={goToPosts}>
-        <Text>Posts ({posts.length || 0})</Text>
+        <Text>Posts ({!loading && data.postsByUser.count})</Text>
         <Icon
           style={{ marginLeft: 4 }}
           color={theme.styled.ICON}
@@ -35,14 +59,18 @@ function Posts({ account, theme, goToPosts, goToPostDetails }) {
         />
       </Title>
 
-      {posts.slice(5, 7).map(data => (
-        <ShortPost
-          key={data.id}
-          title={data.title}
-          coverUrl={data.coverPostUrl}
-          goToPostDetails={goToPostDetails}
-        />
-      ))}
+      {!loading &&
+        data.postsByUser.results.map(data => (
+          <ShortPost
+            key={data.id}
+            title={data.title}
+            coverUrl={data.coverPostUrl}
+            goToPostDetails={() => goToPostDetails(data)}
+          />
+        ))}
+      {/* ) : (
+        <FirstPost>Start your first post!</FirstPost>
+      )} */}
     </Container>
   );
 }
