@@ -143,10 +143,10 @@ function Post({ theme, profile, post, comments }) {
                 </Space>
 
                 <BoldContent numberOfLines={2}>{data.title}</BoldContent>
-
+                {/* 
                 <Content numberOfLines={2} style={{ marginLeft: 8 }}>
                   {data.description}
-                </Content>
+                </Content> */}
 
                 <TouchableOpacity
                   onPress={() =>
@@ -223,8 +223,7 @@ function Post({ theme, profile, post, comments }) {
                         username: "ricardo",
                         name: "Ricardo Malagón",
                         followers: { count: 0 },
-                        following: { count: 0 },
-                        posts: []
+                        following: { count: 0 }
                       })
                     }
                   >
@@ -250,9 +249,7 @@ function Post({ theme, profile, post, comments }) {
         options={["Report", "Cancel"]}
         cancelButtonIndex={1}
         destructiveButtonIndex={1}
-        onPress={index => {
-          report(index);
-        }}
+        onPress={index => report(index)}
       />
     </View>
   );

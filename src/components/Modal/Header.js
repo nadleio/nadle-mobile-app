@@ -3,7 +3,7 @@ import { StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-navigation";
 import styled, { withTheme } from "styled-components";
 
-import { Title, Label } from "../Text";
+import { Title } from "../Text";
 
 const Container = styled.View`
   padding: 15px 5% 15px 5%;

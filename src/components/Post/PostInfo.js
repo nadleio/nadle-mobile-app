@@ -1,15 +1,14 @@
 import React from "react";
 import { View } from "react-native";
 import styled, { withTheme } from "styled-components";
-
-import { Label, Title } from "../Text";
+import moment from "moment";
 
 const Container = styled.View`
   flex-direction: row;
   align-items: center;
 `;
 
-const ImageContainer = styled.View`
+const AvatarContainer = styled.View`
   height: 34px;
   width: 34px;
   border-radius: 17px;
@@ -34,23 +33,37 @@ const Divider = styled.View`
   opacity: 0.2;
 `;
 
-function PostInfo() {
+const Title = styled.Text`
+  margin: 16px 0;
+  color: ${props => props.theme.styled.TITLE};
+  font-size: ${props => props.theme.fontSize.TITLE};
+`;
+
+const Date = styled.Text`
+  color: ${props => props.theme.styled.CONTENT};
+  font-size: ${props => props.theme.fontSize.SMALL};
+`;
+
+const Owner = styled.Text`
+  color: ${props => props.theme.styled.CONTENT};
+  font-size: ${props => props.theme.fontSize.BODY};
+`;
+
+function PostInfo({ content }) {
   return (
     <View style={{ marginBottom: 16 }}>
       <Container>
-        <ImageContainer>
+        <AvatarContainer>
           <Avatar source={{ uri: "https://source.unsplash.com/random" }} />
-        </ImageContainer>
+        </AvatarContainer>
 
         <View style={{ marginLeft: 8 }}>
-          <Label>Ricardo Malagon</Label>
-          <Label style={{ fontSize: 14 }}>16 Dic, 2020</Label>
+          <Owner>Ricardo Malagon</Owner>
+          <Date>{moment(content.createdAt).format("MMMM D, YYYY")}</Date>
         </View>
       </Container>
 
-      <Title style={{ marginVertical: 16 }}>
-        How to launch on React Native IOS and Android
-      </Title>
+      <Title>{content.title}</Title>
 
       <Divider />
     </View>

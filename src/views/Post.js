@@ -3,12 +3,12 @@ import { ScrollView, View } from "react-native";
 import styled, { withTheme } from "styled-components";
 import { SafeAreaView } from "react-navigation";
 
-import Header from "../../components/Post/Header";
-import BottomBar from "../../components/Post/BottomBar";
-import MarkDownView from "../../components/markdown/Preview/MarkDownView";
-import PostInfo from "../../components/Post/PostInfo";
+import Header from "../components/Post/Header";
+import BottomBar from "../components/Post/BottomBar";
+import MarkDownView from "../components/markdown/Preview/MarkDownView";
+import PostInfo from "../components/Post/PostInfo";
 
-import FadeInView from "../../components/AnimateView";
+import FadeInView from "../components/AnimateView";
 
 const Container = styled.View`
   flex: 1;
@@ -22,6 +22,7 @@ const Cover = styled.Image`
 
 function Post({ navigation, theme }) {
   const content = navigation.state.params.data;
+  console.log(content);
 
   return (
     <SafeAreaView
@@ -29,14 +30,14 @@ function Post({ navigation, theme }) {
       backgroundColor={theme.styled.BOX_BACKGROUND}
     >
       <Container>
-        <Header isVisible={true} back={() => navigation.goBack()} />
+        <Header isVisible back={() => navigation.goBack()} />
 
         <FadeInView>
           <ScrollView contentOffset={{ x: 0, y: 110 }}>
             <Cover source={{ uri: content.coverPostUrl }} />
 
             <View style={{ margin: 16 }}>
-              <PostInfo />
+              <PostInfo content={content} />
               <MarkDownView content={content.body} />
             </View>
           </ScrollView>

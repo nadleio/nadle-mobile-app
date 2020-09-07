@@ -63,7 +63,13 @@ function Cover({ theme, setCover }) {
 
       {cover !== "" ? (
         <PostCover style={{ marginBottom: 32 }} source={{ uri: cover }}>
-          <IconContainer activeOpacity={0.5} onPress={() => setCover("")}>
+          <IconContainer
+            activeOpacity={0.5}
+            onPress={() => {
+              setCover("");
+              setCoverState("");
+            }}
+          >
             <Icon name="replace" color={theme.styled.ICON} size={18} />
           </IconContainer>
         </PostCover>

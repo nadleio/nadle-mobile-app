@@ -2,6 +2,7 @@ import React from "react";
 import styled, { withTheme } from "styled-components";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import moment from "moment";
 
 import Icon from "../Icon";
 import ShortPost from "../ShortPost";
@@ -23,11 +24,6 @@ const Text = styled.Text`
   max-width: 100%;
 `;
 
-const FirstPost = styled.Text`
-  color: ${props => props.theme.styled.CONTENT};
-  font-size: ${props => props.theme.fontSize.BODY};
-`;
-
 const POSTS = gql`
   query($owner_id: ID!, $limit: Int, $offset: Int) {
     postsByUser(owner_id: $owner_id, limit: $limit, offset: $offset) {
@@ -38,6 +34,11 @@ const POSTS = gql`
         title
         body
         coverPostUrl
+        createdAt
+        tags {
+          id
+          name
+        }
       }
     }
   }
@@ -53,7 +54,7 @@ function Posts({ theme, goToPosts, goToPostDetails, account }) {
       <Title onPress={goToPosts}>
         <Text>Posts ({!loading && data.postsByUser.count})</Text>
         <Icon
-          style={{ marginLeft: 4 }}
+          style={{ marginLeft: 4, marginTop: 2 }}
           color={theme.styled.ICON}
           name="outline-chevron-double-right"
         />
@@ -65,12 +66,11 @@ function Posts({ theme, goToPosts, goToPostDetails, account }) {
             key={data.id}
             title={data.title}
             coverUrl={data.coverPostUrl}
+            tags={data.tags}
             goToPostDetails={() => goToPostDetails(data)}
+            createdAt={moment(data.createdAt).format("MMMM D, YYYY")}
           />
         ))}
-      {/* ) : (
-        <FirstPost>Start your first post!</FirstPost>
-      )} */}
     </Container>
   );
 }

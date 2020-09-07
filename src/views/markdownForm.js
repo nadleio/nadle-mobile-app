@@ -9,8 +9,11 @@ import { SafeAreaView } from "react-navigation";
 import Header from "../components/Header";
 import Input from "../components/Form/Input";
 import Button from "../components/Button";
+import Tags from "../components/Tags";
+import Icon from "../components/Icon";
 
 import Cover from "../components/MarkDownForm/Cover";
+import FormTags from "../components/MarkDownForm/Tags";
 import Loading from "../components/Loading";
 
 import { uploadFile } from "../Fragments/file";
@@ -20,15 +23,50 @@ const Container = styled.View`
   background-color: ${props => props.theme.styled.BACKGROUND};
 `;
 
+const TagsContainer = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  margin-bottom: 32px;
+`;
+
+const Content = styled.Text`
+  color: ${props => props.theme.styled.TITLE};
+  font-size: ${props => props.theme.fontSize.TITLE};
+  font-weight: 600;
+`;
+
+const AddTag = styled.Text`
+  color: ${props => props.theme.colors.PRIMARY};
+  font-size: ${props => props.theme.fontSize.BODY};
+  font-weight: 600;
+  margin-left: 8px;
+  margin-top: 2px;
+`;
+
 const MUTATION_POST = gql`
-  mutation($body: String!, $title: String!, $coverPostUrl: String!) {
-    createPost(body: $body, title: $title, coverPostUrl: $coverPostUrl) {
+  mutation(
+    $body: String!
+    $title: String!
+    $coverPostUrl: String!
+    $tags: [TagOptions]!
+  ) {
+    createPost(
+      body: $body
+      title: $title
+      coverPostUrl: $coverPostUrl
+      tags: $tags
+    ) {
       message
       success
       errorCode
       data {
         id
         title
+        tags {
+          id
+          name
+        }
       }
     }
   }
@@ -53,6 +91,7 @@ function MarkdownForm({ theme, navigation }) {
   const [uploadFile] = useMutation(UPLOAD_FILE);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [modalTag, setModalTag] = useState(false);
 
   async function uploadCover(values) {
     setIsLoading(true);
@@ -77,11 +116,15 @@ function MarkdownForm({ theme, navigation }) {
 
   async function uploadPost(values, coverUrl) {
     try {
+      const tags = [];
+      values.tags.map(item => tags.push({ id: item.id }));
+
       const { data } = await createPost({
         variables: {
           body: values.body,
           title: values.title,
-          coverPostUrl: coverUrl
+          coverPostUrl: coverUrl,
+          tags: tags
         }
       });
 
@@ -109,14 +152,14 @@ function MarkdownForm({ theme, navigation }) {
         <Container>
           <Header title="Details" back={() => navigation.goBack()} />
 
-          <ScrollView>
+          <ScrollView keyboardShouldPersistTaps="always">
             <Formik
               enableReinitialize
               initialValues={{
                 body: navigation.state.params.text,
                 title: "",
                 coverPostUrl: "",
-                organization: {}
+                tags: []
               }}
               onSubmit={values => uploadCover(values)}
             >
@@ -129,13 +172,31 @@ function MarkdownForm({ theme, navigation }) {
                       this.description.focus();
                     }}
                     style={{ marginBottom: 32 }}
-                    multiline={true}
+                    multiline
                     value={values.title}
                   />
 
                   <Cover
                     setCover={file => setFieldValue("coverPostUrl", file)}
                   />
+
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Content>Tags ({values.tags.length})</Content>
+
+                    <Icon
+                      style={{ marginLeft: 4, marginTop: 2 }}
+                      color={theme.styled.ICON}
+                      name="outline-chevron-double-right"
+                    />
+
+                    <AddTag onPress={() => setModalTag(true)}>Add tags</AddTag>
+                  </View>
+
+                  <TagsContainer>
+                    {values.tags.map(tag => (
+                      <Tags key={tag.id} name={tag.name} />
+                    ))}
+                  </TagsContainer>
 
                   <Button
                     disabled={
@@ -148,6 +209,14 @@ function MarkdownForm({ theme, navigation }) {
                     color={[theme.colors.PRIMARY, theme.colors.PRIMARY]}
                     textColor="#fff"
                   />
+
+                  {modalTag && (
+                    <FormTags
+                      tags={values.tags}
+                      setTags={values => setFieldValue("tags", values)}
+                      close={() => setModalTag(false)}
+                    />
+                  )}
                 </View>
               )}
             </Formik>

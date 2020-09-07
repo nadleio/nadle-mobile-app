@@ -48,21 +48,19 @@ const ShortPost = ({ goToPostDetails, theme, ...props }) => {
       <Content>
         <Text
           style={{
-            marginTop: 4,
             lineHeight: 20,
             fontSize: theme.fontSize.BODY
           }}
         >
-          <DateText>May 16, 2018</DateText>
+          <DateText>{props.createdAt}</DateText>
           <Separator>{" • "}</Separator>
           <PostTitle>{props.title}</PostTitle>
         </Text>
 
         <TagsContainer>
-          <Tags
-            tags={[{ text: "Hola" }, { text: "Nadle" }]}
-            postUid="H03d947"
-          />
+          {props.tags.map(tag => (
+            <Tags key={tag.id} name={tag.name} />
+          ))}
         </TagsContainer>
       </Content>
     </Container>
